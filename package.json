@@ -1,0 +1,32 @@
+{
+  "name": "bustimer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "neko",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^11.13.0",
+    "@types/react": "^16.8.10",
+    "@types/react-dom": "^16.8.3",
+    "@zeit/next-typescript": "^1.1.1",
+    "axios": "^0.18.0",
+    "circular-json": "^0.5.9",
+    "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "moment": "^2.24.0",
+    "next": "^8.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.4.1"
+  }
+}
