@@ -30,10 +30,10 @@ class Widget extends Component {
     let leftMinute, leftSecond;
     leftSecond = 60 - date.second;
     if (nextBus.h > date.hour){
-      leftMinute = 60-date.minute
-        + nextBus.m; 
+      leftMinute = -date.minute
+        + nextBus.m -1; 
     } else {
-      leftMinute = nextBus.m - date.minute; 
+      leftMinute = nextBus.m - date.minute -1; 
     }
     this.setState({
       leftTime: {
@@ -60,7 +60,7 @@ class Widget extends Component {
 
     return (
       <div className="widget">
-        {`${('00'+leftTime.m).slice(-2)}分 ${('00'+leftTime.s).slice(-2)}秒`}
+        {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
 
         登校をつぶやく
         <a 
