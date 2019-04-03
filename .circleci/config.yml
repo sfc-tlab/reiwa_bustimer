@@ -1,0 +1,67 @@
+version: 2
+jobs:
+  generate_cache:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: makekey
+          command: cd api && sh ./makekey.sh && cd ../mongo && sh ./makekey.sh && cd ../
+      - run:
+          name: copy conf
+          command: cp api/config/conf.js.example api/config/conf.js
+      - restore_cache:
+          key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+          paths: ~/caches/images.tar
+      - run:
+          name: Check cache file, if not exists then pull images and generate cache.
+          command: |
+            if [ ! -f ~/caches/images.tar ]; then
+              docker-compose -f docker-compose.yml pull
+              docker-compose -f docker-compose.yml build
+              mkdir -p ~/caches
+              docker save $(docker images | awk 'NR>=2 && ! /^<none>/{print $1}') -o ~/caches/images.tar
+            fi
+      - save_cache:
+          key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+          paths: ~/caches/images.tar
+      - run:
+          name: finish cacheing
+          command: echo "finish cache"
+
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: makekey
+          command: cd api && sh ./makekey.sh && cd ../mongo && sh ./makekey.sh && cd ../
+      - run:
+          name: copy conf
+          command: cp api/config/conf.js.example api/config/conf.js
+      - restore_cache:
+          key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
+          paths: ~/caches/images.tar
+      - run: 
+          name: docker load
+          command: if test -d ~/caches; then docker load -i ~/caches/images.tar; fi
+      - run:
+          name: Build Docker Image
+          command: docker-compose -f docker-compose.yml build
+      - run:
+            name: docker-compose up
+            command: |
+                 docker-compose -f docker-compose.yml up -d
+      - run:
+            name: finish build
+            command: echo "finish build"
+
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - generate_cache
+      - build:
+          requires:
+            - generate_cache
