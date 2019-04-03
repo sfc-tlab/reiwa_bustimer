@@ -15,6 +15,7 @@ const toDateObj = (date) => {
     secondStr,
     month: parseInt(monthStr, 10),
     day: parseInt(dayStr, 10),
+    hour: parseInt(hourStr, 10),
     minute: parseInt(minuteStr, 10),
     second: parseInt(secondStr, 10),
   }

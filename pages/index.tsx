@@ -3,6 +3,7 @@ import * as fs from 'fs';
 
 import Layout from '../components/Layout';
 import Widget from '../components/Widget';
+import BusList from '../components/BusList';
 import axios from '../helpers/axios';
 import dateFormatter from '../helpers/dateFormatter';
 
@@ -19,11 +20,9 @@ class Index extends Component {
         timeTableData: JSON.parse(timeTableData),
         date: date,
         pos: [],
-        holidays,
+        holidays: JSON.parse(holidays),
       }
-    } else {
-      return {};
-    }
+    } 
   }
 
   render () {
@@ -34,15 +33,17 @@ class Index extends Component {
       holidays,
     } = this.props;
 
-    console.log(this.props)
 
     return (
       <Layout>
         <Widget 
           nowDate={date}
           pos={pos}
-        >
-        </Widget>
+        />
+        <BusList
+          toDayData={timeTableData.default.sfc2sho[0]}
+          nowTime={date}
+        />
       </Layout>
     )
   }
