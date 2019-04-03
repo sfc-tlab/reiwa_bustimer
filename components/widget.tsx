@@ -41,6 +41,13 @@ class Widget extends Component {
       nowDateTime,
       pos,
     } = this.props;
+    
+    const nextBus = busList[0];
+    const tweet = {
+      url: 'https://bustimer.sfc.keioac.jp',
+      text: `「${pos}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」で登校なう`,
+      hashtags: "登校なう,sfc,bustimer"
+    };
 
     const { leftTime } = this.state;
 
@@ -49,9 +56,18 @@ class Widget extends Component {
         {`${leftTime.m}分${leftTime.s}秒`}
 
         登校をつぶやく
-        <button>
-          Twitter
-        </button>
+        <a 
+          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          className="twitter-share-button" 
+          data-size="large" 
+          data-text={tweet.text} 
+          data-url={tweet.url} 
+          data-hashtags={tweet.hashtags}
+          data-show-count="false"
+        >
+          Tweet
+        </a>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
     )
   }
