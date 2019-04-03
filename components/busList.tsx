@@ -7,22 +7,8 @@ class BusList extends Component {
 
   render () {
     const { 
-      toDayData,
-      nowTime
+      busList,
     } = this.props;
-
-    console.log(toDayData);
-
-    const busList = toDayData.filter(time => {
-      return (
-        (time.h > nowTime.hour) 
-        ||
-        (
-          time.h === nowTime.hour &&
-          time.m > nowTime.minute
-        )
-      )
-    });
 
     return (
       <div className="bus-list">
@@ -50,6 +36,7 @@ class BusList extends Component {
                   time={time}
                   info={info}
                   subInfo={subInfo}
+                  key={''+bus.h+bus.m}
                 />
               );
             })

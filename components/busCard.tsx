@@ -13,7 +13,7 @@ class BusCard extends Component {
 
     return (
       <div className="bus-card">
-        <div className="time-container">
+        <span className="time-container">
           <span className="time-hour">
             {('00'+time.hour).slice(-2)}
           </span>
@@ -21,14 +21,14 @@ class BusCard extends Component {
           <span className="time-minute">
             {('00'+time.minute).slice(-2)}
           </span>
-        </div>
+        </span>
         <img src={icon} alt="bus-icon" />
-        <div className="info">
+        <span className="info">
           {info}
-        </div>
-        <div className="sub-info">
+        </span>
+        <span className="sub-info">
           {subInfo}
-        </div>
+        </span>
       </div>
     )
   }

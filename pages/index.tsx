@@ -25,24 +25,49 @@ class Index extends Component {
     } 
   }
 
+  getMyList () {
+    const { 
+      timeTableData,
+      date,
+      pos,
+      holidays,
+    } = this.props;  
+    const isHoliday = (date.monthStr+date.dayStr) in holidays;
+    const todayData = timeTableData.default.sfc2sho[0];
+    const busList = todayData.filter(time => {
+      return (
+        (time.h > date.hour) 
+        ||
+        (
+          time.h === date.hour &&
+          time.m > date.minute
+        )
+      )
+    });
+    
+    return busList;
+  }
+
   render () {
     const { 
       timeTableData,
       date,
       pos,
       holidays,
-    } = this.props;
+    } = this.props;  
+
+    const busList = this.getMyList();
 
 
     return (
       <Layout>
         <Widget 
-          nowDate={date}
+          nowDateTime={date}
           pos={pos}
+          busList={busList}
         />
         <BusList
-          toDayData={timeTableData.default.sfc2sho[0]}
-          nowTime={date}
+          busList={busList}
         />
       </Layout>
     )
