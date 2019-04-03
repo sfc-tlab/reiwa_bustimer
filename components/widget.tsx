@@ -4,21 +4,29 @@ import dateFormatter from '../helpers/dateFormatter';
 
 
 class Widget extends Component {    
-  state = {leftTime: {h: 0, m: 0, s: 0}}
 
-  componentDidMount () {
-    this.updateLeftTime();
+  componentWillMount () {
+    this.setState({
+      leftTime: { 
+        h: 0, 
+        m: 0, 
+        s: 0
+      },
+      ...this.props });
   }
 
-  updateLeftTime () {
+  componentWillReceiveProps(nextProps) {
+    this.updateLeftTime(nextProps);
+  } 
+
+  updateLeftTime (nextProps) {
     const { 
       busList,
       nowDateTime,
       pos,
-    } = this.props;
+    } = nextProps;
     const nextBus = busList[0];
-    // const date = dateFormatter.toDateObj(new Date());
-    const date = nowDateTime;
+    const date = nowDateTime
     let leftMinute, leftSecond;
     leftSecond = 60 - date.second;
     if (nextBus.h > date.hour){
@@ -40,7 +48,8 @@ class Widget extends Component {
       busList,
       nowDateTime,
       pos,
-    } = this.props;
+      leftTime
+    } = this.state;
     
     const nextBus = busList[0];
     const tweet = {
@@ -49,11 +58,9 @@ class Widget extends Component {
       hashtags: "登校なう,sfc,bustimer"
     };
 
-    const { leftTime } = this.state;
-
     return (
       <div className="widget">
-        {`${leftTime.m}分${leftTime.s}秒`}
+        {`${('00'+leftTime.m).slice(-2)}分 ${('00'+leftTime.s).slice(-2)}秒`}
 
         登校をつぶやく
         <a 

@@ -9,8 +9,13 @@ import dateFormatter from '../helpers/dateFormatter';
 
 
 class Index extends Component {    
-  state = { holidays: '' }
-  
+  state = { 
+    date: dateFormatter.toDateObj(new Date()), 
+    busList:[{ h:0, m:0, 
+               from: 'sho', to: 'sfc', 
+               twin: false, rotary: false,
+               type: 'normal'}] }
+
   static async getInitialProps(req) {
     if (req) {
       const timeTableData = await fs.readFileSync("./static/timeTable.json");
@@ -25,10 +30,21 @@ class Index extends Component {
     } 
   }
 
-  getMyList () {
+  componentWillMount () {
+    this.interval = setInterval(() => {
+      const date = dateFormatter.toDateObj(new Date());
+      const busList = this.getMyList(date);
+      this.setState({ date, busList });
+    }, 300);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  getMyList (date) {
     const { 
       timeTableData,
-      date,
       pos,
       holidays,
     } = this.props;  
@@ -51,13 +67,14 @@ class Index extends Component {
   render () {
     const { 
       timeTableData,
-      date,
       pos,
       holidays,
     } = this.props;  
 
-    const busList = this.getMyList();
-
+    const { 
+      date,
+      busList
+    } = this.state;  
 
     return (
       <Layout>

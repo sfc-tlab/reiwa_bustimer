@@ -5,10 +5,22 @@ import BusCard from './BusCard';
 
 class BusList extends Component {    
 
+  componentWillMount () {
+    this.setState({ ...this.props });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateBusList(nextProps);
+  } 
+
+  updateBusList (nextProps) {
+    this.setState({ ...nextProps });
+  }
+
   render () {
     const { 
       busList,
-    } = this.props;
+    } = this.state;
 
     return (
       <div className="bus-list">
