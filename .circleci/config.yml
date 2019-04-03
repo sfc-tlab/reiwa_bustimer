@@ -4,12 +4,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run:
-          name: makekey
-          command: cd api && sh ./makekey.sh && cd ../mongo && sh ./makekey.sh && cd ../
-      - run:
-          name: copy conf
-          command: cp api/config/conf.js.example api/config/conf.js
       - restore_cache:
           key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
           paths: ~/caches/images.tar
@@ -33,12 +27,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run:
-          name: makekey
-          command: cd api && sh ./makekey.sh && cd ../mongo && sh ./makekey.sh && cd ../
-      - run:
-          name: copy conf
-          command: cp api/config/conf.js.example api/config/conf.js
       - restore_cache:
           key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "Dockerfile" }}
           paths: ~/caches/images.tar
