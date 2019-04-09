@@ -1,9 +1,8 @@
 FROM node:9.8.0
 
-ARG $FRONT_PORT
-
 WORKDIR /src
 
-CMD ["bash", "-c", "npm install && npm run build && npm run start"]
+RUN rm -rf /src/node_modules
+RUN rm -rf /src/package-lock.json
 
-EXPOSE 3000
+CMD ["bash", "-c", "npm install && npm run build && npm run start"]
