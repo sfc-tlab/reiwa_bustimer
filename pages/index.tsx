@@ -4,7 +4,6 @@ import * as fs from 'fs';
 import Layout from '../components/Layout';
 import Widget from '../components/Widget';
 import BusList from '../components/BusList';
-import axios from '../helpers/axios';
 import dateFormatter from '../helpers/dateFormatter';
 
 
@@ -27,10 +26,15 @@ class Index extends Component {
         pos: [],
         holidays: JSON.parse(holidays),
       }
-    } 
+    }
   }
 
-  componentWillMount () {
+  async componentWillMount () {
+    // TODO: 高速化
+    // const location = new Location();
+    // console.log('getpos')
+    // const pos = await location.getPosName();
+    // console.log(pos)
     this.interval = setInterval(() => {
       const date = dateFormatter.toDateObj(new Date());
       const busList = this.getMyList(date);
@@ -49,7 +53,7 @@ class Index extends Component {
       holidays,
     } = this.props;  
     const isHoliday = (date.monthStr+date.dayStr) in holidays;
-    const todayData = timeTableData.default.sfc2sho[0];
+    const todayData = timeTableData.default.sfc.sho.weekday;
     const busList = todayData.filter(time => {
       return (
         (time.h > date.hour) 

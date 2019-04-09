@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 
+import TweetButton from './TweetButton';
 import dateFormatter from '../helpers/dateFormatter';
 
 
 class Widget extends Component {    
+  state = {}
 
   componentWillMount () {
     this.setState({
@@ -12,7 +14,8 @@ class Widget extends Component {
         m: 0, 
         s: 0
       },
-      ...this.props });
+      ...this.props 
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,8 +33,9 @@ class Widget extends Component {
     let leftMinute, leftSecond;
     leftSecond = 60 - date.second;
     if (nextBus.h > date.hour){
-      leftMinute = -date.minute
-        + nextBus.m -1; 
+      leftMinute = ((nextBus.h - date.hour) * 60)
+        - date.minute
+        + nextBus.m - 1; 
     } else {
       leftMinute = nextBus.m - date.minute -1; 
     }
@@ -39,7 +43,8 @@ class Widget extends Component {
       leftTime: {
         m: leftMinute,
         s: leftSecond
-      }
+      },
+      tweetText: `「${pos}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」で登校なう`,
     })
   }
 
@@ -48,33 +53,30 @@ class Widget extends Component {
       busList,
       nowDateTime,
       pos,
-      leftTime
+      leftTime,
+      tweetText,
     } = this.state;
     
-    const nextBus = busList[0];
-    const tweet = {
-      url: 'https://bustimer.sfc.keioac.jp',
-      text: `「${pos}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」で登校なう`,
-      hashtags: "登校なう,sfc,bustimer"
-    };
+    const tweetUrl = 'https://bustimer.sfc.keioac.jp';
+    const hashtags = 'bustimer,登校なう';
 
     return (
       <div className="widget">
+        次のバスまで
+        <br />
         {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
-
+        <br />
         登校をつぶやく
-        <a 
-          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-          className="twitter-share-button" 
-          data-size="large" 
-          data-text={tweet.text} 
-          data-url={tweet.url} 
-          data-hashtags={tweet.hashtags}
-          data-show-count="false"
+        <TweetButton 
+          size="large" 
+          text={tweetText} 
+          tweetUrl={tweetUrl} 
+          hashtags={hashtags}
+          countFlag="false"
+          via="bustimer"
         >
           Tweet
-        </a>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </TweetButton>
       </div>
     )
   }
