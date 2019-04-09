@@ -27,11 +27,11 @@ class TweetButton extends Component {
     const { children } = this.state;
 
     return (
-      <div className="tweet-button"
+      <span className="tweet-button"
         onClick={this.postTweet} 
       >
         {children}
-      </div>
+      </span>
     )
   }
 }

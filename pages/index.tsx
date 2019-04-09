@@ -23,7 +23,7 @@ class Index extends Component {
       return {
         timeTableData: JSON.parse(timeTableData),
         date: date,
-        pos: [],
+        pos: 'sho',
         holidays: JSON.parse(holidays),
       }
     }
