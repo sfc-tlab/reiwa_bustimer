@@ -1,0 +1,14 @@
+{
+  "name": "bustimer",
+  "short_name": "bustimer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f0f0",
+  "theme_color": "#ff6600",
+  "description": "SFC生向けのバスの時刻表アプリ",
+  "icons": [{
+    "src": "/static/img/icon.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
