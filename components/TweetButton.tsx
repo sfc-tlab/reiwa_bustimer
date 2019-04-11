@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 
 const styles = {
@@ -35,30 +35,43 @@ class TweetButton extends Component {
     const { children } = this.state;
 
     return (
-      <Button
-        onClick={this.postTweet} 
-      >
-        {children}
-        <Icon 
-          src="/static/img/twitter-icon.svg" 
-        />
-      </Button>
+      <Wrapper>
+        <button
+          className="twitter-button"
+          onClick={this.postTweet} 
+        >
+          <span className="button-text"> {children} </span>
+          <div className="twitter-icon" />
+        </button>
+      </Wrapper>
     )
   }
 }
 
-const Button = styled.button`
-  border-radius: 3px;
-  border: 2px solid #1b95e0;
-  color: #1b95e0;
-  margin: 0 1em;
-  padding: 0.25em 1em;
+const Wrapper = styled.div`
+  .twitter-button {
+    border-radius: 3px;
+    border: 2px solid #1b95e0;
+    color: #FFFFFF;
+    background: #1b95e0;
+  }
+
+  .twitter-icon {
+    padding 20px 20px 20px 20px;
+    background-color: #FFFFFF;
+    -webkit-mask: url(/static/img/twitter-icon.svg) no-repeat center;
+    mask: url(/static/img/twitter-icon.svg) no-repeat center;
+    display: inline-block;
+  }
+
+  .button-text {
+    position: relative;
+    bottom: 15px;
+    font-weight: bold;
+    display: inline-block;
+  }
 `;
 
-const Icon = styled.img`
-  coler: #1b95e0;
-  size: 100px;
-`;
 
 
 export default TweetButton;
