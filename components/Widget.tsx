@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import styled from 'styled-components';
 
 import TweetButton from './TweetButton';
 import dateFormatter from '../helpers/dateFormatter';
@@ -64,44 +65,55 @@ class Widget extends Component {
     const taxiHashtags = 'bustimer,SFC生相乗り募集';
 
     return (
-      <div className="widget">
-        次のバスまで
-        <br />
-        {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
-        <br />
-        <span className="tweet-toukou">
-          <div className="tweet-toukou-text">
-            登校をつぶやく
-          </div>
-          <TweetButton 
-            size="large" 
-            text={tweetText} 
-            tweetUrl={tweetUrl} 
-            hashtags={tweetHashtags}
-            countFlag="false"
-            via="bustimer"
-          >
-            登校なう
-          </TweetButton>
-        </span>
-        <span className="tweet-taxi">
-          <div className="tweet-taxi-text">
-            タクシーの相乗り募集をする
-          </div>
-          <TweetButton 
-            size="large" 
-            text={tweetText} 
-            tweetUrl={tweetUrl} 
-            hashtags={taxiHashtags}
-            countFlag="false"
-            via="bustimer"
-          >
-            相乗り募集
-          </TweetButton>
-        </span>
-      </div>
+      <Wrapper>
+        <div className="widget">
+          次のバスまで
+          <br />
+          {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
+          <br />
+          <span className="tweet-toukou">
+            <div className="tweet-toukou-text">
+              登校をつぶやく
+            </div>
+            <TweetButton 
+              size="large" 
+              text={tweetText} 
+              tweetUrl={tweetUrl} 
+              hashtags={tweetHashtags}
+              countFlag="false"
+              via="bustimer"
+            >
+              登校なう
+            </TweetButton>
+          </span>
+          <span className="tweet-taxi">
+            <div className="tweet-taxi-text">
+              タクシーの相乗り募集をする
+            </div>
+            <TweetButton 
+              size="large" 
+              text={tweetText} 
+              tweetUrl={tweetUrl} 
+              hashtags={taxiHashtags}
+              countFlag="false"
+              via="bustimer"
+            >
+              相乗り募集
+            </TweetButton>
+          </span>
+        </div>
+      </Wrapper>
     )
   }
 }
+
+const Wrapper = styled.div`
+  .widget {
+    margin: 30px;
+    padding: 15px;
+    border-radius: 3px;
+    border: 1px solid #000; 
+  }
+`;
 
 export default Widget;
