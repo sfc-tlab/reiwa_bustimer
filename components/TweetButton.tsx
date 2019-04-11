@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 
-const styles = {
-  logo: {
-    margin: 0,
-    color: '#1b95e0',
-  }
-};
-
 class TweetButton extends Component {    
 
   private componentWillMount () {
