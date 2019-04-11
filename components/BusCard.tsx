@@ -38,6 +38,9 @@ class BusCard extends Component {
 }
 
 const Wrapper = styled.div`
+  .bus-card {
+    padding: 10px;
+  }
 `;
 
 export default BusCard;

@@ -6,8 +6,8 @@ const linkStyle = {
 
 export default function Header() {
   return (
-    <div>
+    <h6>
       ReiwaNoBusTimer
-    </div>
+    </h6>
   )
 }

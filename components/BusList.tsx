@@ -68,9 +68,12 @@ class BusList extends Component {
 
 const Wrapper = styled.div`
   .bus-list {
-    padding: 20px;
+    margin: 30px;
+    padding: 15px;
     border-radius: 3px;
-    border-top:1px solid #666; 
+    border-top: 1px solid #000; 
+    border-left: 1px solid #000; 
+    border-right :1px solid #000; 
   }
 `;
 
