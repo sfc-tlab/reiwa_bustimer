@@ -40,13 +40,25 @@ class Widget extends Component {
     } else {
       leftMinute = nextBus.m - date.minute -1; 
     }
+    let departure = '';
+    switch (pos) {
+      case 'sho':
+        departure = '湘南台';
+        break;
+      case 'sfc':
+        departure = 'SFC';
+        break;
+      case 'tuji':
+        departure = '辻堂';
+        break;
+    }
     this.setState({
       leftTime: {
         m: leftMinute,
         s: leftSecond
       },
-      tweetText: `「${pos}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」で登校なう`,
-      taxiText: `「${pos}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`,
+      tweetText: `「${departure}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」で登校なう`,
+      taxiText: `「${departure}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`,
     })
   }
 

@@ -2075,7 +2075,7 @@
       }
     },
     "tuji": {
-      "sho": {
+      "sfc": {
         "weekday": [
           {
             "h":7,
@@ -2566,7 +2566,7 @@
             "rotary":false
           }
         ],
-        "sturday": [
+        "saturday": [
           {
             "h":7,
             "m":33,
@@ -4000,7 +4000,7 @@
             "rotary":false
           }
         ],
-        "sturday": [
+        "saturday": [
           {
             "h":7,
             "m":0,
