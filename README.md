@@ -2,7 +2,7 @@
 新しい時代に向けてSFC生が今まで使っていたbustimerをリニューアルします。
 
 ## Theme color
-https://material.io/tools/color/#!/?view.left=0&view.right=1&primary.color=fff75e
+https://material.io/tools/color/#!/?view.left=0&view.right=1&primary.color=379be1
 
 ## Getting start
 `cp .env.example .env`
