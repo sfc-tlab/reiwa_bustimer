@@ -75,5 +75,8 @@ workflows:
           requires:
             - generate_cache
       - deploy:
+          filters:
+            branches:
+              only: master
           requires:
             - build
