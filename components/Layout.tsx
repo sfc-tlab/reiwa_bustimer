@@ -42,7 +42,8 @@ const Layout = (props) => {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
       </Head>
-      <Header 
+      <Header
+        className="header"
         color="#000000"
       />
 

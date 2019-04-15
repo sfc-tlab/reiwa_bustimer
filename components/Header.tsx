@@ -8,19 +8,23 @@ interface ThemeColor {
 export default function Header(props: ThemeColor) {
   return (
     <Wrapper>
-      <h6 className="header">
+      <div className="header">
         bustimer
-      </h6>
+      </div>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
-  padding: 76px;
+  position: fix;
+  top: 0px;
+  padding: 8px;
   background: #379BFF;
 
   .header {
     font-size: 41px;
+    text-align: center;
+    font-family: "ＭＳ ゴシック",sans-serif;
     color: #FFFFFF;
   }
 
