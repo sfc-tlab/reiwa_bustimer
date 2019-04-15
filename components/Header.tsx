@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+import Router from 'next/router';
 import styled, { css } from 'styled-components';
 
 
@@ -5,20 +7,36 @@ interface ThemeColor {
     color: string;
 }   
 
-export default function Header(props: ThemeColor) {
-  return (
-    <Wrapper>
-      <div className="header">
-        <span className="header-schedule-button">
-          仮
-        </span>
-        bustimer
-        <span className="header-setting-button">
-          仮
-        </span>
-      </div>
-    </Wrapper>
-  )
+export default class Header extends Component<ThemeColor> {
+
+  jumpTo = (e, path) => {
+    if (e) {
+      e.preventDefault(); 
+    }
+    Router.push(path)
+  }
+  
+  render () {
+    return (
+      <Wrapper>
+        <div className="header">
+          <span 
+            className="header-schedule-button"
+            onClick={e => this.jumpTo(e, '/schedule')}
+          >
+            仮
+          </span>
+          bustimer
+          <span 
+            className="header-setting-button"
+            onClick={e => this.jumpTo(e, '/setting')}
+          >
+            仮
+          </span>
+        </div>
+      </Wrapper>
+    )
+  }
 }
 
 const Wrapper = styled.div`
@@ -36,12 +54,12 @@ const Wrapper = styled.div`
 
   .header-schedule-button {
     position: absolute;
-    right: 15px; 
+    left: 15px; 
   }
 
   .header-setting-button {
     position: absolute;
-    left: 15px;
+    right: 15px;
   }
 
   ${(props: ThemeColor) =>
