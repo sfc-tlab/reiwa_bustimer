@@ -3,5 +3,9 @@
     "next/babel",
     "@zeit/next-typescript/babel"
   ],
-  "plugins": [["styled-components", { "ssr": true }], "transform-decorators-legacy"]
+  "plugins": [
+    ["styled-components", { "ssr": true }], 
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", {"loose": true}]
+  ]
 }

@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
+import { inject, observer } from "mobx-react";
 
 import TweetButton from './TweetButton';
 import dateFormatter from '../helpers/dateFormatter';
 
 
+@inject("store")  
+@observer
 class Widget extends Component {    
   state = {}
 
@@ -17,6 +20,10 @@ class Widget extends Component {
       },
       ...this.props
     });
+  }
+
+  componentDidmount() {
+    this.props.store.setLoading(false);
   }
 
   componentWillReceiveProps(nextProps) {
