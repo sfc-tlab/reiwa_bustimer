@@ -72,8 +72,8 @@ workflows:
     jobs:
       - generate_cache
       - build:
-        requires:
-          - generate_cache
+          requires:
+            - generate_cache
       - deploy:
-        requires:
-          - build
+          requires:
+            - build
