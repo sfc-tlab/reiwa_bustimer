@@ -44,6 +44,27 @@ jobs:
             name: finish build
             command: echo "finish build"
 
+  deploy:
+    machine: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "e8:a7:03:2a:04:c5:9a:38:c8:96:56:cb:f8:6c:ca:01"
+      - run:
+          name: Start ssh-keyscan
+          command: |
+            ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd /bustimer && git pull origin master && docker-compose stop && docker-compose rm -f && docker-compose up -d"
+      - run:
+          name: Exit from SSH
+          command: exit
+      - run:
+          name: finish deploy
+          command: echo "finish deploy"
+
 
 workflows:
   version: 2
@@ -51,5 +72,8 @@ workflows:
     jobs:
       - generate_cache
       - build:
-          requires:
-            - generate_cache
+        requires:
+          - generate_cache
+      - deploy:
+        requires:
+          - build
