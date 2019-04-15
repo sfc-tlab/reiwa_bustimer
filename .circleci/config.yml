@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "cd /bustimer && git pull origin master && docker-compose stop && docker-compose rm -f && docker-compose up -d"
+            ssh $SSH_USER@$SSH_HOST -p 2255 "cd /bustimer && git pull origin master && docker-compose stop && docker-compose rm -f && docker-compose up -d"
       - run:
           name: Exit from SSH
           command: exit
