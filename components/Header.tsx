@@ -9,7 +9,13 @@ export default function Header(props: ThemeColor) {
   return (
     <Wrapper>
       <div className="header">
+        <span className="header-schedule-button">
+          仮
+        </span>
         bustimer
+        <span className="header-setting-button">
+          仮
+        </span>
       </div>
     </Wrapper>
   )
@@ -28,6 +34,15 @@ const Wrapper = styled.div`
     color: #FFFFFF;
   }
 
+  .header-schedule-button {
+    position: absolute;
+    right: 15px; 
+  }
+
+  .header-setting-button {
+    position: absolute;
+    left: 15px;
+  }
 
   ${(props: ThemeColor) =>
     props.color 
