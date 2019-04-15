@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Provider } from "mobx-react";
 import * as fs from 'fs';
 
+import store from "../stores";
 import Layout from '../components/Layout';
 import Widget from '../components/Widget';
 import BusList from '../components/BusList';
 import dateFormatter from '../helpers/dateFormatter';
-
 
 class Index extends Component {    
   state = { 
@@ -82,14 +83,18 @@ class Index extends Component {
 
     return (
       <Layout>
-        <Widget 
-          nowDateTime={date}
-          pos={pos}
-          busList={busList}
-        />
-        <BusList
-          busList={busList}
-        />
+        <Provider {...store} >
+          <Widget 
+            nowDateTime={date}
+            pos={pos}
+            busList={busList}
+          />
+        </Provider>
+        <Provider {...store} >
+          <BusList
+            busList={busList}
+          />
+        </Provider>
       </Layout>
     )
   }
