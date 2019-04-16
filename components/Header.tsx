@@ -21,18 +21,33 @@ export default class Header extends Component<ThemeColor> {
       <Wrapper>
         <div className="header">
           <span 
-            className="header-schedule-button"
+            className="header-button schedule"
             onClick={e => this.jumpTo(e, '/schedule')}
           >
             仮
           </span>
-          bustimer
+          <span className="header text">
+            bustimer
+          </span>
           <span 
-            className="header-setting-button"
+            className="header-button setting"
             onClick={e => this.jumpTo(e, '/setting')}
           >
             仮
           </span>
+        </div>
+
+        <div className="departures">
+          <div className="departure-button sho">
+            <div className="departure-button-text">
+              湘南台
+            </div>
+          </div>
+          <div className="departure-button tuji">
+            <div className="departure-button-text">
+              辻堂
+            </div>
+          </div>
         </div>
       </Wrapper>
     )
@@ -40,27 +55,54 @@ export default class Header extends Component<ThemeColor> {
 }
 
 const Wrapper = styled.div`
-  position: fix;
-  top: 0px;
-  padding: 8px;
-  background: #379BFF;
+  text-align: center;
+  font-family: "ＭＳ ゴシック",sans-serif;
 
   .header {
+    position: fix;
     font-size: 41px;
-    text-align: center;
-    font-family: "ＭＳ ゴシック",sans-serif;
     color: #FFFFFF;
+    position: fix;
+    top: 0px;
+    padding: 8px;
+    background: #379BFF;
   }
 
-  .header-schedule-button {
+  .header-button {
     position: absolute;
+  }
+
+  .header-button.schedule {
     left: 15px; 
   }
 
-  .header-setting-button {
-    position: absolute;
+  .header-button.setting {
     right: 15px;
   }
+
+  .departures {
+    width: 100%;
+  }
+
+  .departure-button {
+    display: inline-flex;
+    width: 50%;
+    padding: 10px; 
+    border: 2px solid #707070;
+  }
+
+  .departure-button.sho {
+    border-right: 1px solid #707070;
+  }
+
+  .departure-button.tuji {
+    border-left: 1px solid #707070;
+  }
+
+  .departure-button-text {
+    color: #707070;
+  }
+
 
   ${(props: ThemeColor) =>
     props.color 
