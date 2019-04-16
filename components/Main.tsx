@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { inject, observer  } from "mobx-react";
 
 import Layout from './Layout';
+import Splash from './Splash';
 import Widget from './Widget';
 import BusList from './BusList';
 import dateFormatter from '../helpers/dateFormatter';
 
 
+@inject("store")
+@observer
 class Main extends Component {    
   state = { 
     date: dateFormatter.toDateObj(new Date()), 
@@ -20,11 +24,21 @@ class Main extends Component {
     // console.log('getpos')
     // const pos = await location.getPosName();
     // console.log(pos)
+    const { store } = this.props;
+    store.setLoading(true);
+    console.log(this.props.store.isLoading)
     this.interval = setInterval(() => {
       const date = dateFormatter.toDateObj(new Date());
       const busList = this.getMyList(date);
       this.setState({ date, busList });
     }, 300);
+  }
+
+  componentDidMount () {
+    const { store } = this.props;
+    store.setLoading(false);
+    console.log(store.isLoading)
+    
   }
 
   componentWillUnmount() {
@@ -58,6 +72,7 @@ class Main extends Component {
       timeTableData,
       pos,
       holidays,
+      store
     } = this.props;  
 
     const { 
@@ -65,18 +80,25 @@ class Main extends Component {
       busList
     } = this.state;  
 
-    return (
-      <Layout>
-        <Widget 
-          nowDateTime={date}
-          pos={pos}
-          busList={busList}
-        />
-        <BusList
-          busList={busList}
-        />
-      </Layout>
-    )
+    if (store.isLoading) {
+      return (
+        <Splash />
+      )
+    } else {
+      return (
+        <Layout>
+          <Widget 
+            nowDateTime={date}
+            pos={pos}
+            busList={busList}
+          />
+          <BusList
+            busList={busList}
+          />
+        </Layout>
+      )
+    
+    }
   }
 }
 
