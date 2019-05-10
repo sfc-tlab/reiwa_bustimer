@@ -20,13 +20,14 @@ class Index extends Component {
     const { store } = this.props;
     store.setLoading(true);
     store.setDate();
-    store.setPos('sho');
+    store.setFromTo('sho', 'sfc');
     const timeTable = await import('../static/timeTable.json');
     const holidays = await import('../static/holidays.json');
     this.interval = setInterval(() => {
       store.setDate();
-      const busList = this.getMyList(timeTable.default, holidays.default);
-      store.setBusList(busList);
+      store.setTodayTable(timeTable.default, holidays.default);
+      store.setLeftBuses();
+      store.setLeftTime();
     }, 300);
   }
 
@@ -38,29 +39,6 @@ class Index extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
-  }
-
-  getMyList (timeTable, holidays) {
-    try {
-      const { store } = this.props;
-      const date = store.date;
-      const isHoliday = ((date.monthStr+date.dayStr) in holidays);
-      const todayData = timeTable.default.sfc.sho.weekday;
-      const busList = todayData.filter(time => {
-        return (
-          (time.h > date.hour) 
-          ||
-          (
-            time.h === date.hour &&
-            time.m > date.minute
-          )
-        )
-      });
-      return busList;
-    } catch (e) {
-      console.error(e);
-      return [];
-    }
   }
 
   render () {

@@ -9,18 +9,6 @@ import BusCard from './BusCard';
 @observer
 class BusList extends Component {    
 
-  componentWillMount () {
-    this.setState({ ...this.props });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateBusList(nextProps);
-  } 
-
-  updateBusList (nextProps) {
-    this.setState({ ...nextProps });
-  }
-
   render () {
     const { store } = this.props;
 
@@ -28,8 +16,8 @@ class BusList extends Component {
       <Wrapper>
         <div className="bus-list">
           <div className="bus-card-container">
-            {store.busList.length?(
-              store.busList.map(bus => {
+            {store.leftBuses.length?(
+              store.leftBuses.map(bus => {
                 let icon = '../static/img/bus/normal.png';
                 let info = '';
                 let subInfo = '';

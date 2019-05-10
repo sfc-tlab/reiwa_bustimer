@@ -25,10 +25,22 @@ export default class MainStore {
   pos: string = 'sfc';
 
   @observable
-  departure: string = 'SFC';
+  from: string = 'sfc';
 
   @observable
-  busList: object = [];
+  fromStr: string = 'SFC';
+
+  @observable
+  to: string = 'sho';
+
+  @observable
+  toStr: string = '湘南台';
+
+  @observable.ref
+  todayTable: object = [];
+
+  @observable.ref
+  leftBuses: object = [];
 
   @observable
   nextBus: object = {
@@ -44,10 +56,10 @@ export default class MainStore {
   };
 
   @observable
-  tweetText: string = `「${this.departure}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」で登校なう`;
+  tweetText: string = `「${this.fromStr}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」で登校なう`;
 
   @observable
-  taxiText: string = `「${this.departure}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
+  taxiText: string = `「${this.fromStr}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
 
   @action
   setLoading = isLoading => {
@@ -60,22 +72,56 @@ export default class MainStore {
   }
 
   @action
-  setPos = (pos: string) => {
-    this.pos = pos;
+  getPosStr = (pos: string) => {
     switch (pos) {
       case 'sho':
-        this.departure = '湘南台';
-        break;
+        return '湘南台';
       case 'sfc':
-        this.departure = 'SFC';
-        break;
+        return 'SFC';
       case 'tuji':
-        this.departure = '辻堂';
-        break;
+        return '辻堂';
       default:
-        this.departure = 'test';
-        break;
+        return 'テスト';
     }
+  }
+
+  @action
+  setFromTo = (from: string, to: string) => {
+    this.from = from;
+    this.fromStr = this.getPosStr(from);
+    this.to = to;
+    this.toStr = this.getPosStr(to);
+  } 
+
+  @action
+  setTodayTable = (timeTable: object, holidays: object) => {
+    const isHoliday = ((this.date.monthStr+this.date.dayStr) in holidays);
+    const timeTableForPos = timeTable.default[this.from][this.to];
+    let todayData;
+    isHoliday
+      ? todayData = timeTableForPos['holiday']
+      : todayData = timeTableForPos['weekday']
+    console.log(todayData)
+    this.todayTable = todayData;
+  }
+
+  @action
+  setLeftBuses = () => {
+    const todayTable = this.todayTable;
+    console.log(todayTable)
+    const leftBuses = todayTable.filter(time => {
+      return (
+        (time.h > this.date.hour) 
+        ||
+        (
+          time.h === this.date.hour &&
+          time.m > this.date.minute
+        )
+      )
+    });
+    console.log(leftBuses)
+    this.leftBuses = leftBuses;
+    this.setNextBus(leftBuses[0]);
   }
 
   @action
@@ -84,26 +130,21 @@ export default class MainStore {
   }
 
   @action
-  setLeftTime = (h: number, m: number, s: number) => {
-    this.leftTime.h = h;
-    this.leftTime.m = m;
-    this.leftTime.s = s;
-  }
-
-  @action
-  setBusList = (busList) => {
-    this.busList = busList;
-    this.setNextBus(busList[0]);
+  setLeftTime = () => {
+    const nextBus = this.nextBus;
+    const date = this.date;
     let leftHour, leftMinute, leftSecond;
-    leftHour = this.nextBus.h - this.date.hour;
-    leftSecond = 60 - this.date.second;
-    if (this.nextBus.h > this.date.hour){
-      leftMinute = ((this.nextBus.h - this.date.hour) * 60)
-        - this.date.minute
-        + this.nextBus.m - 1; 
+    leftHour = nextBus.h - date.hour;
+    leftSecond = 60 - date.second;
+    if (nextBus.h > date.hour){
+      leftMinute = ((nextBus.h - date.hour) * 60)
+        - date.minute
+        + nextBus.m - 1; 
     } else {
-      leftMinute = this.nextBus.m - this.date.minute -1; 
+      leftMinute = nextBus.m - date.minute -1; 
     }
-    this.setLeftTime(leftHour, leftMinute, leftSecond);
+    this.leftTime.h = leftHour;
+    this.leftTime.m = leftMinute;
+    this.leftTime.s = leftSecond;
   }
 }

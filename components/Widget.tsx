@@ -11,45 +11,8 @@ import dateFormatter from '../helpers/dateFormatter';
 class Widget extends Component {    
 
   componentDidmount() {
-    this.props.store.setLoading(false);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateLeftTime(nextProps);
-  } 
-
-  updateLeftTime (nextProps) {
     const { store } = this.props;
-    if (store.busList.length) {
-      const nextBus = store.busList[0];
-      const date = store.date;
-      let leftHour, leftMinute, leftSecond;
-      leftHour = nextBus.h - date.hour;
-      leftSecond = 60 - store.date.second;
-      if (nextBus.h > date.hour){
-        leftMinute = ((nextBus.h - date.hour) * 60)
-          - date.minute
-          + nextBus.m - 1; 
-      } else {
-        leftMinute = nextBus.m - date.minute -1; 
-      }
-      let departure = '';
-      switch (store.pos) {
-        case 'sho':
-          store.setDeparture('湘南台');
-          break;
-        case 'sfc':
-          store.setDeparture('SFC');
-          break;
-        case 'tuji':
-          store.setDeparture('辻堂');
-          break;
-        default:
-          store.setDeparture('test');
-          break;
-      }
-      store.setLeftTime(leftHour, leftMinute, leftSecond);
-    }
+    store.setLoading(false);
   }
 
   render () {
@@ -59,7 +22,7 @@ class Widget extends Component {
     const tweetHashtags = 'bustimer,登校なう';
     const taxiHashtags = 'bustimer,SFC生相乗り募集';
     
-    if (!store.busList.length) {
+    if (!store.leftBuses.length) {
       return (
         <Wrapper>
           <div className="widget">
@@ -76,6 +39,13 @@ class Widget extends Component {
             SFC ▶︎ 湘南台
             <br />
             {`${store.leftTime.m}分 ${('00'+store.leftTime.s).slice(-2)}秒`}
+            <br />
+            <div 
+              className="from-to-switch"
+              onClick={store.setFromTo(store.to, store.from)}
+            >
+              {"<->"}
+            </div>
           </div>
           <br />
           <span className="tweet-toukou">
