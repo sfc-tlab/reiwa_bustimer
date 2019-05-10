@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { inject, observer  } from "mobx-react";
+import { inject, observer } from "mobx-react";
+import { import } from 'next/dynamic';
 
 import Layout from '../components/Layout';
 import Splash from '../components/Splash';
 import Widget from '../components/Widget';
 import BusList from '../components/BusList';
 import dateFormatter from '../helpers/dateFormatter';
-
 
 
 @inject("store")
@@ -26,49 +26,50 @@ class Index extends Component {
     // const location = new Location();
     // console.log('getpos')
     // const pos = await location.getPosName();
-    // console.log(pos)
     const { store } = this.props;
     store.setLoading(true);
     store.setDate();
     store.setPos('sho');
-    await store.getTimeTable();
-    await store.getHolidays();
+    const timeTable = await import('../static/timeTable.json');
+    const holidays = await import('../static/holidays.json');
     this.interval = setInterval(() => {
       store.setDate();
-      const busList = this.getMyList();
+      const busList = this.getMyList(timeTable.default, holidays.default);
       this.setState({ busList });
     }, 300);
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     const { store } = this.props;
     store.setLoading(false);
     console.log(store.isLoading)
-    
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  getMyList () {
-    const { store } = this.props;
-    const date = store.date;
-    const timeTableData = store.timeTableData.toJS();
-    const isHoliday = ((date.monthStr+date.dayStr) in store.holidays.toJS());
-    const todayData = timeTableData.default.sfc.sho.weekday;
-    const busList = todayData.filter(time => {
-      return (
-        (time.h > date.hour) 
-        ||
-        (
-          time.h === date.hour &&
-          time.m > date.minute
+  getMyList (timeTable, holidays) {
+    try {
+      const { store } = this.props;
+      const date = store.date;
+      const isHoliday = ((date.monthStr+date.dayStr) in holidays);
+      const todayData = timeTable.default.sfc.sho.weekday;
+      const busList = todayData.filter(time => {
+        return (
+          (time.h > date.hour) 
+          ||
+          (
+            time.h === date.hour &&
+            time.m > date.minute
+          )
         )
-      )
-    });
-    
-    return busList;
+      });
+      return busList;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
   }
 
   render () {

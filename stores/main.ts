@@ -2,7 +2,6 @@ import { action, observable } from "mobx";
 import { useStaticRendering } from 'mobx-react';
 
 import dateFormatter from '../helpers/dateFormatter';
-import { get } from '../helpers/axios';
 
 
 //TODO baseUrl の置き方考える
@@ -12,17 +11,8 @@ useStaticRendering(isServer);
 
 
 export default class MainStore {
-  @observable
-  timeTableData: object = {};
-
-  @observable
-  holidays: object = {};
 
   constructor(isServer, initialData = {}) {
-    if (isServer) {
-      this.getTimeTable();
-      this.getHolidays();
-    }
   }
 
   @observable
@@ -37,18 +27,6 @@ export default class MainStore {
   @action
   setLoading = isLoading => {
     this.isLoading = isLoading;
-  }
-
-  @action
-  getTimeTable = async () => {
-    const res = await get(baseUrl + '/static/timeTable.json');
-    this.timeTableData = res.data;
-  }
-
-  @action
-  getHolidays = async () => {
-    const res = await get(baseUrl + "/static/holidays.json");
-    this.holidays = res.data;
   }
 
   @action
