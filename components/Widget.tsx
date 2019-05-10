@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
+import { inject, observer } from "mobx-react";
 
 import TweetButton from './TweetButton';
 import dateFormatter from '../helpers/dateFormatter';
 
 
+@inject("store")  
+@observer
 class Widget extends Component {    
   state = {}
 
@@ -17,6 +20,10 @@ class Widget extends Component {
       },
       ...this.props
     });
+  }
+
+  componentDidmount() {
+    this.props.store.setLoading(false);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -92,41 +99,41 @@ class Widget extends Component {
       return (
         <Wrapper>
           <div className="widget">
-            次のバスまで
+            SFC ▶︎ 湘南台
             <br />
             {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
-            <br />
-            <span className="tweet-toukou">
-              <div className="tweet-toukou-text">
-                登校をつぶやく
-              </div>
-              <TweetButton 
-                size="large" 
-                text={tweetText} 
-                tweetUrl={tweetUrl} 
-                hashtags={tweetHashtags}
-                countFlag="false"
-                via="bustimer"
-              >
-                登校なう
-              </TweetButton>
-            </span>
-            <span className="tweet-taxi">
-              <div className="tweet-taxi-text">
-                タクシーの相乗り募集をする
-              </div>
-              <TweetButton 
-                size="large" 
-                text={tweetText} 
-                tweetUrl={tweetUrl} 
-                hashtags={taxiHashtags}
-                countFlag="false"
-                via="bustimer"
-              >
-                相乗り募集
-              </TweetButton>
-            </span>
           </div>
+          <br />
+          <span className="tweet-toukou">
+            <div className="tweet-toukou-text">
+              登校をつぶやく
+            </div>
+            <TweetButton 
+              size="large" 
+              text={tweetText} 
+              tweetUrl={tweetUrl} 
+              hashtags={tweetHashtags}
+              countFlag="false"
+              via="bustimer"
+            >
+              登校なう
+            </TweetButton>
+          </span>
+          <span className="tweet-taxi">
+            <div className="tweet-taxi-text">
+              タクシーの相乗り募集をする
+            </div>
+            <TweetButton 
+              size="large" 
+              text={tweetText} 
+              tweetUrl={tweetUrl} 
+              hashtags={taxiHashtags}
+              countFlag="false"
+              via="bustimer"
+            >
+              相乗り募集
+            </TweetButton>
+          </span>
         </Wrapper>
       )
     }

@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
-import * as fs from 'fs';
+import { inject, observer } from "mobx-react";
+import { import } from 'next/dynamic';
 
 import Layout from '../components/Layout';
+import Splash from '../components/Splash';
 import Widget from '../components/Widget';
 import BusList from '../components/BusList';
 import dateFormatter from '../helpers/dateFormatter';
 
 
+@inject("store")
+@observer
 class Index extends Component {    
+
   state = { 
     date: dateFormatter.toDateObj(new Date()), 
     busList:[{ h:0, m:0, 
                from: 'sho', to: 'sfc', 
                twin: false, rotary: false,
-               type: 'normal'}] }
-
-  static async getInitialProps(req) {
-    if (req) {
-      const timeTableData = await fs.readFileSync("./static/timeTable.json");
-      const holidays = await fs.readFileSync("./static/holidays.json");
-      const date = dateFormatter.toDateObj(new Date());
-      return {
-        timeTableData: JSON.parse(timeTableData),
-        date: date,
-        pos: 'sho',
-        holidays: JSON.parse(holidays),
-      }
-    }
+               type: 'normal'}] 
   }
 
   async componentWillMount () {
@@ -34,64 +26,80 @@ class Index extends Component {
     // const location = new Location();
     // console.log('getpos')
     // const pos = await location.getPosName();
-    // console.log(pos)
+    const { store } = this.props;
+    store.setLoading(true);
+    store.setDate();
+    store.setPos('sho');
+    const timeTable = await import('../static/timeTable.json');
+    const holidays = await import('../static/holidays.json');
     this.interval = setInterval(() => {
-      const date = dateFormatter.toDateObj(new Date());
-      const busList = this.getMyList(date);
-      this.setState({ date, busList });
+      store.setDate();
+      const busList = this.getMyList(timeTable.default, holidays.default);
+      this.setState({ busList });
     }, 300);
+  }
+
+  async componentDidMount () {
+    const { store } = this.props;
+    store.setLoading(false);
+    console.log(store.isLoading)
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  getMyList (date) {
-    const { 
-      timeTableData,
-      pos,
-      holidays,
-    } = this.props;  
-    const isHoliday = (date.monthStr+date.dayStr) in holidays;
-    const todayData = timeTableData.default.sfc.sho.weekday;
-    const busList = todayData.filter(time => {
-      return (
-        (time.h > date.hour) 
-        ||
-        (
-          time.h === date.hour &&
-          time.m > date.minute
+  getMyList (timeTable, holidays) {
+    try {
+      const { store } = this.props;
+      const date = store.date;
+      const isHoliday = ((date.monthStr+date.dayStr) in holidays);
+      const todayData = timeTable.default.sfc.sho.weekday;
+      const busList = todayData.filter(time => {
+        return (
+          (time.h > date.hour) 
+          ||
+          (
+            time.h === date.hour &&
+            time.m > date.minute
+          )
         )
-      )
-    });
-    
-    return busList;
+      });
+      return busList;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
   }
 
   render () {
     const { 
-      timeTableData,
-      pos,
-      holidays,
+      store
     } = this.props;  
 
     const { 
-      date,
       busList
     } = this.state;  
 
-    return (
-      <Layout>
-        <Widget 
-          nowDateTime={date}
-          pos={pos}
-          busList={busList}
-        />
-        <BusList
-          busList={busList}
-        />
-      </Layout>
-    )
+    if (store.isLoading) {
+      return (
+        <Splash />
+      )
+    } else {
+      return (
+        <Layout>
+          <Widget 
+            nowDateTime={store.date}
+            pos={store.pos}
+            busList={busList}
+          />
+          <BusList
+            busList={busList}
+          />
+        </Layout>
+      )
+    
+    }
   }
 }
 
