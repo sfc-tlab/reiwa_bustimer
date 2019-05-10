@@ -6,20 +6,11 @@ import Layout from '../components/Layout';
 import Splash from '../components/Splash';
 import Widget from '../components/Widget';
 import BusList from '../components/BusList';
-import dateFormatter from '../helpers/dateFormatter';
 
 
 @inject("store")
 @observer
 class Index extends Component {    
-
-  state = { 
-    date: dateFormatter.toDateObj(new Date()), 
-    busList:[{ h:0, m:0, 
-               from: 'sho', to: 'sfc', 
-               twin: false, rotary: false,
-               type: 'normal'}] 
-  }
 
   async componentWillMount () {
     // TODO: 高速化
@@ -35,7 +26,7 @@ class Index extends Component {
     this.interval = setInterval(() => {
       store.setDate();
       const busList = this.getMyList(timeTable.default, holidays.default);
-      this.setState({ busList });
+      store.setBusList(busList);
     }, 300);
   }
 
@@ -73,13 +64,7 @@ class Index extends Component {
   }
 
   render () {
-    const { 
-      store
-    } = this.props;  
-
-    const { 
-      busList
-    } = this.state;  
+    const { store } = this.props;  
 
     if (store.isLoading) {
       return (
@@ -88,14 +73,8 @@ class Index extends Component {
     } else {
       return (
         <Layout>
-          <Widget 
-            nowDateTime={store.date}
-            pos={store.pos}
-            busList={busList}
-          />
-          <BusList
-            busList={busList}
-          />
+          <Widget />
+          <BusList />
         </Layout>
       )
     

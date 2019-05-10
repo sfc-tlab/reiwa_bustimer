@@ -1,9 +1,12 @@
 import React, { Component, Fragment} from 'react';
+import { inject, observer } from "mobx-react";
 import styled from 'styled-components';
 
 import BusCard from './BusCard';
 
 
+@inject("store")
+@observer
 class BusList extends Component {    
 
   componentWillMount () {
@@ -19,16 +22,14 @@ class BusList extends Component {
   }
 
   render () {
-    const { 
-      busList,
-    } = this.state;
+    const { store } = this.props;
 
     return (
       <Wrapper>
         <div className="bus-list">
           <div className="bus-card-container">
-            {busList.length?(
-              busList.map(bus => {
+            {store.busList.length?(
+              store.busList.map(bus => {
                 let icon = '../static/img/bus/normal.png';
                 let info = '';
                 let subInfo = '';
