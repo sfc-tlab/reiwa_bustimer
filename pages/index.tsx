@@ -19,14 +19,13 @@ class Index extends Component {
     // const pos = await location.getPosName();
     const { store } = this.props;
     store.setLoading(true);
-    store.setDate();
     store.setFromTo('sho', 'sfc');
-    const timeTable = await import('../static/timeTable.json');
-    const holidays = await import('../static/holidays.json');
+    await store.setTimeTable();
+    await store.setHolidays();
     this.interval = setInterval(() => {
       store.setDate();
-      store.setTodayTable(timeTable.default, holidays.default);
-      store.setLeftBuses();
+      store.setTodayTable();
+      store.setNextBus(store.leftBuses[0]);
       store.setLeftTime();
     }, 300);
   }
@@ -52,7 +51,6 @@ class Index extends Component {
       return (
         <Layout>
           <Widget />
-          <BusList />
         </Layout>
       )
     

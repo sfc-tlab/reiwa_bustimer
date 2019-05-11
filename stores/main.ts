@@ -1,5 +1,6 @@
-import { action, observable } from "mobx";
+import { action, observable, computed } from "mobx";
 import { useStaticRendering } from 'mobx-react';
+import { import } from 'next/dynamic';
 
 import dateFormatter from '../helpers/dateFormatter';
 
@@ -13,6 +14,7 @@ useStaticRendering(isServer);
 export default class MainStore {
 
   constructor(isServer, initialData = {}) {
+    this.setDate();
   }
 
   @observable
@@ -37,29 +39,26 @@ export default class MainStore {
   toStr: string = '湘南台';
 
   @observable.ref
-  todayTable: object = [];
+  timeTable: object = {};
 
   @observable.ref
-  leftBuses: object = [];
+  holidays: object = {};
 
-  @observable
-  nextBus: object = {
-    h: 0,
-    m: 0
-  };
+  // @observable.ref
+  // leftBuses: object = [];
+  
+  @observable.ref
+  leftTime: object = {};
 
-  @observable
-  leftTime: object = {
-    h: 0,
-    m: 0,
-    s: 0
-  };
+  @computed
+  get tweetText() {
+    return `「${this.fromStr}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」で登校なう`;
+  }
 
-  @observable
-  tweetText: string = `「${this.fromStr}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」で登校なう`;
-
-  @observable
-  taxiText: string = `「${this.fromStr}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
+  @computed
+  get taxiText() { 
+    return `「${this.fromStr}発 ${('00'+this.nextBus.h).slice(-2)}時 ${('00'+this.nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
+  }
 
   @action
   setLoading = isLoading => {
@@ -72,7 +71,16 @@ export default class MainStore {
   }
 
   @action
-  getPosStr = (pos: string) => {
+  setTimeTable = async () => {
+    this.timeTable = (await import('../static/timeTable.json')).default;
+  }
+
+  @action
+  setHolidays = async () => {
+    this.holidays = (await import('../static/holidays.json')).default;
+  }
+
+  _getPosStr = (pos: string) => {
     switch (pos) {
       case 'sho':
         return '湘南台';
@@ -88,63 +96,65 @@ export default class MainStore {
   @action
   setFromTo = (from: string, to: string) => {
     this.from = from;
-    this.fromStr = this.getPosStr(from);
+    this.fromStr = this._getPosStr(from);
     this.to = to;
-    this.toStr = this.getPosStr(to);
+    this.toStr = this._getPosStr(to);
   } 
 
-  @action
-  setTodayTable = (timeTable: object, holidays: object) => {
-    const isHoliday = ((this.date.monthStr+this.date.dayStr) in holidays);
-    const timeTableForPos = timeTable.default[this.from][this.to];
-    let todayData;
-    isHoliday
-      ? todayData = timeTableForPos['holiday']
-      : todayData = timeTableForPos['weekday']
-    console.log(todayData)
-    this.todayTable = todayData;
+  @action.bound
+  setTodayTable() {
+    console.log(this.todayTable)
+    if (this.timeTable && this.timeTable.default) {
+      const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays);
+      const timeTableForPos = this.timeTable.default[this.from][this.to];
+      this.todayTable = isHoliday
+        ? timeTableForPos['holiday']
+        : timeTableForPos['weekday'];
+    } else {
+      this.todayTable = []; 
+    }
   }
 
-  @action
-  setLeftBuses = () => {
-    const todayTable = this.todayTable;
-    console.log(todayTable)
-    const leftBuses = todayTable.filter(time => {
-      return (
-        (time.h > this.date.hour) 
-        ||
-        (
-          time.h === this.date.hour &&
-          time.m > this.date.minute
+  @computed
+  get leftBuses() {
+    console.log('todayTable: ', this.todayTable)
+    if (this.todayTable && this.todayTable.length) {
+      return this.todayTable.filter(time => {
+        return (
+          (time.h > this.date.hour) 
+          ||
+          (
+            time.h === this.date.hour &&
+            time.m > this.date.minute
+          )
         )
-      )
-    });
-    console.log(leftBuses)
-    this.leftBuses = leftBuses;
-    this.setNextBus(leftBuses[0]);
+      });
+    } else {
+      return [{h: 24, m: 60, s: 60}];
+    }
   }
 
   @action
-  setNextBus = (bus) => {
+  setNextBus(bus) {
     this.nextBus = bus;
   }
 
   @action
-  setLeftTime = () => {
-    const nextBus = this.nextBus;
-    const date = this.date;
-    let leftHour, leftMinute, leftSecond;
-    leftHour = nextBus.h - date.hour;
-    leftSecond = 60 - date.second;
-    if (nextBus.h > date.hour){
-      leftMinute = ((nextBus.h - date.hour) * 60)
-        - date.minute
-        + nextBus.m - 1; 
-    } else {
-      leftMinute = nextBus.m - date.minute -1; 
+  setLeftTime() {
+    if (!this.nextBus){
+      this.leftTime =  {h: 0, m: 0, s: 0};
     }
-    this.leftTime.h = leftHour;
-    this.leftTime.m = leftMinute;
-    this.leftTime.s = leftSecond;
+    let hour, min, sec;
+    hour = this.nextBus.h - this.date.hour;
+    sec = 60 - this.date.second;
+    if (this.nextBus.h > this.date.hour){
+      min = ((this.nextBus.h - this.date.hour) * 60)
+        - this.date.minute
+        + this.nextBus.m - 1; 
+    } else {
+      min = this.nextBus.m - this.date.minute -1; 
+    }
+    this.leftTime = {hour, min, sec};
+    console.log(this.leftTime);
   }
 }
