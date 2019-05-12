@@ -74,7 +74,7 @@ class Widget extends Component {
 
 const Wrapper = styled.div`
   .widget {
-    margin: 30px;
+    margin: 24px;
     padding: 15px;
     border-radius: 3px;
     border: 1px solid #000; 

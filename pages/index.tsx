@@ -13,14 +13,6 @@ import dateFormatter from '../helpers/dateFormatter';
 @observer
 class Index extends Component {    
 
-  state = { 
-    date: dateFormatter.toDateObj(new Date()), 
-    busList:[{ h:0, m:0, 
-               from: 'sho', to: 'sfc', 
-               twin: false, rotary: false,
-               type: 'normal'}] 
-  }
-
   async componentWillMount () {
     // TODO: 高速化
     // const location = new Location();
@@ -52,10 +44,6 @@ class Index extends Component {
       store
     } = this.props;  
 
-    const { 
-      busList
-    } = this.state;  
-
     if (store.isLoading) {
       return (
         <Splash />
@@ -64,6 +52,7 @@ class Index extends Component {
       return (
         <Layout>
           <Widget />
+          <BusList />
         </Layout>
       )
     

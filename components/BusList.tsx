@@ -1,58 +1,26 @@
 import React, { Component, Fragment} from 'react';
+import { inject, observer } from "mobx-react";
 import styled from 'styled-components';
 
 import BusCard from './BusCard';
 
 
+@inject("store")
+@observer
 class BusList extends Component {    
 
-  componentWillMount () {
-    this.setState({ ...this.props });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateBusList(nextProps);
-  } 
-
-  updateBusList (nextProps) {
-    this.setState({ ...nextProps });
-  }
-
   render () {
-    const { 
-      busList,
-    } = this.state;
+    const { store } = this.props;
 
     return (
       <Wrapper>
         <div className="bus-list">
           <div className="bus-card-container">
-            {busList.length?(
-              busList.map(bus => {
-                let icon = '../static/img/bus/normal.png';
-                let info = '';
-                let subInfo = '';
-                if (bus.twin) { 
-                  icon = '../static/img/bus/twin.png'; 
-                  info = 'ツインライナー';
-                }
-                if (bus.via === 'sasakubo') {
-                  icon = '../static/img/bus/sasakubo.png';
-                  info = '笹久保経由';
-                }
-                if (bus.type==='night') {
-                  icon = '../static/img/bus/night.png';
-                  info = '深夜料金';
-                }
-                subInfo = bus.rotary?'ロータリー発':'';
-                const time = {hour: bus.h, minute: bus.m};
-                 
+            {store.leftBuses.length?(
+              store.leftBuses.map(bus => {
                 return(
                   <BusCard
-                    icon={icon}
-                    time={time}
-                    info={info}
-                    subInfo={subInfo}
+                    bus={bus}
                     key={''+bus.h+bus.m}
                   />
                 );

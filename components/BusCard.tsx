@@ -5,12 +5,25 @@ import styled from 'styled-components';
 class BusCard extends Component {    
 
   render () {
-    const {
-      icon,
-      time,
-      info,
-      subInfo
-    } = this.props;
+    const { bus } = this.props;
+
+    let icon = '../static/img/bus/normal.png';
+    let info = '';
+    let subInfo = '';
+    if (bus.twin) { 
+      icon = '../static/img/bus/twin.png'; 
+      info = 'ツインライナー';
+    }
+    if (bus.via === 'sasakubo') {
+      icon = '../static/img/bus/sasakubo.png';
+      info = '笹久保経由';
+    }
+    if (bus.type==='night') {
+      icon = '../static/img/bus/night.png';
+      info = '深夜料金';
+    }
+    subInfo = bus.rotary?'ロータリー発':'';
+    const time = {hour: bus.h, minute: bus.m};
 
     return (
       <Wrapper>
