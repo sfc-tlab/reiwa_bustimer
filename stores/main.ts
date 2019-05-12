@@ -69,7 +69,7 @@ export default class MainStore {
     if (this.leftBuses.length) {
       return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」で登校なう`;
     } else {
-      return `「${this.fromStr}発 もうバスないけど 登校なう`;
+      return `${this.fromStr}からバスないけど 登校なう`;
     }
   }
 
@@ -78,7 +78,7 @@ export default class MainStore {
     if (this.leftBuses.length) {
       return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
     } else {
-      return `「${this.fromStr}から終バス逃してタクシー相乗りメンバー募集中`;
+      return `${this.fromStr}から終バス逃してタクシー相乗りメンバー募集中`;
     }
   }
 

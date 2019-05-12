@@ -24,7 +24,6 @@ class Widget extends Component {
         return '登校';
       }
     }
-    console.log(store.leftTime.s)
 
     function LeftTime() {
       if (store.leftBuses.length) {
