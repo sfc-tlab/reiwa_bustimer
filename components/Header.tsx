@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
+import { inject, observer } from "mobx-react";
 import styled, { css } from 'styled-components';
 
 
@@ -7,16 +8,28 @@ interface ThemeColor {
     color: string;
 }   
 
+@inject("store")  
+@observer
 export default class Header extends Component<ThemeColor> {
 
   jumpTo = (e, path) => {
-    if (e) {
-      e.preventDefault(); 
-    }
+    e?e.preventDefault():null;
     Router.push(path)
+  }
+
+  setPos (e, pos) {
+    const { store } = this.props;
+    e?e.preventDefault():null;
+    if (store.from === 'sfc') {
+      store.setFromTo('sfc', pos);
+      return;
+    }
+    store.setFromTo(pos, 'sfc'); 
   }
   
   render () {
+    const { store } = this.props;
+
     return (
       <Wrapper>
         <div className="header">
@@ -38,12 +51,18 @@ export default class Header extends Component<ThemeColor> {
         </div>
 
         <div className="departures">
-          <div className="departure-button sho">
+          <div 
+            className="departure-button sho"
+              onClick={(e)=>{this.setPos(e, 'sho')}}
+              >
             <div className="departure-button-text">
               湘南台
             </div>
           </div>
-          <div className="departure-button tuji">
+          <div 
+            className="departure-button tuji"
+            onClick={(e)=>{this.setPos(e, 'tuji')}}
+           >
             <div className="departure-button-text">
               辻堂
             </div>
