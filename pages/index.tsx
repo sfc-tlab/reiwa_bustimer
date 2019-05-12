@@ -30,11 +30,9 @@ class Index extends Component {
     store.setLoading(true);
     store.setDate();
     store.setFromTo('sho', 'sfc');
-    const timeTable = await import('../static/timeTable.json');
-    const holidays = await import('../static/holidays.json');
     this.interval = setInterval(() => {
       store.setDate();
-      const busList = this.getMyList(timeTable.default, holidays.default);
+      const busList = this.getMyList(store.timeTable, store.holidays);
       this.setState({ busList });
     }, 300);
   }

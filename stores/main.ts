@@ -25,7 +25,15 @@ export default class MainStore {
       }
   }
 
+  @observable.ref
+  timeTable: object = {};
+
+  @observable.ref
+  holidays: object = {};
+
   constructor(isServer, initialData = {}) {
+    this.timeTable = initialData.timeTable;
+    this.holidays = initialData.holidays;
   }
 
   @observable
@@ -63,4 +71,5 @@ export default class MainStore {
     this.to = to;
     this.toStr = this._getPosStr(to);
   }
+
 }

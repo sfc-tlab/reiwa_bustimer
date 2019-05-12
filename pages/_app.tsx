@@ -13,7 +13,9 @@ export default class MyApp extends App {
   static async getInitialProps(appContext) {
     // Get or Create the store with `undefined` as initialState
     // This allows you to set a custom default initialState
-    const mobxStore = initializeStore();
+    const timeTable = (await import('../static/timeTable.json')).default;
+    const holidays = (await import('../static/holidays.json')).default;
+    const mobxStore = initializeStore({timeTable, holidays});
     // Provide the store to getInitialProps of pages
     appContext.ctx.mobxStore = mobxStore
 
