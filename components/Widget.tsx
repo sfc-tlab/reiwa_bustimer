@@ -9,20 +9,83 @@ import dateFormatter from '../helpers/dateFormatter';
 @inject("store")  
 @observer
 class Widget extends Component {    
+  state = {}
+
+  componentWillMount () {
+    this.setState({
+      leftTime: { 
+        h: 0, 
+        m: 0, 
+        s: 0
+      },
+      ...this.props
+    });
+  }
 
   componentDidmount() {
-    const { store } = this.props;
-    store.setLoading(false);
+    this.props.store.setLoading(false);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateLeftTime(nextProps);
+  } 
+
+  updateLeftTime (nextProps) {
+    const { 
+      busList,
+      nowDateTime,
+      pos,
+    } = nextProps;
+    if (busList.length) {
+      const nextBus = busList[0];
+      const date = nowDateTime
+      let leftMinute, leftSecond;
+      leftSecond = 60 - date.second;
+      if (nextBus.h > date.hour){
+        leftMinute = ((nextBus.h - date.hour) * 60)
+          - date.minute
+          + nextBus.m - 1; 
+      } else {
+        leftMinute = nextBus.m - date.minute -1; 
+      }
+      let departure = '';
+      switch (pos) {
+        case 'sho':
+          departure = '湘南台';
+          break;
+        case 'sfc':
+          departure = 'SFC';
+          break;
+        case 'tuji':
+          departure = '辻堂';
+          break;
+      }
+      this.setState({
+        leftTime: {
+          m: leftMinute,
+          s: leftSecond
+        },
+        tweetText: `「${departure}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」で登校なう`,
+        taxiText: `「${departure}発 ${('00'+nextBus.h).slice(-2)}時 ${('00'+nextBus.m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`,
+      })
+    }
   }
 
   render () {
-    const { store } = this.props;
-
+    const { 
+      busList,
+      nowDateTime,
+      pos,
+      leftTime,
+      tweetText,
+      taxiText,
+    } = this.state;
+    
     const tweetUrl = 'https://bustimer.sfc.keioac.jp';
     const tweetHashtags = 'bustimer,登校なう';
     const taxiHashtags = 'bustimer,SFC生相乗り募集';
     
-    if (!store.leftBuses.length) {
+    if (!busList.length) {
       return (
         <Wrapper>
           <div className="widget">
@@ -38,14 +101,7 @@ class Widget extends Component {
           <div className="widget">
             SFC ▶︎ 湘南台
             <br />
-            {`${store.leftTime.m}分 ${('00'+store.leftTime.s).slice(-2)}秒`}
-            <br />
-            <div 
-              className="from-to-switch"
-              onClick={store.setFromTo(store.to, store.from)}
-            >
-              {"<->"}
-            </div>
+            {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
           </div>
           <br />
           <span className="tweet-toukou">
@@ -54,7 +110,7 @@ class Widget extends Component {
             </div>
             <TweetButton 
               size="large" 
-              text={store.tweetText} 
+              text={tweetText} 
               tweetUrl={tweetUrl} 
               hashtags={tweetHashtags}
               countFlag="false"
@@ -69,7 +125,7 @@ class Widget extends Component {
             </div>
             <TweetButton 
               size="large" 
-              text={store.taxiText} 
+              text={tweetText} 
               tweetUrl={tweetUrl} 
               hashtags={taxiHashtags}
               countFlag="false"

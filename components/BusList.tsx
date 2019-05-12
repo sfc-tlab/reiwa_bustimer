@@ -1,23 +1,34 @@
 import React, { Component, Fragment} from 'react';
-import { inject, observer } from "mobx-react";
 import styled from 'styled-components';
 
 import BusCard from './BusCard';
 
 
-@inject("store")
-@observer
 class BusList extends Component {    
 
+  componentWillMount () {
+    this.setState({ ...this.props });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateBusList(nextProps);
+  } 
+
+  updateBusList (nextProps) {
+    this.setState({ ...nextProps });
+  }
+
   render () {
-    const { store } = this.props;
+    const { 
+      busList,
+    } = this.state;
 
     return (
       <Wrapper>
         <div className="bus-list">
           <div className="bus-card-container">
-            {store.leftBuses.length?(
-              store.leftBuses.map(bus => {
+            {busList.length?(
+              busList.map(bus => {
                 let icon = '../static/img/bus/normal.png';
                 let info = '';
                 let subInfo = '';

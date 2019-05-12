@@ -6,11 +6,20 @@ import Layout from '../components/Layout';
 import Splash from '../components/Splash';
 import Widget from '../components/Widget';
 import BusList from '../components/BusList';
+import dateFormatter from '../helpers/dateFormatter';
 
 
 @inject("store")
 @observer
 class Index extends Component {    
+
+  state = { 
+    date: dateFormatter.toDateObj(new Date()), 
+    busList:[{ h:0, m:0, 
+               from: 'sho', to: 'sfc', 
+               twin: false, rotary: false,
+               type: 'normal'}] 
+  }
 
   async componentWillMount () {
     // TODO: 高速化
@@ -19,11 +28,15 @@ class Index extends Component {
     // const pos = await location.getPosName();
     const { store } = this.props;
     store.setLoading(true);
-    store.setFromTo('sho', 'sfc');
-    const timeTable = (await import('../static/timeTable.json')).default;
-    const holidays = (await import('../static/holidays.json')).default;
-    store.setTimeTable(timeTable);
-    store.setHolidays(holidays);
+    store.setDate();
+    store.setPos('sho');
+    const timeTable = await import('../static/timeTable.json');
+    const holidays = await import('../static/holidays.json');
+    this.interval = setInterval(() => {
+      store.setDate();
+      const busList = this.getMyList(timeTable.default, holidays.default);
+      this.setState({ busList });
+    }, 300);
   }
 
   async componentDidMount () {
@@ -32,8 +45,41 @@ class Index extends Component {
     console.log(store.isLoading)
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  getMyList (timeTable, holidays) {
+    try {
+      const { store } = this.props;
+      const date = store.date;
+      const isHoliday = ((date.monthStr+date.dayStr) in holidays);
+      const todayData = timeTable.default.sfc.sho.weekday;
+      const busList = todayData.filter(time => {
+        return (
+          (time.h > date.hour) 
+          ||
+          (
+            time.h === date.hour &&
+            time.m > date.minute
+          )
+        )
+      });
+      return busList;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  }
+
   render () {
-    const { store } = this.props;  
+    const { 
+      store
+    } = this.props;  
+
+    const { 
+      busList
+    } = this.state;  
 
     if (store.isLoading) {
       return (
@@ -42,7 +88,14 @@ class Index extends Component {
     } else {
       return (
         <Layout>
-          <Widget />
+          <Widget 
+            nowDateTime={store.date}
+            pos={store.pos}
+            busList={busList}
+          />
+          <BusList
+            busList={busList}
+          />
         </Layout>
       )
     
