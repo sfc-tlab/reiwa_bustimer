@@ -83,7 +83,7 @@ class Widget extends Component {
           <div className="widget">
             SFC ▶︎ 湘南台
             <br />
-            {`${leftTime.m}分 ${('00'+leftTime.s).slice(-2)}秒`}
+            {`${store.leftTime.m}分 ${('00'+store.leftTime.s).slice(-2)}秒`}
           </div>
           <br />
           <span className="tweet-toukou">

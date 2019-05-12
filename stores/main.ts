@@ -50,6 +50,9 @@ export default class MainStore {
   date: object = {};
 
   @observable
+  leftTime: object = {};
+
+  @observable
   from: string = 'sho';
 
   @observable
@@ -95,6 +98,25 @@ export default class MainStore {
         )
       )
     });
+  }
+
+  @action
+  setLeftTime = () => {
+    const bus = this.leftBuses[0];
+    const date = this.date;
+    let leftMinute, leftSecond;
+    leftSecond = 60 - date.second;
+    if (bus.h > date.hour){
+      leftMinute = ((bus.h - date.hour) * 60)
+        - date.minute
+        + bus.m - 1; 
+    } else {
+      leftMinute = bus.m - date.minute -1; 
+    }
+    this.leftTime = {
+      m: leftMinute,
+      s: leftSecond
+    }
   }
 
 }

@@ -33,8 +33,7 @@ class Index extends Component {
     this.interval = setInterval(() => {
       store.setDate();
       store.setLeftBuses();
-      const busList = this.getMyList(store.timeTable, store.holidays);
-      this.setState({ busList });
+      store.setLeftTime();
     }, 300);
   }
 
