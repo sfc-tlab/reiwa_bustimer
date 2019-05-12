@@ -97,7 +97,9 @@ export default class MainStore {
     const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays);
     const todayData = isHoliday
       ?this.timeTable.default[this.from][this.to].holiday
-      :this.timeTable.default[this.from][this.to].weekday;
+      :this.date.dayOfWeek==6
+        ?this.timeTable.default[this.from][this.to].weekday
+        :this.timeTable.default[this.from][this.to].weekday;
     this.leftBuses = todayData.filter(time => {
       return (
         (time.h > this.date.hour) 
@@ -112,20 +114,22 @@ export default class MainStore {
 
   @action
   setLeftTime = () => {
-    const bus = this.leftBuses[0];
-    const date = this.date;
-    let leftMinute, leftSecond;
-    leftSecond = 60 - date.second - 1;
-    if (bus.h > date.hour){
-      leftMinute = ((bus.h - date.hour) * 60)
-        - date.minute
-        + bus.m - 1; 
-    } else {
-      leftMinute = bus.m - date.minute -1; 
-    }
-    this.leftTime = {
-      m: leftMinute,
-      s: leftSecond
+    if (this.leftBuses.length) {
+      const bus = this.leftBuses[0];
+      const date = this.date;
+      let leftMinute, leftSecond;
+      leftSecond = 60 - date.second - 1;
+      if (bus.h > date.hour){
+        leftMinute = ((bus.h - date.hour) * 60)
+          - date.minute
+          + bus.m - 1; 
+      } else {
+        leftMinute = bus.m - date.minute -1; 
+      }
+      this.leftTime = {
+        m: leftMinute,
+        s: leftSecond
+      }
     }
   }
 

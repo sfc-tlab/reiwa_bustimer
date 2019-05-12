@@ -32,7 +32,6 @@ class Index extends Component {
   async componentDidMount () {
     const { store } = this.props;
     store.setLoading(false);
-    console.log(store.isLoading)
   }
 
   componentWillUnmount() {

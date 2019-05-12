@@ -31,9 +31,15 @@ class Widget extends Component {
       return (
         <Wrapper>
           <div className="widget">
-            SFC ▶︎ 湘南台
+            {store.fromStr} -> {store.toStr}
             <br />
             {`${store.leftTime.m}分 ${('00'+store.leftTime.s).slice(-2)}秒`}
+            <br />
+            <button 
+              className="swap-pos-button"
+                onClick={()=>{store.setFromTo(store.to, store.from)}}>
+              {"<->"}
+            </button>
           </div>
           <br />
           <span className="tweet-toukou">

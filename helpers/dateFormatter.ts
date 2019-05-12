@@ -6,8 +6,12 @@ const toDateObj = (date) => {
   const minuteStr = (`00${date.getMinutes()}`).slice(-2);
   const secondStr = (`00${date.getSeconds()}`).slice(-2);
   const dateTimeStr = `${yearStr}-${monthStr}-${dayStr}T${hourStr}:${minuteStr}`;
+  const dayOfWeek = date.getDay();
+  const dayOfWeekStr =  [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek];
   return {
     dateTimeStr,
+    dayOfWeek,
+    dayOfWeekStr,
     monthStr,
     dayStr,
     hourStr,
