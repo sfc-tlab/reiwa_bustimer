@@ -21,7 +21,6 @@ class Widget extends Component {
     const tweetUrl = 'https://bustimer.sfc.keioac.jp';
     const tweetHashtags = 'bustimer,登校なう';
     const taxiHashtags = 'bustimer,SFC生相乗り募集';
-    const nextBus = store.leftBuses[0];
     
     if (!store.leftBuses.length) {
       return (

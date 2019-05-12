@@ -13,8 +13,20 @@ useStaticRendering(isServer);
 
 export default class MainStore {
 
+  @observable.ref
+  interval: object = null;
+
   constructor(isServer, initialData = {}) {
-    this.setDate();
+    if (!isServer) {
+      this.setDate(); 
+      this.setTodayTable(this.getTodayTable);
+      this.setNextBus(this.leftBuses[0]);
+      this.interval = setInterval(()=>{
+        this.setDate(); 
+        this.setTodayTable(this.getTodayTable);
+        this.setLeftTime();
+      }, 300);
+    }
   }
 
   @observable
@@ -44,11 +56,26 @@ export default class MainStore {
   @observable.ref
   holidays: object = {};
 
-  // @observable.ref
-  // leftBuses: object = [];
-  
   @observable.ref
-  leftTime: object = {};
+  todayTable: object = [{
+    h: 0,
+    m: 0,
+    s: 0
+  }];
+
+  @observable.ref
+  leftTime: object = {
+    h: 0,
+    m: 0,
+    s: 0
+  };
+
+  @observable.ref 
+  nextBus: object = {
+    h: 0,
+    m: 0,
+    s: 0
+  };
 
   @computed
   get tweetText() {
@@ -101,60 +128,55 @@ export default class MainStore {
     this.toStr = this._getPosStr(to);
   } 
 
-  @action.bound
-  setTodayTable() {
-    console.log(this.todayTable)
-    if (this.timeTable && this.timeTable.default) {
+  @computed
+  get getTodayTable() {
+    console.log(this.timeTable)
+    if (this.timeTable) {
       const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays);
       const timeTableForPos = this.timeTable.default[this.from][this.to];
-      this.todayTable = isHoliday
+      return isHoliday
         ? timeTableForPos['holiday']
         : timeTableForPos['weekday'];
     } else {
-      this.todayTable = []; 
+      return [];
     }
+  }
+
+  @action.bound
+  setTodayTable(todayTable: object) {
+    this.todayTable = todayTable; 
   }
 
   @computed
   get leftBuses() {
-    console.log('todayTable: ', this.todayTable)
-    if (this.todayTable && this.todayTable.length) {
-      return this.todayTable.filter(time => {
-        return (
-          (time.h > this.date.hour) 
-          ||
-          (
-            time.h === this.date.hour &&
-            time.m > this.date.minute
-          )
+    return this.todayTable.filter(time => {
+      return (
+        (time.h > this.date.hour) 
+        ||
+        (
+          time.h === this.date.hour &&
+          time.m > this.date.minute
         )
-      });
-    } else {
-      return [{h: 24, m: 60, s: 60}];
-    }
+      )
+    });
   }
 
   @action
   setNextBus(bus) {
-    this.nextBus = bus;
-  }
-
-  @action
-  setLeftTime() {
-    if (!this.nextBus){
+    if (!bus){
       this.leftTime =  {h: 0, m: 0, s: 0};
     }
     let hour, min, sec;
-    hour = this.nextBus.h - this.date.hour;
+    hour = bus.h - this.date.hour;
     sec = 60 - this.date.second;
-    if (this.nextBus.h > this.date.hour){
-      min = ((this.nextBus.h - this.date.hour) * 60)
+    if (bus.h > this.date.hour){
+      min = ((bus.h - this.date.hour) * 60)
         - this.date.minute
-        + this.nextBus.m - 1; 
+        + bus.m - 1; 
     } else {
-      min = this.nextBus.m - this.date.minute -1; 
+      min = bus.m - this.date.minute -1; 
     }
     this.leftTime = {hour, min, sec};
-    console.log(this.leftTime);
+    this.nextBus = bus;
   }
 }
