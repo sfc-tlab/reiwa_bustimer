@@ -12,6 +12,19 @@ useStaticRendering(isServer);
 
 export default class MainStore {
 
+  _getPosStr = (pos: string) => {
+      switch (pos) {
+        case 'sho':
+          return '湘南台';
+        case 'sfc':
+          return 'SFC';
+        case 'tuji':
+          return '辻堂';
+        default:
+          return 'test';
+      }
+  }
+
   constructor(isServer, initialData = {}) {
   }
 
@@ -22,7 +35,16 @@ export default class MainStore {
   date: object = {};
 
   @observable
-  pos: string = '';
+  from: string = 'sho';
+
+  @observable
+  fromStr: string = '湘南台';
+
+  @observable
+  to: string = 'sfc';
+
+  @observable
+  toStr: string = 'SFC';
 
   @action
   setLoading = isLoading => {
@@ -35,7 +57,10 @@ export default class MainStore {
   }
 
   @action
-  setPos = (pos) => {
-    this.pos = pos;
+  setFromTo = (from: string, to: string) => {
+    this.from = from;
+    this.fromStr = this._getPosStr(from);
+    this.to = to;
+    this.toStr = this._getPosStr(to);
   }
 }

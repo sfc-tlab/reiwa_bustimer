@@ -29,7 +29,7 @@ class Index extends Component {
     const { store } = this.props;
     store.setLoading(true);
     store.setDate();
-    store.setPos('sho');
+    store.setFromTo('sho', 'sfc');
     const timeTable = await import('../static/timeTable.json');
     const holidays = await import('../static/holidays.json');
     this.interval = setInterval(() => {
@@ -90,10 +90,7 @@ class Index extends Component {
         <Layout>
           <Widget 
             nowDateTime={store.date}
-            pos={store.pos}
-            busList={busList}
-          />
-          <BusList
+            pos={store.from}
             busList={busList}
           />
         </Layout>
