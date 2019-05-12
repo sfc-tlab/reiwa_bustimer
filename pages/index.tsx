@@ -47,29 +47,6 @@ class Index extends Component {
     clearInterval(this.interval);
   }
 
-  getMyList (timeTable, holidays) {
-    try {
-      const { store } = this.props;
-      const date = store.date;
-      const isHoliday = ((date.monthStr+date.dayStr) in holidays);
-      const todayData = timeTable.default.sfc.sho.weekday;
-      const busList = todayData.filter(time => {
-        return (
-          (time.h > date.hour) 
-          ||
-          (
-            time.h === date.hour &&
-            time.m > date.minute
-          )
-        )
-      });
-      return busList;
-    } catch (e) {
-      console.error(e);
-      return [];
-    }
-  }
-
   render () {
     const { 
       store

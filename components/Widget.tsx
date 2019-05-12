@@ -9,38 +9,9 @@ import dateFormatter from '../helpers/dateFormatter';
 @inject("store")  
 @observer
 class Widget extends Component {    
-  state = {}
-
-  componentWillMount () {
-    this.setState({
-      leftTime: { 
-        h: 0, 
-        m: 0, 
-        s: 0
-      },
-      ...this.props
-    });
-  }
-
-  componentDidmount() {
-    this.props.store.setLoading(false);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.updateLeftTime(nextProps);
-  } 
-
-  updateLeftTime (nextProps) {
-    const { store } = this.props;
-  }
 
   render () {
     const { store } = this.props;
-    const { 
-      leftTime,
-      tweetText,
-      taxiText,
-    } = this.state;
     
     const tweetUrl = 'https://bustimer.sfc.keioac.jp';
     const tweetHashtags = 'bustimer,登校なう';
