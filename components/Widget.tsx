@@ -32,13 +32,9 @@ class Widget extends Component {
 
   updateLeftTime (nextProps) {
     const { store } = this.props;
-    const { 
-      busList,
-      nowDateTime,
-    } = nextProps;
-    if (busList.length) {
-      const nextBus = busList[0];
-      const date = nowDateTime
+    if (store.leftBuses.length) {
+      const nextBus = store.leftBuses[0];
+      const date = store.date;
       let leftMinute, leftSecond;
       leftSecond = 60 - date.second;
       if (nextBus.h > date.hour){
@@ -60,10 +56,8 @@ class Widget extends Component {
   }
 
   render () {
+    const { store } = this.props;
     const { 
-      busList,
-      nowDateTime,
-      pos,
       leftTime,
       tweetText,
       taxiText,
@@ -73,7 +67,7 @@ class Widget extends Component {
     const tweetHashtags = 'bustimer,登校なう';
     const taxiHashtags = 'bustimer,SFC生相乗り募集';
     
-    if (!busList.length) {
+    if (!store.leftBuses.length) {
       return (
         <Wrapper>
           <div className="widget">

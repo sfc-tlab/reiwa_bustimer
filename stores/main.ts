@@ -31,9 +31,16 @@ export default class MainStore {
   @observable.ref
   holidays: object = {};
 
+  @observable.ref
+  leftBuses: object = [{ h:0, m:0, 
+               from: 'sho', to: 'sfc', 
+               twin: false, rotary: false,
+               type: 'normal'}]; 
+
   constructor(isServer, initialData = {}) {
     this.timeTable = initialData.timeTable;
     this.holidays = initialData.holidays;
+    this.date = dateFormatter.toDateObj(new Date()); 
   }
 
   @observable
@@ -70,6 +77,24 @@ export default class MainStore {
     this.fromStr = this._getPosStr(from);
     this.to = to;
     this.toStr = this._getPosStr(to);
+  }
+
+  @action
+  setLeftBuses = () => {
+    const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays);
+    const todayData = isHoliday
+      ?this.timeTable.default[this.from][this.to].holiday
+      :this.timeTable.default[this.from][this.to].weekday;
+    this.leftBuses = todayData.filter(time => {
+      return (
+        (time.h > this.date.hour) 
+        ||
+        (
+          time.h === this.date.hour &&
+          time.m > this.date.minute
+        )
+      )
+    });
   }
 
 }

@@ -32,6 +32,7 @@ class Index extends Component {
     store.setFromTo('sho', 'sfc');
     this.interval = setInterval(() => {
       store.setDate();
+      store.setLeftBuses();
       const busList = this.getMyList(store.timeTable, store.holidays);
       this.setState({ busList });
     }, 300);
@@ -86,11 +87,7 @@ class Index extends Component {
     } else {
       return (
         <Layout>
-          <Widget 
-            nowDateTime={store.date}
-            pos={store.from}
-            busList={busList}
-          />
+          <Widget />
         </Layout>
       )
     
