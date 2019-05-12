@@ -14,16 +14,9 @@ class Widget extends Component {
     const { store } = this.props;
     
     const tweetUrl = 'https://bustimer.sfc.keioac.jp';
-    const tweetHashtags = 'bustimer,登校なう';
+    const tweetHashtags = `bustimer,${store.wayToSchool}なう`;
     const taxiHashtags = 'bustimer,SFC生相乗り募集';
 
-    function CheckWayToSchool() {
-      if (store.from === 'sfc') {
-        return '下校';
-      } else {
-        return '登校';
-      }
-    }
 
     function LeftTime() {
       if (store.leftBuses.length) {
@@ -54,7 +47,7 @@ class Widget extends Component {
         <br />
         <span className="tweet-toukou">
           <div className="tweet-toukou-text">
-            <CheckWayToSchool />をつぶやく
+            {store.wayToSchool}をつぶやく
           </div>
           <TweetButton 
             size="large" 
@@ -64,7 +57,7 @@ class Widget extends Component {
             countFlag="false"
             via="bustimer"
           >
-            <CheckWayToSchool />なう
+            {store.wayToSchool}なう
           </TweetButton>
         </span>
         <span className="tweet-taxi">
@@ -90,7 +83,7 @@ class Widget extends Component {
 const Wrapper = styled.div`
   .widget {
     margin: 24px;
-    padding: 15px;
+    padding: 20px;
     border-radius: 3px;
     border: 1px solid #000; 
   }

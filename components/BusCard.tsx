@@ -52,8 +52,8 @@ class BusCard extends Component {
 
 const Wrapper = styled.div`
   .bus-card {
-    padding: 10px;
-    margin: 5px;
+    padding: 20px;
+    margin: 20px;
     border-radius: 3px;
     border-top: 1px solid #000; 
     border-left: 1px solid #000; 

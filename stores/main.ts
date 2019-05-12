@@ -63,13 +63,16 @@ export default class MainStore {
 
   @observable
   toStr: string = 'SFC';
+
+  @observable
+  wayToSchool: string = '登校';
   
   @computed
   get tweetText () {
     if (this.leftBuses.length) {
-      return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」で登校なう`;
+      return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」で${this.wayToSchool}なう`;
     } else {
-      return `${this.fromStr}からバスないけど 登校なう`;
+      return `${this.fromStr}からバスないけど ${this.wayToSchool}なう`;
     }
   }
 
@@ -107,6 +110,12 @@ export default class MainStore {
     this.fromStr = this._getPosStr(from);
     this.to = to;
     this.toStr = this._getPosStr(to);
+    if (this.from === 'sfc') {
+      this.wayToSchool =  '下校';
+    } else {
+      this.wayToSchool = '登校';
+    }
+
   }
 
   @action

@@ -3,6 +3,8 @@ import Router from 'next/router';
 import { inject, observer } from "mobx-react";
 import styled, { css } from 'styled-components';
 
+import DepartureButton from './DepartureButton';
+
 
 interface ThemeColor {
     color: string;
@@ -17,15 +19,6 @@ export default class Header extends Component<ThemeColor> {
     Router.push(path)
   }
 
-  setPos (e, pos) {
-    const { store } = this.props;
-    e?e.preventDefault():null;
-    if (store.from === 'sfc') {
-      store.setFromTo('sfc', pos);
-      return;
-    }
-    store.setFromTo(pos, 'sfc'); 
-  }
   
   render () {
     const { store } = this.props;
@@ -51,22 +44,8 @@ export default class Header extends Component<ThemeColor> {
         </div>
 
         <div className="departures">
-          <div 
-            className="departure-button sho"
-              onClick={(e)=>{this.setPos(e, 'sho')}}
-              >
-            <div className="departure-button-text">
-              湘南台
-            </div>
-          </div>
-          <div 
-            className="departure-button tuji"
-            onClick={(e)=>{this.setPos(e, 'tuji')}}
-           >
-            <div className="departure-button-text">
-              辻堂
-            </div>
-          </div>
+          <DepartureButton pos='sho' />
+          <DepartureButton pos='tuji' />
         </div>
       </Wrapper>
     )
@@ -97,29 +76,6 @@ const Wrapper = styled.div`
 
   .header-button.setting {
     right: 15px;
-  }
-
-  .departures {
-    width: 100%;
-  }
-
-  .departure-button {
-    display: inline-flex;
-    width: 50%;
-    padding: 10px; 
-    border: 2px solid #707070;
-  }
-
-  .departure-button.sho {
-    border-right: 1px solid #707070;
-  }
-
-  .departure-button.tuji {
-    border-left: 1px solid #707070;
-  }
-
-  .departure-button-text {
-    color: #707070;
   }
 
 
