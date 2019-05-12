@@ -82,6 +82,15 @@ export default class MainStore {
     }
   }
 
+  @computed
+  get ogpDescription () {
+    if (this.leftBuses.length) {
+      return `${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス待ちなう`;
+    } else {
+      return `${this.fromStr}でバス難民なう`;
+    }
+  }
+
   @action
   setLoading = isLoading => {
     this.isLoading = isLoading;
