@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, observable, computed } from "mobx";
 import { useStaticRendering } from 'mobx-react';
 
 import dateFormatter from '../helpers/dateFormatter';
@@ -63,6 +63,16 @@ export default class MainStore {
 
   @observable
   toStr: string = 'SFC';
+  
+  @computed
+  get tweetText () {
+    return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」で登校なう`;
+  }
+
+  @computed
+  get taxiText () {
+    return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
+  }
 
   @action
   setLoading = isLoading => {
@@ -105,7 +115,7 @@ export default class MainStore {
     const bus = this.leftBuses[0];
     const date = this.date;
     let leftMinute, leftSecond;
-    leftSecond = 60 - date.second;
+    leftSecond = 60 - date.second - 1;
     if (bus.h > date.hour){
       leftMinute = ((bus.h - date.hour) * 60)
         - date.minute
