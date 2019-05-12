@@ -99,7 +99,7 @@ export default class MainStore {
       ?this.timeTable.default[this.from][this.to].holiday
       :this.date.dayOfWeek==6
         ?this.timeTable.default[this.from][this.to].weekday
-        :this.timeTable.default[this.from][this.to].weekday;
+        :this.timeTable.default[this.from][this.to].weekday; // debug終わったらsaturdayに戻す
     this.leftBuses = todayData.filter(time => {
       return (
         (time.h > this.date.hour) 
