@@ -36,7 +36,7 @@ export default class DepartureButton extends Component {
 
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.span`
   text-align: center;
   font-family: "ＭＳ ゴシック",sans-serif;
 
