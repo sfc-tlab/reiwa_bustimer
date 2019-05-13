@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46" height="30" viewBox="0 0 46 30">
+  <g id="swap-button" transform="translate(-165 -183)">
+    <g id="長方形_60" data-name="長方形 60" transform="translate(165 192)" fill="none" stroke="#000" stroke-width="3">
+      <rect width="46" height="19" rx="5" stroke="none"/>
+      <rect x="1.5" y="1.5" width="43" height="16" rx="3.5" fill="none"/>
+    </g>
+    <text id="_" data-name="↔︎" transform="translate(188 209)" fill="#eee" font-size="30" font-family="HiraginoSans-W3, Hiragino Sans"><tspan x="-13.74" y="0">↔︎</tspan></text>
+  </g>
+</svg>

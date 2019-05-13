@@ -33,16 +33,30 @@ class Widget extends Component {
               本日のバスは終了しました。
             </div>
           }
-          <br />
-          {store.fromStr} -> {store.toStr}
-          <br />
-          <LeftTime />
-          <br />
-          <button 
+          <div className="poa-container">
+            <span
+              className="pos string from">
+              {store.fromStr} 
+            </span>
+            <img 
+              className="pos direction-icon" 
+              src={"/static/img/direction-icon.svg"} 
+              alt="direction-icon"
+            />
+            <span
+              className="pos string to">
+              {store.toStr}
+            </span>
+          </div>
+          <div className="left-time">
+            <LeftTime />
+          </div>
+          <img
             className="swap-pos-button"
-              onClick={()=>{store.setFromTo(store.to, store.from)}}>
-            {"<->"}
-          </button>
+            src={`/static/img/swap-button.svg`}
+            onClick={()=>{store.setFromTo(store.to, store.from)}} 
+            alt="departure-swap-button"
+          />
         </div>
         <br />
         <span className="tweet-toukou">
@@ -86,7 +100,19 @@ const Wrapper = styled.div`
     padding: 20px;
     border-radius: 3px;
     border: 1px solid #000; 
+    text-align: center;
   }
+
+  .direction-icon {
+    position: relative;
+  }
+
+  .pos {
+    position: relative;
+    font-size: 30px;
+    color: #707070;
+  }
+
 `;
 
 export default Widget;

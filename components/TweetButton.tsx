@@ -34,7 +34,11 @@ class TweetButton extends Component {
           onClick={this.postTweet} 
         >
           <span className="button-text"> {children} </span>
-          <div className="twitter-icon" />
+          <img 
+            className="twitter-icon" 
+            src={"/static/img/twitter-icon.svg"}
+            alt="twitter-icon"
+          />
         </button>
       </Wrapper>
     )
@@ -50,18 +54,15 @@ const Wrapper = styled.div`
   }
 
   .twitter-icon {
-    padding 20px 20px 20px 20px;
-    background-color: #FFFFFF;
-    -webkit-mask: url(/static/img/twitter-icon.svg) no-repeat center;
-    mask: url(/static/img/twitter-icon.svg) no-repeat center;
-    display: inline-block;
+    top: 3px;
+    display: inline;
   }
 
   .button-text {
     position: relative;
-    bottom: 15px;
+    bottom: 4px;
     font-weight: bold;
-    display: inline-block;
+    display: inline;
   }
 `;
 
