@@ -29,7 +29,7 @@ class TweetButton extends Component {
 
     return (
       <Wrapper>
-        <button
+        <div
           className="twitter-button"
           onClick={this.postTweet} 
         >
@@ -39,14 +39,16 @@ class TweetButton extends Component {
             src={"/static/img/twitter-icon.svg"}
             alt="twitter-icon"
           />
-        </button>
+        </div>
       </Wrapper>
     )
   }
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.span`
   .twitter-button {
+    display: inline-block;
+    padding: 8px 3px 0px 3px;
     border-radius: 3px;
     border: 2px solid #1b95e0;
     color: #FFFFFF;

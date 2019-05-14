@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from "mobx-react";
 
-import TweetButton from './TweetButton';
+import ShareButtons from './ShareButtons';
 import dateFormatter from '../helpers/dateFormatter';
 
 
@@ -13,14 +13,25 @@ class Widget extends Component {
   render () {
     const { store } = this.props;
     
-    const tweetUrl = 'https://bustimer.sfc.keioac.jp';
-    const tweetHashtags = `bustimer,${store.wayToSchool}なう`;
-    const taxiHashtags = 'bustimer,SFC生相乗り募集';
-
-
     function LeftTime() {
+      // 別コンポーネントに切り出しても良い
       if (store.leftBuses.length) {
-        return `${store.leftTime.m}分 ${('00'+store.leftTime.s).slice(-2)}秒`
+        return (
+          <Fragment>
+            <span className="left-time min">
+              {`${store.leftTime.m}`}
+            </span>
+            <span className="left-time min str">
+              分 
+            </span>
+            <span className="left-time sec">
+              {`${('00'+store.leftTime.s).slice(-2)}`}
+            </span>
+            <span className="left-time sec str">
+            秒
+            </span>
+          </Fragment>
+        );
       }
       return '';
     }
@@ -28,88 +39,81 @@ class Widget extends Component {
     return (
       <Wrapper>
         <div className="widget">
-          { !store.leftBuses.length &&
-            <div className="widget-message">
-              本日のバスは終了しました。
-            </div>
-          }
-          <div className="poa-container">
+          <div className="pos-container">
+            { !store.leftBuses.length &&
+              <div className="widget-message">
+                本日のバスは終了しました。
+              </div>
+            }
             <span
-              className="pos string from">
+              className="pos from">
               {store.fromStr} 
             </span>
-            <img 
-              className="pos direction-icon" 
-              src={"/static/img/direction-icon.svg"} 
-              alt="direction-icon"
-            />
+              <img 
+                className="pos direction-icon svg" 
+                src={"/static/img/direction-icon.svg"} 
+                alt="direction-icon"
+              />
             <span
-              className="pos string to">
+              className="pos to">
               {store.toStr}
             </span>
+            <br />
+            <img
+              className="pos swap-button svg"
+              src={`/static/img/swap-button.svg`}
+              onClick={()=>{store.setFromTo(store.to, store.from)}} 
+              alt="departure-swap-button"
+            />
           </div>
-          <div className="left-time">
+          <div className="left-time-container">
             <LeftTime />
           </div>
-          <img
-            className="swap-pos-button"
-            src={`/static/img/swap-button.svg`}
-            onClick={()=>{store.setFromTo(store.to, store.from)}} 
-            alt="departure-swap-button"
-          />
         </div>
-        <br />
-        <span className="tweet-toukou">
-          <div className="tweet-toukou-text">
-            {store.wayToSchool}をつぶやく
-          </div>
-          <TweetButton 
-            size="large" 
-            text={store.tweetText} 
-            tweetUrl={tweetUrl} 
-            hashtags={tweetHashtags}
-            countFlag="false"
-            via="bustimer"
-          >
-            {store.wayToSchool}なう
-          </TweetButton>
-        </span>
-        <span className="tweet-taxi">
-          <div className="tweet-taxi-text">
-            タクシーの相乗り募集をする
-          </div>
-          <TweetButton 
-            size="large" 
-            text={store.taxiText} 
-            tweetUrl={tweetUrl} 
-            hashtags={taxiHashtags}
-            countFlag="false"
-            via="bustimer"
-          >
-            相乗り募集
-          </TweetButton>
-        </span>
       </Wrapper>
     )
   }
 }
 
 const Wrapper = styled.div`
-  .widget {
-    margin: 24px;
-    padding: 20px;
-    border-radius: 3px;
-    border: 1px solid #000; 
-    text-align: center;
-  }
+  vertical-align: middle;
+  margin: 24px;
+  padding: 20px;
+  text-align: center;
 
-  .direction-icon {
-    position: relative;
+  .pos-container {
+    padding: 10px;
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #707070; 
   }
 
   .pos {
     position: relative;
-    font-size: 30px;
+    font-size: 4vw;
+    color: #707070;
+  }
+
+  .pos.svg {
+  }
+
+  .pos.from {
+    posision: relateve;
+    width: calc((100% * 1/3) );
+    float: left;
+  }
+
+  .pos.to {
+    posision: relateve;
+    width: calc((100% * 1/3) );
+    float: right;
+  }
+
+  .left-time-container {
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #707070; 
+  }
+
+  .left-time {
     color: #707070;
   }
 
