@@ -69,7 +69,7 @@ const Wrapper = styled.div`
     font-size: 41px;
     color: #FFFFFF;
     top: 0px;
-    padding: 8px;
+    padding: 4px;
     background: #379BFF;
   }
 

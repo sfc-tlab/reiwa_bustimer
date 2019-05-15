@@ -75,10 +75,11 @@ const Wrapper = styled.div`
     position: fixed;
     background-color: #FFFFFF;
     padding-bottom: 20px;
+    border-bottom: 1px solid #707070; 
   }
 
   .scroll-content {
-    padding-top: 400px;
+    padding-top: 403px;
   }
 `;
 

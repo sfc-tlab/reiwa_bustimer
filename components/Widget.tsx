@@ -88,10 +88,11 @@ const Wrapper = styled.div`
   .pos-container {
     border-radius: 3px 3px 0 0;
     border: 1px solid #707070; 
+    padding-bottom: 10px;
   }
 
   .pos-info {
-    padding: 20px 20px 15px 20px;
+    padding: 20px 20px 10px 20px;
   }
 
   .pos {

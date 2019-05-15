@@ -51,6 +51,7 @@ class Layout extends Component {
           {`
             * {
               box-sizing: border-box;
+              vertical-align: middle;
             }
 
             body {

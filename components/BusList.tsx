@@ -38,7 +38,7 @@ class BusList extends Component {
 }
 
 const Wrapper = styled.div`
-    border-top: 1px solid #707070; 
+  border-top: 1px solid #707070; 
 `;
 
 export default BusList;
