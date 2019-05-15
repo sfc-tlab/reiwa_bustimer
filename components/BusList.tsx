@@ -15,22 +15,20 @@ class BusList extends Component {
     return (
       <Wrapper>
         <div className="bus-list">
-          <div className="bus-card-container">
-            {store.leftBuses.length?(
-              store.leftBuses.map(bus => {
-                return(
-                  <BusCard
-                    bus={bus}
-                    key={''+bus.h+bus.m}
-                  />
-                );
-              })
-            ):(
-              <Fragment>
-                本日のバスは終了しました。
-              </Fragment>
-            )}
-          </div>
+          {store.leftBuses.length?
+            <div className="bus-card-container">
+                {store.leftBuses.map(bus => 
+                    <BusCard
+                      bus={bus}
+                      key={''+bus.h+bus.m}
+                    />
+                )}
+            </div>
+          :(
+            <Fragment>
+              本日のバスは終了しました。
+            </Fragment>
+          )}
         </div>
       </Wrapper>
     )
@@ -38,7 +36,9 @@ class BusList extends Component {
 }
 
 const Wrapper = styled.div`
-  border-top: 1px solid #707070; 
+  .bus-card-container {
+    border-top: 1px solid #707070; 
+  }
 `;
 
 export default BusList;
