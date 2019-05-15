@@ -30,7 +30,11 @@ export default class Header extends Component<ThemeColor> {
             className="header-button schedule"
             onClick={e => this.jumpTo(e, '/schedule')}
           >
-            仮
+            <img
+              className="busstop-icon"
+              src={"/static/img/busstop-icon.svg"}
+              alt="busstop-icon"
+            />
           </span>
           <span className="header text">
             bustimer
@@ -39,7 +43,11 @@ export default class Header extends Component<ThemeColor> {
             className="header-button setting"
             onClick={e => this.jumpTo(e, '/setting')}
           >
-            仮
+            <img
+              className="setting-icon"
+              src={"/static/img/setting-icon.svg"}
+              alt="setting-icon"
+            />
           </span>
         </div>
 
@@ -57,9 +65,9 @@ const Wrapper = styled.div`
   font-family: "ＭＳ ゴシック",sans-serif;
 
   .header {
+    position: relative;
     font-size: 41px;
     color: #FFFFFF;
-    position: fix;
     top: 0px;
     padding: 8px;
     background: #379BFF;
@@ -77,6 +85,19 @@ const Wrapper = styled.div`
     right: 15px;
   }
 
+  .busstop-icon {
+    margin-top: 5px;
+    fill: #FFFFFF;
+    width: 48px;
+    height: 48px;
+  }
+
+  .setting-icon {
+    margin-top: 8px;
+    fill: #FFFFFF;
+    width: 48px;
+    height: 48px;
+  }
 
   ${(props: ThemeColor) =>
     props.color 
