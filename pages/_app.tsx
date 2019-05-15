@@ -4,6 +4,7 @@ import { Provider } from "mobx-react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 import { initializeStore } from '../stores';
+import Layout from '../components/Layout';
 
 const GlobalStyle = createGlobalStyle`
 `;
@@ -43,7 +44,9 @@ export default class MyApp extends App {
           <Provider store={this.mobxStore}>
             <>
               <GlobalStyle />
-              <Component {...pageProps} />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </>
           </Provider>
         </Container>

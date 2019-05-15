@@ -52,18 +52,16 @@ class Index extends Component {
       )
     } else {
       return (
-        <Layout>
-          <Wrapper>
-            <div className="fixed-item">
-              <Header />
-              <Widget />
-              <ShareButtons />
-            </div>
-            <div className="scroll-content">
-              <BusList />
-            </div>
-          </Wrapper>
-        </Layout>
+        <Wrapper>
+          <div className="fixed-item">
+            <Header />
+            <Widget />
+            <ShareButtons />
+          </div>
+          <div className="scroll-content">
+            <BusList />
+          </div>
+        </Wrapper>
       )
     
     }

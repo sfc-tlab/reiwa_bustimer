@@ -86,14 +86,14 @@ const Wrapper = styled.div`
   }
 
   .busstop-icon {
-    margin-top: 5px;
+    margin: 5px;
     fill: #FFFFFF;
     width: 48px;
     height: 48px;
   }
 
   .setting-icon {
-    margin-top: 8px;
+    margin: 5px;
     fill: #FFFFFF;
     width: 48px;
     height: 48px;

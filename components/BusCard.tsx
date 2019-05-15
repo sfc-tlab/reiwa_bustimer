@@ -30,11 +30,13 @@ class BusCard extends Component {
         <div className="bus-card">
           <img src={icon} alt="bus-icon" />
           <span className="time-container">
-            <span className="time-hour">
+            <span className="time hour">
               {('00'+time.hour).slice(-2)}
             </span>
+            <span className="time colon">
             :
-            <span className="time-minute">
+            </span>
+            <span className="time minute">
               {('00'+time.minute).slice(-2)}
             </span>
           </span>
@@ -51,11 +53,38 @@ class BusCard extends Component {
 }
 
 const Wrapper = styled.div`
+  font-family: "ＭＳ ゴシック",sans-serif;
+
   .bus-card {
     padding: 20px;
     border-top: 1px solid #707070; 
     border-bottom: 1px solid #707070;
   }
+
+  .bus-icon {
+    padding: 10px;
+  }
+
+  .time-container {
+    padding: 10px;
+  }
+
+  .time {
+    color: #707070;
+    font-size: 30px;
+    padding: 2px;
+  }
+
+  .info {
+    color: #707070;
+    padding: 10px;
+  }
+
+  .sub-info {
+    color: #707070;
+    padding: 10px;
+  }
+
 `;
 
 export default BusCard;

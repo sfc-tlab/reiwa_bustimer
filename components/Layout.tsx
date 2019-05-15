@@ -2,18 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { inject, observer } from "mobx-react";
 import Head from 'next/head';
 
-const layoutStyle = {
-  margin: 20,
-  padding: 20,
-  border: '1px solid #DDD'
-}
 
 @inject("store")
 @observer
 class Layout extends Component {
 
   render () {
-    const { store } = this.props;
+    const { store, children } = this.props;
 
     return (
       <Fragment>
@@ -22,9 +17,9 @@ class Layout extends Component {
           <meta name="format-detection" content="telephome=no" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="keywords" content="bustimer,SFC,sfc,バス" />
-          <meta name="description" content={store.ogpDescription} />
-          <meta property="og:title" content="reiwa no bustimer - SFC生のバス通学サポートアプリ" />
-          <meta property="og:description" content={store.ogpDescription} />
+          <meta name="description" content="バス通学するSFC生のサポートアプリです。" />
+          <meta property="og:title" content="reiwa no bustimer" />
+          <meta property="og:description" content="バス通学するSFC生のサポートアプリです。" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://bustimer.sfc.keioac.jp" />
           <meta property="og:image" content="https://bustimer.sfc.keioac.jp/static/icon.png" />
@@ -37,7 +32,7 @@ class Layout extends Component {
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:url" content="https://bustimer.sfc.keioac.jp" />
           <meta name="twitter:title" content="reiwa no bustimer" />
-          <meta name="twitter:description" content={store.ogpDescription} />
+          <meta name="twitter:description" content="バス通学するSFC生のサポートアプリです。" />
           <meta name="twitter:image" content="https://bustimer.sfc.keioac.jp/static/icon.png" />
 
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,7 +45,7 @@ class Layout extends Component {
           <meta name="mobile-web-app-capable" content="yes" />
         </Head>
 
-        {this.props.children}
+        {children}
 
         <style jsx global>
           {`
