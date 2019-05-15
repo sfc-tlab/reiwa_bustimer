@@ -15,6 +15,15 @@ class Layout extends Component {
     return (
       <Fragment>
         <Head>
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140231335-1"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-140231335-1');
+          </script>
           <title>reiwa no bustimer</title>
           <meta name="format-detection" content="telephome=no" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
