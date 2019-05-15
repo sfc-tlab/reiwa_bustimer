@@ -92,6 +92,9 @@ const Wrapper = styled.div`
   }
 
   .pos-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px 20px 15px 20px;
   }
 
@@ -103,7 +106,8 @@ const Wrapper = styled.div`
   }
 
   .pos.direction-icon {
-    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .pos.from {

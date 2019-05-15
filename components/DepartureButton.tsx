@@ -45,6 +45,7 @@ const Wrapper = styled.span`
     width: 50%;
     padding: 10px; 
     border: 2px solid #707070;
+    background-color: #FFFFFF;
   }
 
   .departure-button.sho {
