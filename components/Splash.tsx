@@ -22,6 +22,8 @@ export default class Splash extends Component<ThemeColor> {
 }
 
 const Wrapper = styled.div`
+  position: relative;
+  z-index: 1000;
   width: 100vw;
   height: 100vh;
   display: flex;
