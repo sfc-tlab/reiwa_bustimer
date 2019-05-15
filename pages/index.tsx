@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { inject, observer } from "mobx-react";
 import { import } from 'next/dynamic';
+import styled, { css } from 'styled-components';
 
 import Layout from '../components/Layout';
+import Header from '../components/Header'
 import Splash from '../components/Splash';
 import Widget from '../components/Widget';
+import ShareButtons from '../components/ShareButtons';
 import BusList from '../components/BusList';
 import dateFormatter from '../helpers/dateFormatter';
 
@@ -50,13 +53,36 @@ class Index extends Component {
     } else {
       return (
         <Layout>
-          <Widget />
-          <BusList />
+          <Wrapper>
+            <div className="fixed-item">
+              <Header />
+              <Widget />
+              <ShareButtons />
+            </div>
+            <div className="scroll-content">
+              <BusList />
+            </div>
+          </Wrapper>
         </Layout>
       )
     
     }
   }
 }
+
+const Wrapper = styled.div`
+  .fixed-item {
+    width: 100%;
+    z-index: 999;
+    position: fixed;
+    background-color: #FFFFFF;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #707070; 
+  }
+
+  .scroll-content {
+    padding-top: 361px;
+  }
+`;
 
 export default Index;

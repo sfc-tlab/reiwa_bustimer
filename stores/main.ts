@@ -47,6 +47,9 @@ export default class MainStore {
   isLoading: boolean = true;
 
   @observable
+  bustimerUrl: string = 'https://bustimer.sfc.keioac.jp';
+
+  @observable
   date: object = {};
 
   @observable
@@ -65,7 +68,18 @@ export default class MainStore {
   toStr: string = 'SFC';
 
   @observable
+  selectedPos: string = 'sho';
+
+  @observable
   wayToSchool: string = '登校';
+
+  @observable
+  taxiHashtags: string = 'bustimer,SFC生相乗り募集';
+
+  @computed
+  get tweetHashtags () {
+    return `bustimer,${this.wayToSchool}なう`;
+  }
   
   @computed
   get tweetText () {
@@ -112,9 +126,12 @@ export default class MainStore {
     this.toStr = this._getPosStr(to);
     if (this.from === 'sfc') {
       this.wayToSchool =  '下校';
+      this.selectedPos = to;
     } else {
       this.wayToSchool = '登校';
+      this.selectedPos = from;
     }
+    
 
   }
 
