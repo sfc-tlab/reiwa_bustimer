@@ -3,11 +3,21 @@ import { inject, observer } from "mobx-react";
 import Head from 'next/head';
 
 import Header from './Header'
+import { initGA, logPageView } from '../helpers/analytics'
+
 
 
 @inject("store")
 @observer
 class Layout extends Component {
+
+  componentDidMount () {
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+    logPageView();
+  }
 
   render () {
     const { store, children } = this.props;
@@ -15,17 +25,6 @@ class Layout extends Component {
     return (
       <Fragment>
         <Head>
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140231335-1"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'UA-140231335-1');
-            gtag('set', {'user_id': 'USER_ID'});
-            ga('set', 'userId', 'USER_ID');
-          </script>
           <title>reiwa no bustimer</title>
           <meta name="format-detection" content="telephome=no" />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
