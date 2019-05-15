@@ -23,7 +23,7 @@ export default class DepartureButton extends Component {
     return (
       <Wrapper>
         <div 
-          className={`departure-button ${pos}`}
+          className={`departure-button ${pos} `+(store.selectedPos === pos?'selected':null)}
             onClick={(e)=>{this.setPos(e, pos)}}
             >
           <div className="departure-button-text">
@@ -57,6 +57,10 @@ const Wrapper = styled.span`
 
   .departure-button-text {
     color: #707070;
+  }
+
+  .selected {
+    background-color: #76CCFF;
   }
 
 
