@@ -15,9 +15,6 @@ class ShareButtons extends Component {
     return (
       <Wrapper>
         <span className="tweet-button toukou">
-          <div className="tweet-toukou-text">
-            {store.wayToSchool}をつぶやく
-          </div>
           <TweetButton 
             size="large" 
             text={store.tweetText} 
@@ -31,9 +28,6 @@ class ShareButtons extends Component {
         </span>
 
         <span className="tweet-button taxi">
-          <div className="tweet-taxi-text">
-            タクシーの相乗り募集をする
-          </div>
           <TweetButton 
             size="large" 
             text={store.taxiText} 
@@ -58,6 +52,10 @@ const Wrapper = styled.div`
     display: inline-block;
     width: 50%;
     padding: 20px;
+  }
+
+  .tweet-button {
+    padding: 10px;
   }
 `;
 

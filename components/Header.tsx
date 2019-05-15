@@ -57,7 +57,6 @@ const Wrapper = styled.div`
   font-family: "ＭＳ ゴシック",sans-serif;
 
   .header {
-    position: fix;
     font-size: 41px;
     color: #FFFFFF;
     position: fix;

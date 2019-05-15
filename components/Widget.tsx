@@ -40,25 +40,26 @@ class Widget extends Component {
       <Wrapper>
         <div className="widget">
           <div className="pos-container">
-            { !store.leftBuses.length &&
-              <div className="widget-message">
-                本日のバスは終了しました。
-              </div>
-            }
-            <span
-              className="pos from">
-              {store.fromStr} 
-            </span>
-              <img 
-                className="pos direction-icon svg" 
-                src={"/static/img/direction-icon.svg"} 
-                alt="direction-icon"
-              />
-            <span
-              className="pos to">
-              {store.toStr}
-            </span>
-            <br />
+            <div className="pos-info">
+              { !store.leftBuses.length &&
+                <div className="widget-message">
+                  本日のバスは終了しました。
+                </div>
+              }
+              <span
+                className="pos from">
+                {store.fromStr} 
+              </span>
+                <img 
+                  className="pos direction-icon svg" 
+                  src={"/static/img/direction-icon.svg"} 
+                  alt="direction-icon"
+                />
+              <span
+                className="pos to">
+                {store.toStr}
+              </span>
+            </div>
             <img
               className="pos swap-button svg"
               src={`/static/img/swap-button.svg`}
@@ -77,23 +78,27 @@ class Widget extends Component {
 
 const Wrapper = styled.div`
   vertical-align: middle;
-  margin: 24px;
-  padding: 20px;
+  padding: 24px;
   text-align: center;
 
   .pos-container {
-    padding: 10px;
     border-radius: 3px 3px 0 0;
     border: 1px solid #707070; 
   }
 
+  .pos-info {
+    padding: 20px 20px 15px 20px;
+  }
+
   .pos {
+    vertical-align: middle;
     position: relative;
-    font-size: 4vw;
+    font-size: 30px;
     color: #707070;
   }
 
-  .pos.svg {
+  .pos.direction-icon {
+    padding-top: 5px;
   }
 
   .pos.from {
