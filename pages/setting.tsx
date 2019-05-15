@@ -3,15 +3,9 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from 'styled-components';
 
 
-@inject("store")  
+@inject("store")
 @observer
-class Setting extends Component {    
-
-  componentWillMount(){
-    const { store } = this.props;
-    store.screenName = 'setting';
-  }
-
+class Setting extends Component {
   render () {
     return (
       <Wrapper>

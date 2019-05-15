@@ -13,7 +13,7 @@ import dateFormatter from '../helpers/dateFormatter';
 
 @inject("store")
 @observer
-class Index extends Component {    
+class Index extends Component {
 
   async componentWillMount () {
     // TODO: 高速化
@@ -22,7 +22,6 @@ class Index extends Component {
     // const pos = await location.getPosName();
     const { store } = this.props;
     store.setLoading(true);
-    store.screenName = 'home';
     store.setDate();
     store.setFromTo('sho', 'sfc');
     this.interval = setInterval(() => {
@@ -42,9 +41,9 @@ class Index extends Component {
   }
 
   render () {
-    const { 
+    const {
       store
-    } = this.props;  
+    } = this.props;
 
     if (store.isLoading) {
       return (
@@ -62,7 +61,7 @@ class Index extends Component {
           </div>
         </Wrapper>
       )
-    
+
     }
   }
 }
@@ -75,7 +74,7 @@ const Wrapper = styled.div`
     position: fixed;
     background-color: #FFFFFF;
     padding-bottom: 20px;
-    border-bottom: 1px solid #707070; 
+    border-bottom: 1px solid #707070;
   }
 
   .scroll-content {

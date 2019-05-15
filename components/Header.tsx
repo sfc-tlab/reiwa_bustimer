@@ -8,31 +8,40 @@ import DepartureButton from './DepartureButton';
 
 interface ThemeColor {
     color: string;
-}   
+}
 
-@inject("store")  
+interface HeaderState {
+  pathName: string;
+}
+
+@inject("store")
 @observer
-export default class Header extends Component {
+export default class Header extends Component<{}, HeaderState> {
+  constructor(props: {}) {
+    super(props)
 
-  getInitialProps ({pathname, query, asPath}) {
-    return {pathname, query, asPath} 
+    this.state = {
+      pathName: '/'
+    }
   }
 
+  getInitialProps ({pathname, query, asPath}) {
+    return {pathname, query, asPath}
+  }
 
   jumpTo = (e, path) => {
     e?e.preventDefault():null;
+    this.setState({ pathName: path });
     Router.push(path)
   }
 
-  
-  render () {
-    const { store } = this.props;
 
+  render () {
     return (
       <Wrapper>
         <div className="header">
-          {(store.screenName === 'home'
-            ?<span 
+          {(this.state.pathName === '/'
+            ?<span
               className="header-button schedule"
               onClick={e => this.jumpTo(e, '/schedule')}
             >
@@ -43,7 +52,7 @@ export default class Header extends Component {
               />
             </span>
             :
-            <span 
+            <span
               className="header-button schedule"
               onClick={e => this.jumpTo(e, '/')}
             >
@@ -54,14 +63,14 @@ export default class Header extends Component {
               />
             </span>
           )}
-          <span 
+          <span
             className="header text"
             onClick={e => this.jumpTo(e, '/')}
           >
             bustimer
           </span>
-          {(store.screenName === 'home' &&
-            <span 
+          {(this.state.pathName === '/' &&
+            <span
               className="header-button setting"
               onClick={e => this.jumpTo(e, '/setting')}
             >
@@ -73,7 +82,7 @@ export default class Header extends Component {
             </span>
           )}
         </div>
-        {(store.screenName != 'setting' && 
+        {(this.state.pathName != '/setting' &&
           <div className="departures">
             <DepartureButton pos='sho' />
             <DepartureButton pos='tuji' />
@@ -105,7 +114,7 @@ const Wrapper = styled.div`
   }
 
   .header-button.schedule {
-    left: 15px; 
+    left: 15px;
   }
 
   .header-button.setting {
@@ -134,7 +143,7 @@ const Wrapper = styled.div`
   }
 
   ${(props: ThemeColor) =>
-    props.color 
+    props.color
     && css`
       background: props.color
     `}
