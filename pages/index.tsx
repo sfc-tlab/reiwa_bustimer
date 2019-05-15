@@ -81,7 +81,7 @@ const Wrapper = styled.div`
   }
 
   .scroll-content {
-    padding-top: 361px;
+    padding-top: 400px;
   }
 `;
 

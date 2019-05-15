@@ -19,16 +19,20 @@ class Widget extends Component {
         return (
           <Fragment>
             <span className="left-time min">
-              {`${store.leftTime.m}`}
-            </span>
-            <span className="left-time min str">
-              分 
+              <span className="num">
+                {`${store.leftTime.m}`}
+              </span>
+              <span className="str">
+                分 
+              </span>
             </span>
             <span className="left-time sec">
-              {`${('00'+store.leftTime.s).slice(-2)}`}
-            </span>
-            <span className="left-time sec str">
-            秒
+              <span className="num">
+                {`${('00'+store.leftTime.s).slice(-2)}`}
+              </span>
+              <span className="str">
+              秒
+              </span>
             </span>
           </Fragment>
         );
@@ -116,10 +120,31 @@ const Wrapper = styled.div`
   .left-time-container {
     border-radius: 0 0 3px 3px;
     border: 1px solid #707070; 
+    padding: 10px;
   }
 
   .left-time {
+    margin: 5px;
+    display: inline-block;
     color: #707070;
+    font-size: 36px;
+  }
+
+  .left-time .str {
+    font-size: 20px;
+  }
+
+  .left-time.min {
+    position: relative;
+    display: inline;
+    padding-left: 25px;
+    width:50%;
+  }
+
+  .left-time.sec{
+    position: relative;
+    display: inline;
+    width:50%;
   }
 
 `;
