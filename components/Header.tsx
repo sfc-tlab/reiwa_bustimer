@@ -12,7 +12,12 @@ interface ThemeColor {
 
 @inject("store")  
 @observer
-export default class Header extends Component<ThemeColor> {
+export default class Header extends Component {
+
+  getInitialProps ({pathname, query, asPath}) {
+    return {pathname, query, asPath} 
+  }
+
 
   jumpTo = (e, path) => {
     e?e.preventDefault():null;
@@ -26,41 +31,63 @@ export default class Header extends Component<ThemeColor> {
     return (
       <Wrapper>
         <div className="header">
+          {(store.screenName === 'home'
+            ?<span 
+              className="header-button schedule"
+              onClick={e => this.jumpTo(e, '/schedule')}
+            >
+              <img
+                className="busstop-icon"
+                src={"/static/img/busstop-icon.svg"}
+                alt="busstop-icon"
+              />
+            </span>
+            :
+            <span 
+              className="header-button schedule"
+              onClick={e => this.jumpTo(e, '/')}
+            >
+              <img
+                className="return-icon"
+                src={"/static/img/return-icon.svg"}
+                alt="return-icon"
+              />
+            </span>
+          )}
           <span 
-            className="header-button schedule"
-            onClick={e => this.jumpTo(e, '/schedule')}
+            className="header text"
+            onClick={e => this.jumpTo(e, '/')}
           >
-            <img
-              className="busstop-icon"
-              src={"/static/img/busstop-icon.svg"}
-              alt="busstop-icon"
-            />
-          </span>
-          <span className="header text">
             bustimer
           </span>
-          <span 
-            className="header-button setting"
-            onClick={e => this.jumpTo(e, '/setting')}
-          >
-            <img
-              className="setting-icon"
-              src={"/static/img/setting-icon.svg"}
-              alt="setting-icon"
-            />
-          </span>
+          {(store.screenName === 'home' &&
+            <span 
+              className="header-button setting"
+              onClick={e => this.jumpTo(e, '/setting')}
+            >
+              <img
+                className="setting-icon"
+                src={"/static/img/setting-icon.svg"}
+                alt="setting-icon"
+              />
+            </span>
+          )}
         </div>
-
-        <div className="departures">
-          <DepartureButton pos='sho' />
-          <DepartureButton pos='tuji' />
-        </div>
+        {(store.screenName != 'setting' && 
+          <div className="departures">
+            <DepartureButton pos='sho' />
+            <DepartureButton pos='tuji' />
+          </div>
+        )}
       </Wrapper>
     )
   }
 }
 
 const Wrapper = styled.div`
+  width: 100%;
+  position: fixed;
+  z-index: 999;
   text-align: center;
   font-family: "ＭＳ ゴシック",sans-serif;
 
@@ -93,6 +120,13 @@ const Wrapper = styled.div`
   }
 
   .setting-icon {
+    margin: 5px;
+    fill: #FFFFFF;
+    width: 48px;
+    height: 48px;
+  }
+
+  .return-icon {
     margin: 5px;
     fill: #FFFFFF;
     width: 48px;

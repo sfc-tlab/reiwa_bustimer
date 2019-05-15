@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { inject, observer } from "mobx-react";
 import Head from 'next/head';
 
+import Header from './Header'
+
 
 @inject("store")
 @observer
@@ -44,6 +46,8 @@ class Layout extends Component {
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="mobile-web-app-capable" content="yes" />
         </Head>
+
+        <Header />
 
         {children}
 

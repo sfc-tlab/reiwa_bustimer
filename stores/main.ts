@@ -76,6 +76,9 @@ export default class MainStore {
   @observable
   taxiHashtags: string = 'bustimer,SFC生相乗り募集';
 
+  @observable
+  screenName: string = 'home';
+
   @computed
   get tweetHashtags () {
     return `bustimer,${this.wayToSchool}なう`;

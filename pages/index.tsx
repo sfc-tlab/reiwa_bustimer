@@ -4,7 +4,6 @@ import { import } from 'next/dynamic';
 import styled, { css } from 'styled-components';
 
 import Layout from '../components/Layout';
-import Header from '../components/Header'
 import Splash from '../components/Splash';
 import Widget from '../components/Widget';
 import ShareButtons from '../components/ShareButtons';
@@ -23,6 +22,7 @@ class Index extends Component {
     // const pos = await location.getPosName();
     const { store } = this.props;
     store.setLoading(true);
+    store.screenName = 'home';
     store.setDate();
     store.setFromTo('sho', 'sfc');
     this.interval = setInterval(() => {
@@ -54,7 +54,6 @@ class Index extends Component {
       return (
         <Wrapper>
           <div className="fixed-item">
-            <Header />
             <Widget />
             <ShareButtons />
           </div>
@@ -70,8 +69,9 @@ class Index extends Component {
 
 const Wrapper = styled.div`
   .fixed-item {
+    margin-top: 122px;
     width: 100%;
-    z-index: 999;
+    z-index: 998;
     position: fixed;
     background-color: #FFFFFF;
     padding-bottom: 20px;

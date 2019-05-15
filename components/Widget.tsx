@@ -45,11 +45,6 @@ class Widget extends Component {
         <div className="widget">
           <div className="pos-container">
             <div className="pos-info">
-              { !store.leftBuses.length &&
-                <div className="widget-message">
-                  本日のバスは終了しました。
-                </div>
-              }
               <span
                 className="pos from">
                 {store.fromStr} 
@@ -72,6 +67,11 @@ class Widget extends Component {
             />
           </div>
           <div className="left-time-container">
+              { !store.leftBuses.length &&
+                <div className="widget-message">
+                  本日のバスは終了しました。
+                </div>
+              }
             <LeftTime />
           </div>
         </div>

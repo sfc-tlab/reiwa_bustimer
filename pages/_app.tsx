@@ -2,6 +2,7 @@ import React from "react";
 import App, { Container } from "next/app";
 import { Provider } from "mobx-react";  
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import Router from 'next/router';
 
 import { initializeStore } from '../stores';
 import Layout from '../components/Layout';
