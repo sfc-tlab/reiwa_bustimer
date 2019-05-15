@@ -23,6 +23,8 @@ class Layout extends Component {
             gtag('js', new Date());
 
             gtag('config', 'UA-140231335-1');
+            gtag('set', {'user_id': 'USER_ID'});
+            ga('set', 'userId', 'USER_ID');
           </script>
           <title>reiwa no bustimer</title>
           <meta name="format-detection" content="telephome=no" />
