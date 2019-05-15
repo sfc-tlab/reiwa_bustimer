@@ -34,7 +34,7 @@ class Layout extends Component {
           <meta property="og:description" content="バス通学するSFC生のサポートアプリです。" />
           <meta property="og:type" content="website" />
           <meta property="og:url" content={store.bustimerUrl} />
-          <meta property="og:image" content={`${store.bustimerUrl}/static/icon.png`} />
+          <meta property="og:image" content={`http://bustimer.keioac.jp/static/icon.png`} />
           <meta property="og:image:width" content="600" />
           <meta property="og:image:height" content="300" />
           <meta property="og:site_name" content="reiwa no bustimer" />
@@ -42,10 +42,12 @@ class Layout extends Component {
           <meta property="fb:app_id" content="" />
 
           <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@bustimer" />
+          <meta name="twitter:creator" content="@Im_nuko" />
           <meta name="twitter:url" content={store.bustimerUrl} />
           <meta name="twitter:title" content="reiwa no bustimer" />
           <meta name="twitter:description" content="バス通学するSFC生のサポートアプリです。" />
-          <meta name="twitter:image" content={`${store.bustimerUrl}/static/icon.png`} />
+          <meta name="twitter:image" content={`http://bustimer.keioac.jp/static/icon.png`} />
 
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
