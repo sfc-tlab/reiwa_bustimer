@@ -47,7 +47,7 @@ export default class MainStore {
   isLoading: boolean = true;
 
   @observable
-  bustimerUrl: string = 'https://bustimer.sfc.keioac.jp';
+  bustimerUrl: string = 'https://bustimer.keioac.jp';
 
   @observable
   date: object = {};
