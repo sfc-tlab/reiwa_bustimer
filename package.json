@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 19022",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 19022"
   },
   "author": "neko",
   "license": "MIT",
