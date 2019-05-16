@@ -146,9 +146,6 @@ export default class MainStore {
       :this.date.dayOfWeek===6
         ?this.timeTable[this.from][this.to].saturday
         :this.timeTable[this.from][this.to].weekday;
-    // if (todayData.length && todayData[0].key) {
-    //   todayData.sort((a,b)=>a-b)
-    // }
     this.leftBuses = todayData.filter(time => {
       return (
         (time.h > this.date.hour) 
