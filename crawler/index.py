@@ -14,9 +14,13 @@ def save():
     pass
 
 
+def sort_data(time_table):
+    sorted_time_table = sorted(time_table, key=lambda x:x["key"])
+    return sorted_time_table
+
+
 def add_data(name: str, time_table_data: object) -> None:
     dep, dest = name.split('-')
-    print(dep, dest)
     if dep in ['honkan', 'rotary']:
         dep = 'sfc'
     if dep not in crawled_data:
@@ -26,12 +30,18 @@ def add_data(name: str, time_table_data: object) -> None:
             crawled_data[dep] = dict(
                 {dest: time_table_data}, **crawled_data[dep])
         else:
+            # add and sort weekday
             crawled_data[dep][dest]["weekday"].extend(
                 time_table_data["weekday"])
+            crawled_data[dep][dest]["weekday"] = sort_data(crawled_data[dep][dest]["weekday"])
+            # add and sort saturday
             crawled_data[dep][dest]["saturday"].extend(
                 time_table_data["saturday"])
+            crawled_data[dep][dest]["saturday"] = sort_data(crawled_data[dep][dest]["saturday"])
+            # add and sort holiday
             crawled_data[dep][dest]["holiday"].extend(
                 time_table_data["holiday"])
+            crawled_data[dep][dest]["holiday"] = sort_data(crawled_data[dep][dest]["holiday"])
     pass
 
 
@@ -42,7 +52,7 @@ def main() -> None:
     for i in urls:
         crawler = Crawler(i, urls[i])
         crawler.crawl()
-        add_data(i, crawler.time_table)
+        add_data(i, crawler.sorted_time_table)
     save()
     return
 

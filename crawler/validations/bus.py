@@ -5,6 +5,7 @@ from schematics.types import IntType, StringType, BooleanType
 
 
 class BusCreate(Model):
+    key = IntType(required=True)
     h = IntType(required=True)
     m = IntType(required=True)
     _from = StringType(required=True)
