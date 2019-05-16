@@ -17,7 +17,7 @@ def save():
 def add_data(name: str, time_table_data: object) -> None:
     dep, dest = name.split('-')
     print(dep, dest)
-    if dep == 'honkan' or dep == 'rotary':
+    if dep in ['honkan', 'rotary']:
         dep = 'sfc'
     if dep not in crawled_data:
         crawled_data[dep] = {dest: time_table_data}

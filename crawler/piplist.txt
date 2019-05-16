@@ -1,0 +1,8 @@
+certifi==2019.3.9
+chardet==3.0.4
+cssselect==1.0.3
+idna==2.8
+lxml==4.3.3
+requests==2.22.0
+schematics==2.1.0
+urllib3==1.25.2
