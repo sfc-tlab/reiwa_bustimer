@@ -79,7 +79,7 @@ const Wrapper = styled.div`
   }
 
   .scroll-content {
-    padding-top: 403px;
+    padding-top: 418px;
   }
 `;
 

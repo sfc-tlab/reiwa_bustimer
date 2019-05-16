@@ -36,6 +36,8 @@ class BusList extends Component {
 }
 
 const Wrapper = styled.div`
+  position: relative;
+  z-index: 995;
   .bus-card-container {
     border-top: 1px solid #707070; 
   }

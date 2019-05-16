@@ -81,6 +81,7 @@ class Widget extends Component {
 }
 
 const Wrapper = styled.div`
+  z-index: 996
   vertical-align: middle;
   padding: 24px;
   text-align: center;
