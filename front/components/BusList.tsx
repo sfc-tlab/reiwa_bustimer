@@ -17,10 +17,10 @@ class BusList extends Component {
         <div className="bus-list">
           {store.leftBuses.length?
             <div className="bus-card-container">
-                {store.leftBuses.map(bus => 
+                {store.leftBuses.map((bus, index) => 
                     <BusCard
                       bus={bus}
-                      key={''+bus.h+bus.m}
+                      key={''+bus.h+bus.m+index}
                     />
                 )}
             </div>
