@@ -4,8 +4,8 @@ services:
   front:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./front/Dockerfile
     ports:
       - "$FRONT_PORT:3000"
     volumes:
-      - ./:/src
+      - ./front:/src

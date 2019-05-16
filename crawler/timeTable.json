@@ -1,0 +1,1 @@
+{"sho": {"sfc": {"weekday": [0], "saturday": [0], "holiday": [0]}}, "tuji": {"sfc": {"weekday": [1], "saturday": [2], "holiday": [3]}}, "sfc": {"tuji": {"weekday": [4, 5], "saturday": [8, 10], "holiday": [12, 15]}, "sho": {"weekday": [2, 3], "saturday": [4, 6], "holiday": [6, 9]}}}

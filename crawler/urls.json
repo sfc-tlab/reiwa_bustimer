@@ -1,0 +1,35 @@
+{
+  "sho-sfc": [
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000801156-1/nid:00129893/rt:0/k:%E6%B9%98%E5%8D%97%E5%8F%B0%E9%A7%85%E8%A5%BF%E5%8F%A3",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000800340-1/nid:00129893/rt:0/k:%E6%B9%98%E5%8D%97%E5%8F%B0%E9%A7%85%E8%A5%BF%E5%8F%A3",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000800857-1/nid:00129893/rt:0/k:%E6%B9%98%E5%8D%97%E5%8F%B0%E9%A7%85%E8%A5%BF%E5%8F%A3",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000800209-1/nid:00129893/rt:0/k:%E6%B9%98%E5%8D%97%E5%8F%B0%E9%A7%85%E8%A5%BF%E5%8F%A3",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802604-1/nid:00129893/rt:0/k:%E6%B9%98%E5%8D%97%E5%8F%B0%E9%A7%85%E8%A5%BF%E5%8F%A3"
+  ], 
+  "tuji-sfc": [
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802702-1/nid:00129934/rt:0/k:%E8%BE%BB%E5%A0%82%E9%A7%85",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802690-1/nid:00129934/rt:0/k:%E8%BE%BB%E5%A0%82%E9%A7%85",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802714-1/nid:00129934/rt:0/k:%E8%BE%BB%E5%A0%82%E9%A7%85"
+  ],
+  "honkan-sho": [
+        "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000800141-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D",
+        "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802603-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D",
+        "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802785-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D",
+        "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802329-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D"
+  ],
+  "rotary-sho": [
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000801015-1/nid:00129985/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000800447-1/nid:00129985/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802605-1/nid:00129985/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6"
+  ],
+  "honkan-tuji": [
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802599-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802607-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802703-1/nid:00129986/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6%E6%9C%AC%E9%A4%A8%E5%89%8D"
+  ],
+  "rotary-tuji": [
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802600-1/nid:00129985/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802602-1/nid:00129985/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6",
+    "http://www.kanachu.co.jp/dia/diagram/timetable/cs:0000802705-1/nid:00129985/rt:0/k:%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6"
+  ]
+}

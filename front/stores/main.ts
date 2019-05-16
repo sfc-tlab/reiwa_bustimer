@@ -142,10 +142,10 @@ export default class MainStore {
   setLeftBuses = () => {
     const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays);
     const todayData = isHoliday
-      ?this.timeTable.default[this.from][this.to].holiday
+      ?this.timeTable[this.from][this.to].holiday
       :this.date.dayOfWeek===6
-        ?this.timeTable.default[this.from][this.to].saturday
-        :this.timeTable.default[this.from][this.to].weekday;
+        ?this.timeTable[this.from][this.to].saturday
+        :this.timeTable[this.from][this.to].weekday;
     this.leftBuses = todayData.filter(time => {
       return (
         (time.h > this.date.hour) 
