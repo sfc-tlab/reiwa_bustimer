@@ -32,15 +32,15 @@ export default class MainStore {
   holidays: object = {};
 
   @observable.ref
-  leftBuses: object = [{ h:0, m:0, 
-               from: 'sho', to: 'sfc', 
+  leftBuses: object = [{ h:0, m:0,
+               from: 'sho', to: 'sfc',
                twin: false, rotary: false,
-               type: 'normal'}]; 
+               type: 'normal'}];
 
   constructor(isServer, initialData = {}) {
     this.timeTable = initialData.timeTable;
     this.holidays = initialData.holidays;
-    this.date = dateFormatter.toDateObj(new Date()); 
+    this.date = dateFormatter.toDateObj(new Date());
   }
 
   @observable
@@ -76,14 +76,11 @@ export default class MainStore {
   @observable
   taxiHashtags: string = 'bustimer,SFC生相乗り募集';
 
-  @observable
-  screenName: string = 'home';
-
   @computed
   get tweetHashtags () {
     return `bustimer,${this.wayToSchool}なう`;
   }
-  
+
   @computed
   get tweetText () {
     if (this.leftBuses.length) {
@@ -134,7 +131,7 @@ export default class MainStore {
       this.wayToSchool = '登校';
       this.selectedPos = from;
     }
-    
+
 
   }
 
@@ -148,7 +145,7 @@ export default class MainStore {
         :this.timeTable[this.from][this.to].weekday;
     this.leftBuses = todayData.filter(time => {
       return (
-        (time.h > this.date.hour) 
+        (time.h > this.date.hour)
         ||
         (
           time.h === this.date.hour &&
@@ -168,9 +165,9 @@ export default class MainStore {
       if (bus.h > date.hour){
         leftMinute = ((bus.h - date.hour) * 60)
           - date.minute
-          + bus.m - 1; 
+          + bus.m - 1;
       } else {
-        leftMinute = bus.m - date.minute -1; 
+        leftMinute = bus.m - date.minute -1;
       }
       this.leftTime = {
         m: leftMinute,
