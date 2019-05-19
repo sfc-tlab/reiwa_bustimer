@@ -137,7 +137,7 @@ export default class MainStore {
 
   @action
   setLeftBuses = () => {
-    const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays);
+    const isHoliday = ((this.date.monthStr+this.date.dayStr) in this.holidays) || this.date.dayOfWeek === 0;
     const todayData = isHoliday
       ?this.timeTable[this.from][this.to].holiday
       :this.date.dayOfWeek===6
