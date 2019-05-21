@@ -12,7 +12,8 @@ class TweetButton extends Component {
     this.setState({ ...nextProps });
   } 
 
-  private postTweet = () => {
+  public render () {
+    const { children } = this.state;
     let url = "https://twitter.com/share?";
     const params = {
       "text": this.state.text,
@@ -20,26 +21,18 @@ class TweetButton extends Component {
       "hashtags": this.state.hashtags,
       "via": this.state.via,
     }
-    Object.keys(params).forEach(key => url+=`${key}=${params[key]}&`)
-    window.open(url);
-  }
-
-  public render () {
-    const { children } = this.state;
+    Object.keys(params).forEach(key => url+=`${key}=${params[key]}&`);
 
     return (
       <Wrapper>
-        <div
-          className="twitter-button"
-          onClick={this.postTweet} 
-        >
+        <a className="twitter-button" href={url}>
           <span className="button-text"> {children} </span>
           <img 
             className="twitter-icon" 
             src={"/static/img/twitter-icon.svg"}
             alt="twitter-icon"
           />
-        </div>
+        </a>
       </Wrapper>
     )
   }
@@ -53,11 +46,11 @@ const Wrapper = styled.span`
     border: 2px solid #1b95e0;
     color: #FFFFFF;
     background: #1b95e0;
+    text-decoration: none;
   }
 
   .twitter-icon {
-    top: 3px;
-    display: inline;
+    padding-bottom: 10px;
   }
 
   .button-text {
