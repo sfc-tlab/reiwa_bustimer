@@ -84,6 +84,9 @@ export default class MainStore {
   @computed
   get tweetText () {
     if (this.leftBuses.length) {
+      if (this.from === 'sfc') {
+        return `「${this.toStr}行き ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」で${this.wayToSchool}なう`;
+      }
       return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」で${this.wayToSchool}なう`;
     } else {
       return `${this.fromStr}からバスないけど ${this.wayToSchool}なう`;
@@ -93,6 +96,9 @@ export default class MainStore {
   @computed
   get taxiText () {
     if (this.leftBuses.length) {
+      if (this.from === 'sfc') {
+        return `「${this.toStr}行き ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
+      }
       return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」待ちのタクシー相乗りメンバー募集中`;
     } else {
       return `${this.fromStr}から終バス逃してタクシー相乗りメンバー募集中`;
