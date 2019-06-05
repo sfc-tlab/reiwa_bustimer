@@ -16,7 +16,7 @@
     "@types/react-dom": "^16.8.3",
     "@types/styled-components": "^4.1.14",
     "@zeit/next-typescript": "^1.1.1",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "mobx": "^5.9.4",
