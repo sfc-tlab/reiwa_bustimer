@@ -68,7 +68,7 @@ class Index extends Component {
 
 const Wrapper = styled.div`
   .fixed-item {
-    margin-top: 122px;
+    margin-top: 105px;
     width: 100%;
     z-index: 998;
     position: fixed;
