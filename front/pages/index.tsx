@@ -45,7 +45,7 @@ class Index extends Component {
       store
     } = this.props;
 
-    if (store.isLoading) {
+    if (store.isLoading || !store.leftTime) {
       return (
         <Splash />
       )
@@ -78,7 +78,7 @@ const Wrapper = styled.div`
   }
 
   .scroll-content {
-    padding-top: 418px;
+    padding-top: 429px;
   }
 `;
 

@@ -53,7 +53,7 @@ export default class MainStore {
   date: object = {};
 
   @observable
-  leftTime: object = {};
+  leftTime = false;
 
   @observable
   from: string = 'sho';
