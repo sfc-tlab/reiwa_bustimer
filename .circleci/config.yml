@@ -49,7 +49,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "e8:a7:03:2a:04:c5:9a:38:c8:96:56:cb:f8:6c:ca:01"
+            - "b5:2e:ca:82:be:ed:bc:97:e8:c5:87:16:43:75:f9:12"
       - run:
           name: Start ssh-keyscan
           command: |
@@ -57,7 +57,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST -p 2255 "cd ~/reiwa_bustimer && git pull origin master && docker-compose stop && docker-compose rm -f && docker-compose up -d"
+            ssh $SSH_USER@$SSH_HOST -p 22222 "cd /var/reiwa_bustimer && git pull origin master && docker-compose build --no-cache && docker-compose up -d"
       - run:
           name: Exit from SSH
           command: exit
