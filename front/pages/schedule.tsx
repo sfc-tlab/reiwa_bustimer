@@ -6,6 +6,13 @@ import styled, { css } from 'styled-components';
 @inject("store")
 @observer
 class Schedule extends Component {
+
+  componentWillMount() {
+    const { store } = this.props;
+
+    store.setPath('/schedule');
+  }
+
   render () {
     return (
       <Wrapper>

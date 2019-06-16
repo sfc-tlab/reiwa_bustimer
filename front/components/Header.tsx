@@ -19,28 +19,23 @@ interface HeaderState {
 export default class Header extends Component<{}, HeaderState> {
   constructor(props: {}) {
     super(props)
-
-    this.state = {
-      pathName: '/'
-    }
-  }
-
-  getInitialProps ({pathname, query, asPath}) {
-    return {pathname, query, asPath}
   }
 
   jumpTo = (e, path) => {
+    const { store } = this.props;
     e?e.preventDefault():null;
-    this.setState({ pathName: path });
     Router.push(path)
   }
 
 
   render () {
+    const { store } = this.props;
+    console.log(store.pathName)
+
     return (
       <Wrapper>
         <div className="header">
-          {(this.state.pathName === '/'
+          {(store.pathName === '/'
             ?<span
               className="header-button schedule"
               onClick={e => this.jumpTo(e, '/schedule')}
@@ -69,7 +64,7 @@ export default class Header extends Component<{}, HeaderState> {
           >
             bustimer
           </span>
-          {(this.state.pathName === '/' &&
+          {(store.pathName === '/' &&
             <span
               className="header-button setting"
               onClick={e => this.jumpTo(e, '/setting')}
@@ -82,7 +77,7 @@ export default class Header extends Component<{}, HeaderState> {
             </span>
           )}
         </div>
-        {(this.state.pathName != '/setting' &&
+        {( ['/schedule', '/'].includes(store.pathName) &&
           <div className="departures">
             <DepartureButton pos='sho' />
             <DepartureButton pos='tuji' />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import { inject, observer } from "mobx-react";
 import styled, { css } from 'styled-components';
 
@@ -6,11 +7,26 @@ import styled, { css } from 'styled-components';
 @inject("store")
 @observer
 class Setting extends Component {
+
+  componentWillMount() {
+    const { store } = this.props;
+
+    store.setPath('/setting');
+  }
+
+  jumpTo = (e, path) => {
+    const { store } = this.props;
+    e?e.preventDefault():null;
+    store.setPath(path)
+    Router.push(path)
+  }
+
   render () {
     return (
       <Wrapper>
         <div className="setting">
-          設定画面がここにくる
+
+          <a href='/policy'> プライバシーポリシー </a>
         </div>
       </Wrapper>
     )

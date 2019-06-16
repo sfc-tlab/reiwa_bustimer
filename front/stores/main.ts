@@ -76,6 +76,9 @@ export default class MainStore {
   @observable
   taxiHashtags: string = 'bustimer,SFC生相乗り募集';
 
+  @observable
+  pathName: string = '/';
+
   @computed
   get tweetHashtags () {
     return `bustimer,${this.wayToSchool}なう`;
@@ -117,6 +120,11 @@ export default class MainStore {
   @action
   setLoading = isLoading => {
     this.isLoading = isLoading;
+  }
+
+  @action
+  setPath = path => {
+    this.pathName = path;
   }
 
   @action
