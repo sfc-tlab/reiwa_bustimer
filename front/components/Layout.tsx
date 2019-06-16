@@ -51,10 +51,10 @@ class Layout extends Component {
 
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
-          <meta name="theme-color" content="#ff6600" />
+          <meta name="theme-color" content="#379BFF" />
           <link rel="apple-touch-icon" href="/static/img/icon.png" />
           <meta name="apple-mobile-web-app-title" content="bustimer" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="mobile-web-app-capable" content="yes" />
           <link rel="icon" href="/static/favicon.ico" />

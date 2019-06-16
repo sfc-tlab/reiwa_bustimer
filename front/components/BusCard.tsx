@@ -54,6 +54,7 @@ class BusCard extends Component {
 
 const Wrapper = styled.div`
   font-family: "ＭＳ ゴシック",sans-serif;
+  background: #FFFFFF;
 
   .bus-card {
     padding: 20px;
