@@ -11,7 +11,7 @@ class Setting extends Component {
   componentWillMount() {
     const { store } = this.props;
 
-    store.setPath('/setting');
+    store.setPath('/', '/setting');
   }
 
   jumpTo = (e, path) => {
@@ -26,7 +26,12 @@ class Setting extends Component {
       <Wrapper>
         <div className="setting">
 
-          <a href='/policy'> プライバシーポリシー </a>
+          <div
+            className="link"
+            onClick={e => this.jumpTo(e, '/policy')}
+          >
+            プライバシーポリシー 
+          </div>
         </div>
       </Wrapper>
     )
@@ -38,6 +43,17 @@ const Wrapper = styled.div`
   padding-top: 74px;
   width: 100%;
   z-index: 998;
+  text-align: center;
+  font-size: 24px;
+
+  .link {
+    padding: 20px;
+
+  }
+
+  .link:active{
+      color : #26a69a;
+  }
 `;
 
 export default Setting;

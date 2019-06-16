@@ -79,6 +79,9 @@ export default class MainStore {
   @observable
   pathName: string = '/';
 
+  @observable
+  beforePath: string = '/';
+
   @computed
   get tweetHashtags () {
     return `bustimer,${this.wayToSchool}なう`;
@@ -123,8 +126,9 @@ export default class MainStore {
   }
 
   @action
-  setPath = path => {
-    this.pathName = path;
+  setPath = (beforePath, nextPath) => {
+    this.beforePath = beforePath;
+    this.pathName = nextPath;
   }
 
   @action

@@ -10,7 +10,7 @@ class Schedule extends Component {
   componentWillMount() {
     const { store } = this.props;
 
-    store.setPath('/schedule');
+    store.setPath('/', '/schedule');
   }
 
   render () {

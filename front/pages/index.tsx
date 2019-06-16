@@ -22,6 +22,7 @@ class Index extends Component {
     // const pos = await location.getPosName();
     const { store } = this.props;
     store.setLoading(true);
+    store.setPath('/', '/');
     store.setDate();
     store.setFromTo('sho', 'sfc');
     this.interval = setInterval(() => {

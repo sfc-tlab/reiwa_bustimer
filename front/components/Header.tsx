@@ -30,7 +30,6 @@ export default class Header extends Component<{}, HeaderState> {
 
   render () {
     const { store } = this.props;
-    console.log(store.pathName)
 
     return (
       <Wrapper>
@@ -49,7 +48,7 @@ export default class Header extends Component<{}, HeaderState> {
             :
             <span
               className="header-button schedule"
-              onClick={e => this.jumpTo(e, '/')}
+              onClick={e => this.jumpTo(e, store.beforePath)}
             >
               <img
                 className="return-icon"

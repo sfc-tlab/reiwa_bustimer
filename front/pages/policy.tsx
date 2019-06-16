@@ -10,7 +10,7 @@ export default class PrivacyPolicy extends Component {
   componentWillMount() {
     const { store } = this.props;
 
-    store.setPath('/policy');
+    store.setPath('/setting', '/policy');
   }
 
   
