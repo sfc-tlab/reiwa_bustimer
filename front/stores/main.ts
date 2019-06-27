@@ -191,6 +191,11 @@ export default class MainStore {
         m: leftMinute,
         s: leftSecond
       }
+    } else {
+      this.leftTime = {
+        m: 0,
+        s: 0
+      }
     }
   }
 
