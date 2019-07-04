@@ -49,9 +49,8 @@ class Setting extends Component {
             <a 
               href="https://twitter.com/bustimer?ref_src=twsrc%5Etfw" 
               className="twitter-follow-button" data-show-count="false">
-              Follow @bustimer
+              Twitter: @bustimer
             </a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           </div>
         </div>
       </Wrapper>
