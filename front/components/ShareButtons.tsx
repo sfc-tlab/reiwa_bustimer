@@ -14,7 +14,7 @@ class ShareButtons extends Component {
 
     return (
       <Wrapper>
-        <div className="twwet-description">
+        <div className="tweet-description">
           バスの混雑状況をシェアできます
         </div>
 
@@ -53,6 +53,7 @@ const Wrapper = styled.div`
   font-family: "ＭＳ ゴシック",sans-serif;
 
   .tweet-description {
+    padding: 8px;
     color: #707070;
   }
 
