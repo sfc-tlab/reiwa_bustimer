@@ -89,18 +89,24 @@ export default class MainStore {
 
   @computed
   get busKaitekiText () {
-    if (this.from === 'sfc') {
-      return `「${this.toStr}行き ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」快適なう`;
-    }
-    return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」快適なう`;
+    if (this.leftBuses.length) {
+      if (this.from === 'sfc') {
+        return `「${this.toStr}行き ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」快適なう`;
+      }
+      return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」快適なう`;
+      }
+    return ``;
   }
 
   @computed
   get busKonzatuText () {
-    if (this.from === 'sfc') {
-      return `「${this.toStr}行き ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」混雑なう`;
+    if (this.leftBuses.length) {
+      if (this.from === 'sfc') {
+        return `「${this.toStr}行き ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」混雑なう`;
+      }
+      return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」混雑なう`;
     }
-    return `「${this.fromStr}発 ${('00'+this.leftBuses[0].h).slice(-2)}時 ${('00'+this.leftBuses[0].m).slice(-2)}分のバス」混雑なう`;
+    return ``;
   }
 
   @computed
