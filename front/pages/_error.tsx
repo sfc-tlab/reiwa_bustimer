@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react';
 import Error from 'next/error'
 import Router from 'next/router';
 
-class Page extends React.Component {
+
+class ErrorPage extends Error {
+  static getInitialProps({ res, err }) {
+    const statusCode = res ? res.statusCode : err ? err.statusCode : null
+    return { statusCode }
+  }
 
   componentDidMount() {
-    Router.push('/')  
+    if (this.props.statusCode === 404) {
+      Router.push('/')
+    }
   }
 
-  render() {
-    return null
-  }
 }
 
-export default Page
+export default ErrorPage
