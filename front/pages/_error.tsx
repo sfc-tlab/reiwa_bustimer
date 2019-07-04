@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import Error from 'next/error'
 import Router from 'next/router';
 
