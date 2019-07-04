@@ -32,6 +32,27 @@ class Setting extends Component {
           >
             プライバシーポリシー 
           </div>
+
+          <div className="link" >
+            <a
+              className="link"
+              href="https://github.com/sfc-tlab/reiwa_bustimer"
+            >
+              <img 
+                className="logo"
+                src="/static/img/GitHub_Logo.png" 
+              />
+            </a>
+          </div>
+
+          <div className="link" >
+            <a 
+              href="https://twitter.com/bustimer?ref_src=twsrc%5Etfw" 
+              className="twitter-follow-button" data-show-count="false">
+              Follow @bustimer
+            </a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </div>
         </div>
       </Wrapper>
     )
@@ -51,9 +72,14 @@ const Wrapper = styled.div`
 
   }
 
-  .link:active{
+  .link:active {
       color : #26a69a;
   }
+
+  .logo {
+    height: 40px;
+  }
+
 `;
 
 export default Setting;
