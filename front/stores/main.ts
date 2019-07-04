@@ -141,8 +141,13 @@ export default class MainStore {
       this.wayToSchool = '登校';
       this.selectedPos = from;
     }
-
-
+    if(!isServer) {
+      const cache = {
+        from: this.from,
+        to: this.to,
+      }
+      localStorage.setItem('cache', JSON.stringify(cache))
+    }
   }
 
   @action

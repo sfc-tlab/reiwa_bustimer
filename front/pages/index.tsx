@@ -24,7 +24,6 @@ class Index extends Component {
     store.setLoading(true);
     store.setPath('/', '/');
     store.setDate();
-    store.setFromTo('sho', 'sfc');
     this.interval = setInterval(() => {
       store.setDate();
       store.setLeftBuses();
@@ -34,6 +33,12 @@ class Index extends Component {
 
   async componentDidMount () {
     const { store } = this.props;
+    const cache = JSON.parse(localStorage.getItem('cache'));
+    if (cache) {
+      store.setFromTo(cache.from, cache.to);
+    } else {
+      store.setFromTo('sho', 'sfc');
+    }
     store.setLoading(false);
   }
 
@@ -79,7 +84,7 @@ const Wrapper = styled.div`
   }
 
   .scroll-content {
-    padding-top: 429px;
+    padding-top: 439px;
   }
 `;
 

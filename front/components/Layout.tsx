@@ -58,7 +58,7 @@ class Layout extends Component {
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="mobile-web-app-capable" content="yes" />
           <link rel="icon" href="/static/favicon.ico" />
-          <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
         </Head>
 
         <Header />

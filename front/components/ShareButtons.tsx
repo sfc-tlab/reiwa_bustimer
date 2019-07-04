@@ -14,6 +14,10 @@ class ShareButtons extends Component {
 
     return (
       <Wrapper>
+        <div className="twwet-description">
+          バスの混雑状況をシェアできます
+        </div>
+
         <span className="tweet-button toukou">
           <TweetButton 
             size="large" 
@@ -47,6 +51,10 @@ class ShareButtons extends Component {
 const Wrapper = styled.div`
   text-align: center;
   font-family: "ＭＳ ゴシック",sans-serif;
+
+  .tweet-description {
+    color: #707070;
+  }
 
   .tweet {
     display: inline-block;

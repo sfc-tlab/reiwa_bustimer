@@ -85,6 +85,7 @@ const Wrapper = styled.div`
   vertical-align: middle;
   padding: 24px;
   padding-top: 48px;
+  padding-bottom: 5px;
   text-align: center;
 
   .pos-container {
