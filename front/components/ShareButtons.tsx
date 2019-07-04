@@ -17,26 +17,26 @@ class ShareButtons extends Component {
         <span className="tweet-button toukou">
           <TweetButton 
             size="large" 
-            text={store.tweetText} 
+            text={store.busKaitekiText} 
             tweetUrl={store.bustimerUrl} 
             hashtags={store.tweetHashtags}
             countFlag="false"
             via="bustimer"
           >
-            {store.wayToSchool}なう
+            快適なう
           </TweetButton>
         </span>
 
         <span className="tweet-button taxi">
           <TweetButton 
             size="large" 
-            text={store.taxiText} 
+            text={store.busKonzatuText} 
             tweetUrl={store.bustimerUrl} 
             hashtags={store.taxiHashtags}
             countFlag="false"
             via="bustimer"
           >
-            相乗り募集
+            混雑なう
           </TweetButton>
         </span>
       </Wrapper>
