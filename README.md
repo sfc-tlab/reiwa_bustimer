@@ -14,4 +14,6 @@ Let's access to `http://localhost:19080`
 Let's access to `http://localhost:3000`
 
 ## How to deploy
+**デプロイ時数十秒のダウンタイムが発生するのでバスの運行停止時間に行う。**
+
 `git push origin master`
