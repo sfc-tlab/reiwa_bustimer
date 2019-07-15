@@ -1,7 +1,12 @@
 # reiwa bustimer
 新しい時代に向けてSFC生が今まで使っていたbustimerをリニューアルします。
 
-## Getting start
+## Quick start
+` docker run -e --name bustimer -itd -p 3000:3000 imneko/bustimer:latest`
+
+Let's access to `http://localhost:3000`
+
+## Getting start (self build)
 `cp .env.example .env`
 `docker-compose up -d`
 
