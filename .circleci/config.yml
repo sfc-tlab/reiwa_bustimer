@@ -44,6 +44,27 @@ jobs:
             name: finish build
             command: echo "finish build"
 
+  push-image:
+    machine: true
+    steps:
+      - checkout
+      - restore_cache:
+          key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "front/Dockerfile" }}
+          paths: ~/caches/images.tar
+      - run: 
+          name: docker load
+          command: if test -d ~/caches; then docker load -i ~/caches/images.tar; fi
+      - run: 
+          name: build image 
+          command: |
+            docker build -f front/Dockerfile --rm=false -t imneko/bustimer:latest .
+      - run: 
+          name: push image
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push imneko/bustimer:latest
+
+
   deploy:
     machine: true
     steps:
@@ -57,7 +78,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST -p 22222 "cd /var/reiwa_bustimer && git pull origin master && docker-compose build --no-cache && docker-compose up -d"
+            ssh $SSH_USER@$SSH_HOST -p 22222 "docker pull imneko/bustimer:latest && docker stop bustimer && docker rm bustimer && docker run -e APP_ENV=prod --name bustimer -itd -p 19430:3000 imneko/bustimer:latest"
       - run:
           name: Exit from SSH
           command: exit

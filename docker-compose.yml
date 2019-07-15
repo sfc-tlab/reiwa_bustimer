@@ -7,5 +7,3 @@ services:
       dockerfile: ./front/Dockerfile
     ports:
       - "$FRONT_PORT:3000"
-    volumes:
-      - ./front:/src
