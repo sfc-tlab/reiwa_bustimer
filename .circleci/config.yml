@@ -95,9 +95,15 @@ workflows:
       - build:
           requires:
             - generate_cache
-      - deploy:
+      - push-image:
           filters:
             branches:
               only: master
           requires:
             - build
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - push-image
