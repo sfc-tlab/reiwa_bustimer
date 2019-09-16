@@ -2,7 +2,6 @@ import React from "react";
 import App, { Container } from "next/app";
 import { Provider } from "mobx-react";  
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import Router from 'next/router';
 
 import { initializeStore } from '../stores';
 import Layout from '../components/Layout';
@@ -11,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default class MyApp extends App {
+  mobxStore;
 
   static async getInitialProps(appContext) {
     // Get or Create the store with `undefined` as initialState
@@ -31,7 +31,7 @@ export default class MyApp extends App {
 
   constructor(props) {
     super(props);
-    const isServer = !process.browser;
+    const isServer = typeof window == 'undefined';
     this.mobxStore = isServer
       ? props.initialMobxState
       : initializeStore(props.initialMobxState);
