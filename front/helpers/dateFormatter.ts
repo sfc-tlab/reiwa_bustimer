@@ -1,13 +1,13 @@
-const toDateObj = (date) => {
-  const yearStr = date.getFullYear();
-  const monthStr = (`00${date.getMonth() + 1}`).slice(-2);
-  const dayStr = (`00${date.getDate()}`).slice(-2);
-  const hourStr = (`00${date.getHours()}`).slice(-2);
-  const minuteStr = (`00${date.getMinutes()}`).slice(-2);
-  const secondStr = (`00${date.getSeconds()}`).slice(-2);
-  const dateTimeStr = `${yearStr}-${monthStr}-${dayStr}T${hourStr}:${minuteStr}`;
-  const dayOfWeek = date.getDay();
-  const dayOfWeekStr =  [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek];
+const makeDateObj = (date) => {
+  const yearStr: string = date.getFullYear();
+  const monthStr: string = (`00${date.getMonth() + 1}`).slice(-2);
+  const dayStr: string = (`00${date.getDate()}`).slice(-2);
+  const hourStr: string = (`00${date.getHours()}`).slice(-2);
+  const minuteStr: string = (`00${date.getMinutes()}`).slice(-2);
+  const secondStr: string = (`00${date.getSeconds()}`).slice(-2);
+  const dateTimeStr: string = `${yearStr}-${monthStr}-${dayStr}T${hourStr}:${minuteStr}`;
+  const dayOfWeek: number = date.getDay();
+  const dayOfWeekStr: string =  [ "日", "月", "火", "水", "木", "金", "土" ][dayOfWeek];
   return {
     dateTimeStr,
     dayOfWeek,
@@ -25,4 +25,7 @@ const toDateObj = (date) => {
   }
 }
 
-module.exports = { toDateObj }
+const dateObj = makeDateObj(new Date());
+export type DateObjType = typeof dateObj; 
+
+export default makeDateObj;

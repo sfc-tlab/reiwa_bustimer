@@ -1,12 +1,10 @@
 import { action, observable, computed } from "mobx";
 import { useStaticRendering } from 'mobx-react';
 
-import dateFormatter from '../helpers/dateFormatter';
+import makeDateObj, { DateObjType } from '../helpers/dateFormatter';
 
 
-//TODO baseUrl の置き方考える
-const baseUrl = 'https://bus.im-neko.net';
-const isServer = !process.browser
+const isServer = typeof window == 'undefined';
 useStaticRendering(isServer);
 
 
@@ -32,15 +30,15 @@ export default class MainStore {
   holidays: object = {};
 
   @observable.ref
-  leftBuses: object = [{ h:0, m:0,
+  leftBuses: any[]  = [{ h:0, m:0,
                from: 'sho', to: 'sfc',
                twin: false, rotary: false,
                type: 'normal'}];
 
-  constructor(isServer, initialData = {}) {
+  constructor(initialData: {timeTable?: {}, holidays?: {}}) {
     this.timeTable = initialData.timeTable;
     this.holidays = initialData.holidays;
-    this.date = dateFormatter.toDateObj(new Date());
+    this.date = makeDateObj(new Date());
   }
 
   @observable
@@ -50,10 +48,10 @@ export default class MainStore {
   bustimerUrl: string = 'https://bustimer.keioac.jp';
 
   @observable
-  date: object = {};
+  date: DateObjType;
 
   @observable
-  leftTime = false;
+  leftTime: boolean | {m: number, s: number} = false;
 
   @observable
   from: string = 'sho';
@@ -131,7 +129,7 @@ export default class MainStore {
 
   @action
   setDate = () => {
-    this.date = dateFormatter.toDateObj(new Date());
+    this.date = makeDateObj(new Date());
   }
 
   @action
@@ -158,7 +156,7 @@ export default class MainStore {
 
   @action
   setLeftBuses = () => {
-    const isHoliday = ((this.date.monthStr+"-"+this.date.dayStr) in this.holidays) || this.date.dayOfWeek === 0;
+    const isHoliday = (this.holidays && (this.date.monthStr+"-"+this.date.dayStr) in this.holidays) || this.date.dayOfWeek === 0;
     const todayData = isHoliday
       ?this.timeTable[this.from][this.to].holiday
       :this.date.dayOfWeek===6
@@ -201,5 +199,4 @@ export default class MainStore {
       }
     }
   }
-
 }

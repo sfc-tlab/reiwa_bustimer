@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Router from 'next/router';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 
 interface ThemeColor {
-    color: string;
+    color?: string;
 }   
 
 export default class Splash extends Component<ThemeColor> {

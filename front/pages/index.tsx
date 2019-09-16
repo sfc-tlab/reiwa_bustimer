@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import { inject, observer } from "mobx-react";
-import { import } from 'next/dynamic';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import Layout from '../components/Layout';
+import { StoreType } from '../stores';
 import Splash from '../components/Splash';
 import Widget from '../components/Widget';
 import ShareButtons from '../components/ShareButtons';
 import BusList from '../components/BusList';
-import dateFormatter from '../helpers/dateFormatter';
 
+
+interface IProps {
+  store: StoreType;
+}
 
 @inject("store")
 @observer
-class Index extends Component {
+class Index extends Component<IProps> {
+  interval;
 
   async componentWillMount () {
-    // TODO: 高速化
-    // const location = new Location();
-    // console.log('getpos')
-    // const pos = await location.getPosName();
     const { store } = this.props;
     store.setLoading(true);
     store.setPath('/', '/');
@@ -80,7 +79,6 @@ const Wrapper = styled.div`
     position: fixed;
     background-color: #FFFFFF;
     padding-bottom: 20px;
-    border-bottom: 1px solid #707070;
   }
 
   .scroll-content {

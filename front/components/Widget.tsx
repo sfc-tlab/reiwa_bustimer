@@ -2,13 +2,16 @@ import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from "mobx-react";
 
-import ShareButtons from './ShareButtons';
-import dateFormatter from '../helpers/dateFormatter';
+import { StoreType } from '../stores';
 
+
+interface IProps {
+  store: StoreType;
+}
 
 @inject("store")  
 @observer
-class Widget extends Component {    
+class Widget extends Component<IProps> {
 
   render () {
     const { store } = this.props;
@@ -37,7 +40,7 @@ class Widget extends Component {
           </Fragment>
         );
       }
-      return '';
+      return null;
     }
     
     return (
@@ -60,8 +63,8 @@ class Widget extends Component {
               </span>
             </div>
             <img
-              className="pos swap-button svg"
-              src={`/static/img/swap-button.svg`}
+              className="pos swap-button"
+              src={`/static/img/swap-icon.png`}
               onClick={()=>{store.setFromTo(store.to, store.from)}} 
               alt="departure-swap-button"
             />
@@ -84,9 +87,14 @@ const Wrapper = styled.div`
   z-index: 996
   vertical-align: middle;
   padding: 24px;
-  padding-top: 48px;
+  padding-top: 24px;
   padding-bottom: 5px;
   text-align: center;
+
+  .swap-button {
+    height: 24px;
+    width: auto;
+  }
 
   .pos-container {
     border-radius: 3px 3px 0 0;
