@@ -72,13 +72,15 @@ jobs:
       - checkout 
       - run:
           name: update-npm
-          command: 'sudo npm install -g npm@latest'
+          command: sudo npm install -g npm@latest
       - run:
           name: install now
-          comamnd: 'sudo npm install now'
+          comamnd: sudo npm install now
       - run:
           name: deploy
-          command: $(npm bin)/now -t ${ZEIT_TOKEN} && $(npm bin)/now --prod
+          command: |
+            now -t ${ZEIT_TOKEN}
+            now --prod
 
 
 workflows:
