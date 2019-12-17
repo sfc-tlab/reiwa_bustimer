@@ -66,25 +66,21 @@ jobs:
 
 
   deploy:
-    machine: true
+    docker: 
+      - image: circleci/node:9.9.0
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "b5:2e:ca:82:be:ed:bc:97:e8:c5:87:16:43:75:f9:12"
+      - checkout 
       - run:
-          name: Start ssh-keyscan
-          command: |
-            ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+        name: update-npm
+        command: 'sudo npm install -g npm@latest'
       - run:
-          name: Deploy Over SSH
-          command: |
-            ssh $SSH_USER@$SSH_HOST -p 22222 "docker pull imneko/bustimer:latest && docker stop bustimer && docker rm bustimer && docker run -e APP_ENV=prod --name bustimer -itd -p 19430:3000 imneko/bustimer:latest"
+        name: install now
+        comamnd: 'sudo npm install -g now'
       - run:
-          name: Exit from SSH
-          command: exit
-      - run:
-          name: finish deploy
-          command: echo "finish deploy"
+        name: deploy
+        command: |
+          now -t ${ZEIT_TOKEN}
+          now --prod
 
 
 workflows:

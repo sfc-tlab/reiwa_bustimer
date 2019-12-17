@@ -1,0 +1,7 @@
+{
+  "build": {
+    "src": "next.config.js", 
+    "use": "@now/next"
+  },
+  "name": "bustimer"
+}
