@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { inject, observer } from "mobx-react";
 
@@ -23,7 +23,7 @@ class ShareButtons extends Component {
             size="large" 
             text={store.busKaitekiText} 
             tweetUrl={store.bustimerUrl} 
-            hashtags={store.tweetHashtags}
+            hashtags={store.busKaitekiText}
             countFlag="false"
             via="bustimer"
           >
@@ -36,7 +36,7 @@ class ShareButtons extends Component {
             size="large" 
             text={store.busKonzatuText} 
             tweetUrl={store.bustimerUrl} 
-            hashtags={store.taxiHashtags}
+            hashtags={store.busKonzatuText}
             countFlag="false"
             via="bustimer"
           >
