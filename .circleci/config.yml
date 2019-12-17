@@ -71,16 +71,16 @@ jobs:
     steps:
       - checkout 
       - run:
-        name: update-npm
-        command: 'sudo npm install -g npm@latest'
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
       - run:
-        name: install now
-        comamnd: 'sudo npm install -g now'
+          name: install now
+          comamnd: 'sudo npm install -g now'
       - run:
-        name: deploy
-        command: |
-          now -t ${ZEIT_TOKEN}
-          now --prod
+          name: deploy
+          command: |
+            now -t ${ZEIT_TOKEN}
+            now --prod
 
 
 workflows:
