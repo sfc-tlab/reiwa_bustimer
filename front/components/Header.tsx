@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import Router from 'next/router';
+import React, { Component } from "react";
+import Router from "next/router";
 import { inject, observer } from "mobx-react";
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-import DepartureButton from './DepartureButton';
-
+import DepartureButton from "./DepartureButton";
 
 interface ThemeColor {
-    color: string;
+  color: string;
 }
 
 interface HeaderState {
@@ -18,34 +17,33 @@ interface HeaderState {
 @observer
 export default class Header extends Component<{}, HeaderState> {
   constructor(props: {}) {
-    super(props)
+    super(props);
   }
 
   jumpTo = (e, path) => {
     const { store } = this.props;
-    e?e.preventDefault():null;
-    Router.push(path)
-  }
+    e ? e.preventDefault() : null;
+    Router.push(path);
+  };
 
-
-  render () {
+  render() {
     const { store } = this.props;
 
     return (
       <Wrapper>
         <div className="header">
-          {(store.pathName === '/'
-            ?<span
+          {store.pathName === "/" ? (
+            <span
               className="header-button schedule"
-              onClick={e => this.jumpTo(e, '/schedule')}
+              onClick={e => this.jumpTo(e, "/schedule")}
             >
               <img
                 className="busstop-icon"
-                src={"/static/img/busstop-icon.svg"}
+                src={"/static/img/icon-timetable.svg"}
                 alt="busstop-icon"
               />
             </span>
-            :
+          ) : (
             <span
               className="header-button schedule"
               onClick={e => this.jumpTo(e, store.beforePath)}
@@ -57,33 +55,30 @@ export default class Header extends Component<{}, HeaderState> {
               />
             </span>
           )}
-          <span
-            className="header text"
-            onClick={e => this.jumpTo(e, '/')}
-          >
-            bustimer
+          <span className="header text" onClick={e => this.jumpTo(e, "/")}>
+            BusTimer
           </span>
-          {(store.pathName === '/' &&
+          {store.pathName === "/" && (
             <span
               className="header-button setting"
-              onClick={e => this.jumpTo(e, '/setting')}
+              onClick={e => this.jumpTo(e, "/setting")}
             >
               <img
                 className="setting-icon"
-                src={"/static/img/setting-icon.svg"}
+                src={"/static/img/icon-setting.svg"}
                 alt="setting-icon"
               />
             </span>
           )}
         </div>
-        {( ['/schedule', '/'].includes(store.pathName) &&
+        {["/schedule", "/"].includes(store.pathName) && (
           <div className="departures">
-            <DepartureButton pos='sho' />
-            <DepartureButton pos='tuji' />
+            <DepartureButton pos="sho" />
+            <DepartureButton pos="tuji" />
           </div>
         )}
       </Wrapper>
-    )
+    );
   }
 }
 
@@ -92,15 +87,17 @@ const Wrapper = styled.div`
   position: fixed;
   z-index: 999;
   text-align: center;
-  font-family: "ＭＳ ゴシック",sans-serif;
+  font-family: "ＭＳ ゴシック", sans-serif;
 
   .header {
     position: relative;
-    font-size: 41px;
-    color: #FFFFFF;
+    height: 60px;
+    line-height: 60px;
+    font-size: 24px;
+    color: #ffffff;
     top: 0px;
-    padding: 4px;
-    background: #379BFF;
+    padding: 0 15px;
+    background: #379bff;
   }
 
   .header-button {
@@ -117,28 +114,28 @@ const Wrapper = styled.div`
 
   .busstop-icon {
     margin: 5px;
-    fill: #FFFFFF;
-    width: 48px;
-    height: 48px;
+    fill: #ffffff;
+    width: 30px;
+    height: 30px;
   }
 
   .setting-icon {
     margin: 5px;
-    fill: #FFFFFF;
-    width: 48px;
-    height: 48px;
+    fill: #ffffff;
+    width: 30px;
+    height: 30px;
   }
 
   .return-icon {
     margin: 5px;
-    fill: #FFFFFF;
-    width: 48px;
-    height: 48px;
+    fill: #ffffff;
+    width: 30px;
+    height: 30px;
   }
 
   ${(props: ThemeColor) =>
-    props.color
-    && css`
-      background: props.color
+    props.color &&
+    css`
+      background: props.color;
     `}
 `;
