@@ -3,8 +3,6 @@ import Router from "next/router";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 
-import DepartureButton from "./DepartureButton";
-
 interface ThemeColor {
   color: string;
 }
@@ -71,12 +69,6 @@ export default class Header extends Component<{}, HeaderState> {
             </span>
           )}
         </div>
-        {["/schedule", "/"].includes(store.pathName) && (
-          <div className="departures">
-            <DepartureButton pos="sho" />
-            <DepartureButton pos="tuji" />
-          </div>
-        )}
       </Wrapper>
     );
   }
