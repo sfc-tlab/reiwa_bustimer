@@ -2,6 +2,8 @@
 
 新しい時代に向けて SFC 生が今まで使っていた bustimer をリニューアルします。
 
+![screenshot](https://i.gyazo.com/9781b72ada20c1f306331d4ce570b8fe.png)
+
 ## Quick start
 
 `docker run -e --name bustimer -itd -p 3000:3000 imneko/bustimer:latest`
