@@ -53,8 +53,8 @@ export default class Header extends Component<{}, HeaderState> {
               />
             </span>
           )}
-          <span className="header text" onClick={e => this.jumpTo(e, "/")}>
-            BusTimer
+          <span className="header-logo" onClick={e => this.jumpTo(e, "/")}>
+            <img src={"/static/img/logo.svg"} alt="BusTimer" />
           </span>
           {store.pathName === "/" && (
             <span
@@ -90,6 +90,18 @@ const Wrapper = styled.div`
     top: 0px;
     padding: 0 15px;
     background: #379bff;
+    font-size: 0;
+  }
+
+  .header-logo {
+    display: inline-block;
+    width: 230px;
+    margin: 0 auto;
+  }
+
+  .header-logo img {
+    width: 100%;
+    height: 100%;
   }
 
   .header-button {
