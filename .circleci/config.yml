@@ -3,6 +3,10 @@ jobs:
   generate_cache:
     machine: true
     steps:
+      - run: |
+          if [[ ${CIRCLE_SHELL_ENV} =~ "localbuild" ]]; then
+            git clone $CIRCLE_REPOSITORY_URL /tmp/_circleci_local_build_repo;
+          fi
       - checkout
       - restore_cache:
           key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "front/Dockerfile" }}
@@ -26,6 +30,10 @@ jobs:
   build:
     machine: true
     steps:
+      - run: |
+          if [[ ${CIRCLE_SHELL_ENV} =~ "localbuild" ]]; then
+            git clone $CIRCLE_REPOSITORY_URL /tmp/_circleci_local_build_repo;
+          fi
       - checkout
       - restore_cache:
           key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "front/Dockerfile" }}
@@ -47,6 +55,10 @@ jobs:
   push-image:
     machine: true
     steps:
+      - run: |
+          if [[ ${CIRCLE_SHELL_ENV} =~ "localbuild" ]]; then
+            git clone $CIRCLE_REPOSITORY_URL /tmp/_circleci_local_build_repo;
+          fi
       - checkout
       - restore_cache:
           key: docker-{{ checksum ".circleci/config.yml" }}-{{ checksum "docker-compose.yml" }}-{{ checksum "front/Dockerfile" }}
@@ -69,13 +81,19 @@ jobs:
     docker: 
       - image: circleci/node:9.9.0
     steps:
+      - run: |
+          if [[ ${CIRCLE_SHELL_ENV} =~ "localbuild" ]]; then
+            git clone $CIRCLE_REPOSITORY_URL /tmp/_circleci_local_build_repo;
+          fi
       - checkout 
       - run:
           name: update-npm
-          command: sudo npm install -g npm@latest
+          command: |
+            sudo npm install -g npm@latest
       - run:
           name: install now
-          comamnd: sudo npm install now
+          comamnd: |
+            sudo npm install now
       - run:
           name: deploy
           command: |
