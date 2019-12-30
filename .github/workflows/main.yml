@@ -29,6 +29,9 @@ jobs:
     steps: 
       - name: checkout
         uses: actions/checkout@v1
+      - name: delete auth.json
+        run: |
+          rm -rf ~/.local/share/now/auth.json
       - name: deploy
         run: |
             cd front
