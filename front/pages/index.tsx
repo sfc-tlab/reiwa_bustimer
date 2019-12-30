@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import { StoreType } from '../stores';
-import Splash from '../components/Splash';
-import Widget from '../components/Widget';
-import ShareButtons from '../components/ShareButtons';
-import BusList from '../components/BusList';
-
+import { StoreType } from "../stores";
+import Splash from "../components/Splash";
+import Widget from "../components/Widget";
+import ShareButtons from "../components/ShareButtons";
+import BusList from "../components/BusList";
 
 interface IProps {
   store: StoreType;
@@ -18,10 +17,10 @@ interface IProps {
 class Index extends Component<IProps> {
   interval;
 
-  async componentWillMount () {
+  async componentWillMount() {
     const { store } = this.props;
     store.setLoading(true);
-    store.setPath('/', '/');
+    store.setPath("/", "/");
     store.setDate();
     this.interval = setInterval(() => {
       store.setDate();
@@ -30,13 +29,13 @@ class Index extends Component<IProps> {
     }, 300);
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     const { store } = this.props;
-    const cache = JSON.parse(localStorage.getItem('cache'));
+    const cache = JSON.parse(localStorage.getItem("cache"));
     if (cache) {
       store.setFromTo(cache.from, cache.to);
     } else {
-      store.setFromTo('sho', 'sfc');
+      store.setFromTo("sho", "sfc");
     }
     store.setLoading(false);
   }
@@ -45,44 +44,27 @@ class Index extends Component<IProps> {
     clearInterval(this.interval);
   }
 
-  render () {
-    const {
-      store
-    } = this.props;
+  render() {
+    const { store } = this.props;
 
     if (store.isLoading || !store.leftTime) {
-      return (
-        <Splash />
-      )
+      return <Splash />;
     } else {
       return (
         <Wrapper>
-          <div className="fixed-item">
-            <Widget />
-            <ShareButtons />
-          </div>
           <div className="scroll-content">
+            <Widget />
             <BusList />
           </div>
         </Wrapper>
-      )
-
+      );
     }
   }
 }
 
 const Wrapper = styled.div`
-  .fixed-item {
-    margin-top: 105px;
-    width: 100%;
-    z-index: 998;
-    position: fixed;
-    background-color: #FFFFFF;
-    padding-bottom: 20px;
-  }
-
   .scroll-content {
-    padding-top: 439px;
+    padding-top: 60px;
   }
 `;
 

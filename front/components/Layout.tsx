@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { inject, observer } from "mobx-react";
 import Head from 'next/head';
 
-import Header from './Header'
+import Header from './Header';
+import Banner from './Banner';
 import { initGA, logPageView } from '../helpers/analytics'
 
 
@@ -62,7 +63,6 @@ class Layout extends Component {
         </Head>
 
         <Header />
-
         {children}
 
         <style jsx global>
@@ -78,6 +78,7 @@ class Layout extends Component {
             }
           `}
         </style>
+        <Banner />
       </Fragment>
     )
   }
