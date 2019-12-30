@@ -38,22 +38,21 @@ export default class DepartureButton extends Component {
 
 const Wrapper = styled.span`
   text-align: center;
-  font-family: "ＭＳ ゴシック",sans-serif;
+  font-family: "ＭＳ ゴシック", sans-serif;
 
   .departure-button {
-    display: inline-block;
-    width: 50%;
-    padding: 10px; 
-    border: 2px solid #707070;
-    background-color: #FFFFFF;
+    width: 100px;
+    line-height: 36px;
+    font-size: 16px;
+    background-color: #F5F5F5;
   }
 
-  .departure-button.sho {
-    border-right: 1px solid #707070;
+  .sho {
+    border-radius: 5px 0px 0px 5px;
   }
 
-  .departure-button.tuji {
-    border-left: 1px solid #707070;
+  .tuji {
+    border-radius: 0px 5px 5px 0px;
   }
 
   .departure-button-text {
@@ -61,7 +60,11 @@ const Wrapper = styled.span`
   }
 
   .selected {
-    background-color: #76CCFF;
+    background-color: #379BFF;
+  }
+
+  .selected .departure-button-text {
+    color: white;
   }
 
 

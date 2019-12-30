@@ -58,8 +58,6 @@ const Wrapper = styled.div`
 
   .bus-card {
     padding: 20px;
-    border-top: 1px solid #707070; 
-    border-bottom: 1px solid #707070;
   }
 
   .bus-icon {

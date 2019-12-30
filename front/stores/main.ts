@@ -60,10 +60,16 @@ export default class MainStore {
   fromStr: string = '湘南台';
 
   @observable
+  fromImage: string = 'static/img/icon-sho.svg';
+
+  @observable
   to: string = 'sfc';
 
   @observable
   toStr: string = 'SFC';
+
+  @observable
+  toImage: string = 'static/img/icon-sfc.svg';
 
   @observable
   selectedPos: string = 'sho';
@@ -136,8 +142,10 @@ export default class MainStore {
   setFromTo = (from: string, to: string) => {
     this.from = from;
     this.fromStr = this._getPosStr(from);
+    this.fromImage = `static/img/icon-${from}.svg`;
     this.to = to;
     this.toStr = this._getPosStr(to);
+    this.toImage = `static/img/icon-${to}.svg`;
     if (this.from === 'sfc') {
       this.wayToSchool =  '下校';
       this.selectedPos = to;
