@@ -18,7 +18,7 @@ jobs:
           docker build -f front/Dockerfile --rm=false -t imneko/bustimer:latest .
       - name: push image
         run: |
-          docker login -u ${{secrets.$DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}
+          docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}
           docker push imneko/bustimer:latest
 
 
