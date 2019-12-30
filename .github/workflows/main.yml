@@ -35,5 +35,4 @@ jobs:
       - name: deploy
         run: |
             cd front
-            now -t ${{secrets.ZEIT_TOKEN}}
-            now --prod
+            now -t ${{secrets.ZEIT_TOKEN}} --prod
