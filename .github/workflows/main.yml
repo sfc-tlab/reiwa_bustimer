@@ -23,7 +23,9 @@ jobs:
 
 
   deploy:
+    name: deploy to now
     needs: push-image
+    runs-on: ubuntu-latest
     steps: 
       - name: checkout
         uses: actions/checkout@v1
