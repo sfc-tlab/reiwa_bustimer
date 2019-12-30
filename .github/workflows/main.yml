@@ -27,15 +27,8 @@ jobs:
     needs: push-image
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/setup-node@v1
       - name: checkout
         uses: actions/checkout@v1
-      - name: update npm
-        run: |
-          npm install -g npm@latest
-      - name: install now
-        run: |
-          npm install -g now
       - name: deploy
         run: |
             cd front
