@@ -49,7 +49,7 @@ const Text = styled.p`
 const Wrapper = styled.div`
   display: ${props => props.isClose? 'none' : ''};
   position: fixed;
-  background-color: rgba(255, 241, 240, 0.5);
+  background-color: rgba(255, 241, 240, 0.8);
   width: 100%;
   bottom: 0px;
 `;
