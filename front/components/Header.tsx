@@ -34,6 +34,7 @@ export default class Header extends Component<{}, HeaderState> {
             <span
               className="header-button schedule"
               onClick={e => this.jumpTo(e, "/schedule")}
+              onTouchEnd={e => this.jumpTo(e, "/schedule")}
             >
               <img
                 className="busstop-icon"
@@ -45,6 +46,7 @@ export default class Header extends Component<{}, HeaderState> {
             <span
               className="header-button schedule"
               onClick={e => this.jumpTo(e, store.beforePath)}
+              onTouchEnd={e => this.jumpTo(e, store.beforePath)}
             >
               <img
                 className="return-icon"
@@ -60,6 +62,7 @@ export default class Header extends Component<{}, HeaderState> {
             <span
               className="header-button setting"
               onClick={e => this.jumpTo(e, "/setting")}
+              onTouchEnd={e => this.jumpTo(e, "/setting")}
             >
               <img
                 className="setting-icon"

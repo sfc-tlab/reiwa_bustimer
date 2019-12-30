@@ -60,7 +60,7 @@ class Widget extends Component<IProps> {
                 <img
                   className="pos swap-button"
                   src={`/static/img/icon-toggle.svg`}
-                  onClick={() => {
+                  onTouchEnd={() => {
                     store.setFromTo(store.to, store.from);
                   }}
                   alt="departure-swap-button"

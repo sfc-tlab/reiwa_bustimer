@@ -87,6 +87,20 @@ export default class MainStore {
   beforePath: string = '/';
 
   @computed
+  get isHoliday () {
+    return (this.holidays && (this.date.monthStr+"-"+this.date.dayStr) in this.holidays) || this.date.dayOfWeek === 0;
+  }
+
+  @computed
+  get todayData () {
+  return this.isHoliday
+    ? this.timeTable[this.from][this.to].holiday
+    : this.date.dayOfWeek===6
+      ? this.timeTable[this.from][this.to].saturday
+      : this.timeTable[this.from][this.to].weekday;
+  }
+
+  @computed
   get tweetHashtags () {
     return `bustimer,${this.wayToSchool}なう`;
   }
@@ -164,13 +178,7 @@ export default class MainStore {
 
   @action
   setLeftBuses = () => {
-    const isHoliday = (this.holidays && (this.date.monthStr+"-"+this.date.dayStr) in this.holidays) || this.date.dayOfWeek === 0;
-    const todayData = isHoliday
-      ?this.timeTable[this.from][this.to].holiday
-      :this.date.dayOfWeek===6
-        ?this.timeTable[this.from][this.to].saturday
-        :this.timeTable[this.from][this.to].weekday;
-    this.leftBuses = todayData.filter(time => {
+    this.leftBuses = this.todayData.filter(time => {
       return (
         (time.h > this.date.hour)
         ||

@@ -25,6 +25,7 @@ export default class DepartureButton extends Component {
         <div 
           className={`departure-button ${pos} `+(store.selectedPos === pos?'selected':null)}
             onClick={(e)=>{this.setPos(e, pos)}}
+            onTouchEnd={(e)=>{this.setPos(e, pos)}}
             >
           <div className="departure-button-text">
             {store._getPosStr(pos)}
