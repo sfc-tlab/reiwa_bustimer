@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  push-image:
+    name: build and push image
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: build image 
+        run: |
+          docker build -f front/Dockerfile --rm=false -t imneko/bustimer:latest .
+      - name: push image
+        run: |
+          docker login -u ${{secrets.$DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}
+          docker push imneko/bustimer:latest
+
+
+  deploy:
+    needs: push-image
+    steps: 
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: update npm
+        run: |
+          npm install -g npm@latest
+      - name: install now
+        run: |
+          npm install -g now
+      - name: deploy
+        run: |
+            cd front
+            now -t ${{secrets.ZEIT_TOKEN}}
+            now --prod

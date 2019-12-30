@@ -1,4 +1,4 @@
-# reiwa bustimer [![CircleCI](https://circleci.com/gh/sfc-tlab/reiwa_bustimer/tree/master.svg?style=svg)](https://circleci.com/gh/sfc-tlab/reiwa_bustimer/tree/master)
+# reiwa bustimer  ![](https://github.com/sfc-tlab/reiwa_bustimer/workflows/build/badge.svg) 
 新しい時代に向けてSFC生が今まで使っていたbustimerをリニューアルします。
 
 ## Quick start
