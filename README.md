@@ -1,8 +1,6 @@
-![logo](front/static/img/logo_bk.svg)
+![logo](front/static/img/logo_bk.svg)  ![](https://github.com/sfc-tlab/reiwa_bustimer/workflows/build/badge.svg) 
 
-[![CircleCI](https://circleci.com/gh/sfc-tlab/reiwa_bustimer/tree/master.svg?style=svg)](https://circleci.com/gh/sfc-tlab/reiwa_bustimer/tree/master)
-
-新しい時代に向けて SFC 生が今まで使っていた bustimer をリニューアルします。
+新しい時代に向けてSFC生が今まで使っていたbustimerをリニューアルします。  
 
 ![screenshot](https://i.gyazo.com/9781b72ada20c1f306331d4ce570b8fe.png)
 

@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+
+  push-image:
+    name: build and push image
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: build image 
+        run: |
+          docker build -f front/Dockerfile --rm=false -t imneko/bustimer:latest .
+      - name: push image
+        run: |
+          docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}
+          docker push imneko/bustimer:latest
+
+
+  deploy:
+    name: deploy to now
+    needs: push-image
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: delete auth.json
+        run: |
+          rm -rf ~/.local/share/now/auth.json
+      - name: deploy
+        run: |
+            cd front
+            now -t ${{secrets.ZEIT_TOKEN}} --prod
