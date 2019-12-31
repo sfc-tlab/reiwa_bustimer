@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import TweetButton from "./TweetButton";
+import LineButton from "./LineButton";
 
 class BusCard extends Component {
   render() {
@@ -35,9 +36,24 @@ class BusCard extends Component {
               {("00" + time.minute).slice(-2)}
             </span>
           </span>
-          <TweetButton 
-            text={String(time.hour) + "時" + String(time.minute) + "分" + "発のバスに乗るよ！"}
+          <TweetButton
+            text={
+              String(time.hour) +
+              "時" +
+              String(time.minute) +
+              "分" +
+              "発のバスに乗るよ！"
+            }
             hashtags={"bustimer,sfc"}
+          />
+          <LineButton
+            text={
+              String(time.hour) +
+              "時" +
+              String(time.minute) +
+              "分" +
+              "発のバスに乗るよ！"
+            }
           />
         </div>
       </Wrapper>
@@ -61,18 +77,20 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     margin: 0px 15px;
+    padding: 10px 0;
+    justify-content: center;
   }
 
   .color {
     display: flex;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
     background-color: ${props => getIconColor(props.bus)};
   }
 
   .time-container {
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .time {
@@ -88,7 +106,6 @@ const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     color: #707070;
-    padding: 10px;
   }
 
   .info-text {
@@ -102,9 +119,11 @@ const Wrapper = styled.div`
 
   .sub-info-text {
     ${props =>
-      props.hasSubinfo ? `
+      props.hasSubinfo
+        ? `
     display: inline-block;
-    ` : `
+    `
+        : `
     display: none;
     `}
     font-size: 8px;
