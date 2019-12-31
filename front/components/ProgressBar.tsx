@@ -30,7 +30,7 @@ class ProgressBar extends Component {
         // 60分以下
         maxSec = 3600;
       } else {
-        maxSec = 500 * 60;
+        progressSec = 0;
       }
 
       console.log(`now progress: ${progressSec} / ${maxSec}`);
@@ -72,7 +72,9 @@ const Wrapper = styled.span`
 `;
 
 const getProgressPct = (progress: Number, max: Number) => {
-  return (progress / max) * 100;
+  let progressPct = (progress / max) * 100;
+
+  return progressPct;
 };
 
 const Bar = styled.div`
@@ -95,8 +97,8 @@ const Bar = styled.div`
     position: absolute;
     width: 40px;
     height: auto;
-    bottom: 10px;
-    left: calc(${props => getProgressPct(props.progress, props.max)}% - 23px);
+    bottom: 15px;
+    left: calc(${props => getProgressPct(props.progress, props.max)}% - 25px);
   }
 `;
 

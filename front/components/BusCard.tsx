@@ -72,6 +72,7 @@ const Wrapper = styled.div`
 
   .time {
     color: #707070;
+    font-weight: bold;
     font-size: 30px;
     padding: 2px;
   }

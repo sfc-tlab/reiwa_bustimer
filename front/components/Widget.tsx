@@ -132,43 +132,46 @@ const Wrapper = styled.div`
     margin: 0;
   }
 
-  .pos.from {
+  .pos .from {
     posision: relateve;
     width: calc((100% * 1 / 3));
   }
 
-  .pos.to {
+  .pos .to {
     posision: relateve;
     width: calc((100% * 1 / 3));
   }
 
   .left-time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 10px 0 50px;
     border-radius: 0 0 3px 3px;
   }
 
   .left-time {
+    display: flex;
+    align-items: baseline;
     margin: 5px;
-    display: inline-block;
     color: #707070;
     font-size: 36px;
+    font-weight: bold;
   }
 
   .left-time .str {
     font-size: 20px;
   }
 
-  .left-time.min {
+  .left-time .min {
     position: relative;
     display: inline;
     padding-left: 25px;
-    width: 50%;
   }
 
-  .left-time.sec {
+  .left-time .sec {
     position: relative;
     display: inline;
-    width: 50%;
   }
 
   .widget-message {
