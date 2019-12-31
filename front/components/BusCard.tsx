@@ -1,60 +1,50 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 
-
-class BusCard extends Component {    
-
-  render () {
+class BusCard extends Component {
+  render() {
     const { bus } = this.props;
 
-    let icon = '../static/img/bus/normal.png';
-    let info = '';
-    let subInfo = '';
-    if (bus.twin) { 
-      icon = '../static/img/bus/twin.png'; 
-      info = 'ツインライナー';
+    let icon = "../static/img/bus/normal.png";
+    let info = "";
+    let subInfo = "";
+    if (bus.twin) {
+      icon = "../static/img/bus/twin.png";
+      info = "ツインライナー";
     }
-    if (bus.via === 'sasakubo') {
-      icon = '../static/img/bus/sasakubo.png';
-      info = '笹久保経由';
+    if (bus.via === "sasakubo") {
+      icon = "../static/img/bus/sasakubo.png";
+      info = "笹久保経由";
     }
-    if (bus.type==='night') {
-      icon = '../static/img/bus/night.png';
-      info = '深夜料金';
+    if (bus.type === "night") {
+      icon = "../static/img/bus/night.png";
+      info = "深夜料金";
     }
-    subInfo = bus.rotary?'ロータリー発':'';
-    const time = {hour: bus.h, minute: bus.m};
+    subInfo = bus.rotary ? "ロータリー発" : "";
+    const time = { hour: bus.h, minute: bus.m };
 
     return (
       <Wrapper>
         <div className="bus-card">
           <img src={icon} alt="bus-icon" />
           <span className="time-container">
-            <span className="time hour">
-              {('00'+time.hour).slice(-2)}
-            </span>
-            <span className="time colon">
-            :
-            </span>
+            <span className="time hour">{("00" + time.hour).slice(-2)}</span>
+            <span className="time colon">:</span>
             <span className="time minute">
-              {('00'+time.minute).slice(-2)}
+              {("00" + time.minute).slice(-2)}
             </span>
           </span>
-          <span className="info">
-            {info}
-          </span>
-          <span className="sub-info">
-            {subInfo}
-          </span>
+          <span className="info">{info}</span>
+          <span className="sub-info">{subInfo}</span>
         </div>
       </Wrapper>
-    )
+    );
   }
 }
 
 const Wrapper = styled.div`
-  font-family: "ＭＳ ゴシック",sans-serif;
-  background: #FFFFFF;
+  font-family: "ＭＳ ゴシック", sans-serif;
+  background: #ffffff;
 
   .bus-card {
     padding: 20px;
@@ -83,7 +73,6 @@ const Wrapper = styled.div`
     color: #707070;
     padding: 10px;
   }
-
 `;
 
 export default BusCard;
