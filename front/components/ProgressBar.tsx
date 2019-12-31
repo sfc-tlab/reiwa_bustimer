@@ -12,27 +12,28 @@ class ProgressBar extends Component {
     let maxSec = 100;
 
     if (store.leftBuses.length) {
-      progressSec = store.leftTime.m * 60 + store.leftTime.s;
+      let leftSec = store.leftTime.m * 60 + store.leftTime.s;
 
-      if (progressSec < 60) {
+      if (leftSec < 60) {
         // 1分以下
         maxSec = 60;
-      } else if (progressSec < 300) {
+      } else if (leftSec < 300) {
         // 5分以下
         maxSec = 300;
-      } else if (progressSec < 600) {
+      } else if (leftSec < 600) {
         // 10分以下
         maxSec = 600;
-      } else if (progressSec < 1800) {
+      } else if (leftSec < 1800) {
         // 30分以下
         maxSec = 1800;
-      } else if (progressSec < 3600) {
+      } else if (leftSec < 3600) {
         // 60分以下
         maxSec = 3600;
       } else {
-        progressSec = 0;
+        // 60分以上残っている場合は500分
+        maxSec = 60 * 500;
       }
-
+      progressSec = maxSec - leftSec;
       console.log(`now progress: ${progressSec} / ${maxSec}`);
     }
 
