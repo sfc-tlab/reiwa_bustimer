@@ -24,7 +24,7 @@ class Schedule extends Component {
           {store.fromStr} → {store.toStr}
         </PosContainer>
         <BusListContainer>
-          {store.leftBuses.map((bus, index) => 
+          {store.todayData.map((bus, index) => 
             <BusCard
               bus={bus}
               key={''+bus.h+bus.m+index}
