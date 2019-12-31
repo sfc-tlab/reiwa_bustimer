@@ -114,7 +114,6 @@ const Wrapper = styled.div`
 
   .pos-container {
     border-radius: 3px 3px 0 0;
-    padding-bottom: 10px;
   }
 
   .pos {
@@ -140,8 +139,8 @@ const Wrapper = styled.div`
   } 
 
   .left-time-container {
+    margin: 50px 0;
     border-radius: 0 0 3px 3px;
-    padding: 10px;
   }
 
   .left-time {
