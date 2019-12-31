@@ -143,7 +143,7 @@ const Wrapper = styled.div`
   }
 
   .left-time-container {
-    margin: 50px 0;
+    margin: 10px 0 50px;
     border-radius: 0 0 3px 3px;
   }
 
@@ -169,6 +169,10 @@ const Wrapper = styled.div`
     position: relative;
     display: inline;
     width: 50%;
+  }
+
+  .widget-message {
+    text-align: center;
   }
 `;
 

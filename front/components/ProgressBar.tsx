@@ -4,11 +4,37 @@ import styled, { css } from "styled-components";
 
 @inject("store")
 @observer
-export default class ProgressBar extends Component {
+class ProgressBar extends Component {
   render() {
     const { store, pos } = this.props;
-    let progressSec = 50;
+
+    let progressSec = 0;
     let maxSec = 100;
+
+    if (store.leftBuses.length) {
+      progressSec = store.leftTime.m * 60 + store.leftTime.s;
+
+      if (progressSec < 60) {
+        // 1分以下
+        maxSec = 60;
+      } else if (progressSec < 300) {
+        // 5分以下
+        maxSec = 300;
+      } else if (progressSec < 600) {
+        // 10分以下
+        maxSec = 600;
+      } else if (progressSec < 1800) {
+        // 30分以下
+        maxSec = 1800;
+      } else if (progressSec < 3600) {
+        // 60分以下
+        maxSec = 3600;
+      } else {
+        maxSec = 500 * 60;
+      }
+
+      console.log(`now progress: ${progressSec} / ${maxSec}`);
+    }
 
     return (
       <Wrapper>
@@ -73,3 +99,5 @@ const Bar = styled.div`
     left: calc(${props => getProgressPct(props.progress, props.max)}% - 23px);
   }
 `;
+
+export default ProgressBar;
