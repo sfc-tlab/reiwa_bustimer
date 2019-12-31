@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import TweetButton from "./TweetButton";
 
 class BusCard extends Component {
   render() {
@@ -34,6 +35,10 @@ class BusCard extends Component {
               {("00" + time.minute).slice(-2)}
             </span>
           </span>
+          <TweetButton 
+            text={String(time.hour) + "時" + String(time.minute) + "分" + "発のバスに乗るよ！"}
+            hashtags={"bustimer,sfc"}
+          />
         </div>
       </Wrapper>
     );

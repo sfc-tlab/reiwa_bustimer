@@ -34,7 +34,6 @@ class ProgressBar extends Component {
         maxSec = 60 * 500;
       }
       progressSec = maxSec - leftSec;
-      console.log(`now progress: ${progressSec} / ${maxSec}`);
     }
 
     return (
