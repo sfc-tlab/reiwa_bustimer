@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 
 import { StoreType } from "../stores";
 import DepartureButton from "./DepartureButton";
+import ProgressBar from "./ProgressBar";
 
 interface IProps {
   store: StoreType;
@@ -72,6 +73,7 @@ class Widget extends Component<IProps> {
               </span>
             </div>
           </div>
+          <ProgressBar />
           <div className="left-time-container">
             {!store.leftBuses.length && (
               <div className="widget-message">本日のバスは終了しました。</div>
@@ -85,6 +87,8 @@ class Widget extends Component<IProps> {
 }
 
 const Wrapper = styled.div`
+  max-width: 650px;
+  margin: 0 auto;
   padding: 0 16px;
   text-align: center;
 
@@ -136,7 +140,7 @@ const Wrapper = styled.div`
   .pos.to {
     posision: relateve;
     width: calc((100% * 1 / 3));
-  } 
+  }
 
   .left-time-container {
     margin: 50px 0;
