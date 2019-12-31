@@ -20,7 +20,7 @@ class BusCard extends Component {
     const time = { hour: bus.h, minute: bus.m };
 
     return (
-      <Wrapper bus={bus}>
+      <Wrapper bus={bus} hasSubinfo={subInfo != ""}>
         <div className="bus-card">
           <span className="color"></span>
           <span className="info">
@@ -79,7 +79,7 @@ const Wrapper = styled.div`
   .info {
     min-width: 100px;
     display: flex;
-    align-items: start;
+    align-items: center;
     flex-direction: column;
     color: #707070;
     padding: 10px;
@@ -95,6 +95,12 @@ const Wrapper = styled.div`
   }
 
   .sub-info-text {
+    ${props =>
+      props.hasSubinfo ? `
+    display: inline-block;
+    ` : `
+    display: none;
+    `}
     font-size: 8px;
     padding: 5px;
   }
