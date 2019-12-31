@@ -40,11 +40,12 @@ class TweetButton extends Component {
 
 const Wrapper = styled.span`
   .twitter-button {
+    margin: 0 5px;
     display: flex;
     align-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
     color: #FFFFFF;
     background: #1b95e0;
     text-decoration: none;
