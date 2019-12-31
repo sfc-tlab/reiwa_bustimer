@@ -98,7 +98,7 @@ const Wrapper = styled.div`
 
   .header-logo {
     display: inline-block;
-    width: 230px;
+    width: 200px;
     margin: 0 auto;
   }
 
