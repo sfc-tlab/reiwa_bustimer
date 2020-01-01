@@ -17,9 +17,9 @@ class TweetButton extends Component {
     let url = "https://twitter.com/share?";
     const params = {
       "text": this.state.text,
-      "url": this.state.tweetUrl,
+      "url": this.state.tweetUrl || "https://bustimer.keioac.jp",
       "hashtags": this.state.hashtags,
-      "via": this.state.via || 'via',
+      "via": this.state.via || "bustimer",
     }
     Object.keys(params).forEach(key => url+=`${key}=${params[key]}&`);
 
