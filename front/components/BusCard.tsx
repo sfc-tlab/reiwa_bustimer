@@ -101,7 +101,14 @@ const Wrapper = styled.div`
   }
 
   .info {
-    min-width: 100px;
+    ${props =>
+      props.hasSubinfo
+        ? `
+        min-width: 100px;
+    `
+        : `
+        min-width: 0px;
+    `}
     display: flex;
     align-items: center;
     flex-direction: column;
