@@ -64,8 +64,12 @@ class BusCard extends Component {
 const getIconColor = props => {
   if (props.twin) {
     return "#FF3B48";
+  } else if (props.via === "sasakubo") {
+    return "#197F00";
+  } else if (props.type === "night") {
+    return "#8000AD";
   } else {
-    return "#E28549";
+    return "#FF7F2C";
   }
 };
 
@@ -78,7 +82,7 @@ const Wrapper = styled.div`
     align-items: center;
     margin: 0px 15px;
     padding: 10px 0;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .color {
@@ -101,14 +105,7 @@ const Wrapper = styled.div`
   }
 
   .info {
-    ${props =>
-      props.hasSubinfo
-        ? `
-        min-width: 100px;
-    `
-        : `
-        min-width: 0px;
-    `}
+    min-width: 80px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -116,7 +113,8 @@ const Wrapper = styled.div`
   }
 
   .info-text {
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: bold;
     line-height: 20px;
     background-color: #f2f2f2;
     display: block;
