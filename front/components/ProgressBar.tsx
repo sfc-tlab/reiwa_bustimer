@@ -14,7 +14,10 @@ class ProgressBar extends Component {
     if (store.leftBuses.length) {
       let leftSec = store.leftTime.m * 60 + store.leftTime.s;
 
-      if (leftSec < 60) {
+      if (leftSec <= 10) {
+        // 10秒以下
+        maxSec = 10;
+      } else if (leftSec < 60) {
         // 1分以下
         maxSec = 60;
       } else if (leftSec < 300) {
@@ -37,7 +40,7 @@ class ProgressBar extends Component {
     }
 
     return (
-      <Wrapper>
+      <Wrapper max={maxSec}>
         <img
           className="icon ayase-base"
           src={"/static/img/ayase-base.svg"}
@@ -68,6 +71,12 @@ const Wrapper = styled.span`
 
   .icon {
     width: 20px;
+  }
+
+  .ayase-base:after {
+    content: ${props => props.maxSec || " "};
+    position: absolute;
+    font-size: 12px;
   }
 `;
 
