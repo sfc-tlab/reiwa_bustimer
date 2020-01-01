@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-import BusCard from '../components/BusCard';
-
+import BusCard from "../components/BusCard";
 
 @inject("store")
 @observer
 class Schedule extends Component {
-
   componentWillMount() {
     const { store } = this.props;
 
-    store.setPath('/', '/schedule');
+    store.setPath("/", "/schedule");
   }
 
-  render () {
+  render() {
     const { store } = this.props;
     return (
       <Wrapper>
@@ -24,22 +22,18 @@ class Schedule extends Component {
           {store.fromStr} → {store.toStr}
         </PosContainer>
         <BusListContainer>
-          {store.todayData.map((bus, index) => 
-            <BusCard
-              bus={bus}
-              key={''+bus.h+bus.m+index}
-            />
-          )}
+          {store.todayData.map((bus, index) => (
+            <BusCard bus={bus} key={"" + bus.h + bus.m + index} />
+          ))}
         </BusListContainer>
       </Wrapper>
-    )
+    );
   }
 }
 
-const BusListContainer = styled.div`
-`;
+const BusListContainer = styled.div``;
 
-const PosContainer = styled.div` 
+const PosContainer = styled.div`
   font-size: 24px;
   padding: 15px;
 `;
