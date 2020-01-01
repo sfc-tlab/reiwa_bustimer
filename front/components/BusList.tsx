@@ -20,7 +20,7 @@ class BusList extends Component {
               ))}
             </div>
           ) : (
-            <Fragment>本日のバスは終了しました。</Fragment>
+            <div className="finish">本日のバスは終了しました。</div>
           )}
         </div>
       </Wrapper>
@@ -31,6 +31,10 @@ class BusList extends Component {
 const Wrapper = styled.div`
   max-width: 650px;
   margin: 0 auto;
+
+  .finish {
+    text-align: center; 
+  }
 `;
 
 export default BusList;
