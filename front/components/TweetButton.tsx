@@ -19,7 +19,7 @@ class TweetButton extends Component {
       "text": this.state.text,
       "url": this.state.tweetUrl,
       "hashtags": this.state.hashtags,
-      "via": this.state.via,
+      "via": this.state.via || 'via',
     }
     Object.keys(params).forEach(key => url+=`${key}=${params[key]}&`);
 
