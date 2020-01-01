@@ -40,17 +40,22 @@ class TweetButton extends Component {
 
 const Wrapper = styled.span`
   .twitter-button {
-    display: inline-block;
-    padding: 8px 3px 0px 3px;
-    border-radius: 3px;
-    border: 2px solid #1b95e0;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
     color: #FFFFFF;
     background: #1b95e0;
     text-decoration: none;
+    text-align: center;
   }
 
   .twitter-icon {
-    padding-bottom: 10px;
+    display: block;
+    width: 20px;
+    margin: 0 auto;
   }
 
   .button-text {

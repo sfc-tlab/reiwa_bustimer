@@ -41,15 +41,17 @@ const BusListContainer = styled.div`
 
 const PosContainer = styled.div` 
   font-size: 24px;
+  padding: 15px;
 `;
 
 const Title = styled.div`
-  font-size: 48px;
+  font-size: 35px;
+  padding: 30px 15px 15px;
 `;
 
 const Wrapper = styled.div`
   position: relative;
-  padding-top: 122px;
+  padding: 60px 0px;
   width: 100%;
   z-index: 998;
   color: #707070;
