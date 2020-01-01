@@ -75,6 +75,9 @@ class Widget extends Component<IProps> {
           </div>
           <ProgressBar />
           <div className="left-time-container">
+            {!store.leftBuses.length && (
+              <div className="widget-message">本日のバスは終了しました。</div>
+            )}
             <LeftTime />
           </div>
         </div>
