@@ -28,9 +28,9 @@ class TweetButton extends Component {
         <a className="twitter-button" href={url}>
           <span className="button-text"> {children} </span>
           <img 
-            className="twitter-icon" 
-            src={"/static/img/twitter-icon.svg"}
-            alt="twitter-icon"
+            className="icon-twitter" 
+            src={"/static/img/icon-twitter.svg"}
+            alt="icon-twitter"
           />
         </a>
       </Wrapper>
@@ -52,7 +52,7 @@ const Wrapper = styled.span`
     text-align: center;
   }
 
-  .twitter-icon {
+  .icon-twitter {
     display: block;
     width: 20px;
     margin: 0 auto;
