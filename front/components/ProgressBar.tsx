@@ -13,7 +13,9 @@ class ProgressBar extends Component {
 
     if (store.leftBuses.length) {
       let leftSec = store.leftTime.m * 60 + store.leftTime.s;
-      progressSec = maxSec - leftSec;
+      progressSec = maxSec - leftSec < 0 
+        ? 0
+        : maxSec - leftSec;
     }
 
     return (
