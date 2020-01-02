@@ -11,3 +11,5 @@ dist
 
 venv
 *.pyc
+go.sum
+tmp
