@@ -9,3 +9,8 @@
 Hot reloadされるのでファイル編集したら反映されます．
 バグったら  
 `docker restart bustimer-api`
+
+## deploy
+ここにデプロイされてる
+
+https://bustimer-263916.appspot.com
