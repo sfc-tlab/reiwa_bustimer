@@ -17,9 +17,9 @@ class TweetButton extends Component {
     let url = "https://twitter.com/share?";
     const params = {
       "text": this.state.text,
-      "url": this.state.tweetUrl,
+      "url": this.state.tweetUrl || "https://bustimer.keioac.jp",
       "hashtags": this.state.hashtags,
-      "via": this.state.via,
+      "via": this.state.via || "bustimer",
     }
     Object.keys(params).forEach(key => url+=`${key}=${params[key]}&`);
 
@@ -40,17 +40,22 @@ class TweetButton extends Component {
 
 const Wrapper = styled.span`
   .twitter-button {
-    display: inline-block;
-    padding: 8px 3px 0px 3px;
-    border-radius: 3px;
-    border: 2px solid #1b95e0;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 17.5px;
     color: #FFFFFF;
     background: #1b95e0;
     text-decoration: none;
+    text-align: center;
   }
 
   .twitter-icon {
-    padding-bottom: 10px;
+    display: block;
+    width: 20px;
+    margin: 0 auto;
   }
 
   .button-text {

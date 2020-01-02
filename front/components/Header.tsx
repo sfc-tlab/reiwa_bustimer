@@ -49,9 +49,9 @@ export default class Header extends Component<{}, HeaderState> {
               onTouchEnd={e => this.jumpTo(e, store.beforePath)}
             >
               <img
-                className="return-icon"
-                src={"/static/img/return-icon.svg"}
-                alt="return-icon"
+                className="close"
+                src={"/static/img/icon-close.svg"}
+                alt="close"
               />
             </span>
           )}
@@ -98,7 +98,7 @@ const Wrapper = styled.div`
 
   .header-logo {
     display: inline-block;
-    width: 230px;
+    width: 200px;
     margin: 0 auto;
   }
 
@@ -133,11 +133,11 @@ const Wrapper = styled.div`
     height: 30px;
   }
 
-  .return-icon {
+  .close {
     margin: 5px;
     fill: #ffffff;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
   }
 
   ${(props: ThemeColor) =>

@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 
 import { StoreType } from "../stores";
 import DepartureButton from "./DepartureButton";
+import ProgressBar from "./ProgressBar";
 
 interface IProps {
   store: StoreType;
@@ -72,6 +73,7 @@ class Widget extends Component<IProps> {
               </span>
             </div>
           </div>
+          <ProgressBar />
           <div className="left-time-container">
             {!store.leftBuses.length && (
               <div className="widget-message">本日のバスは終了しました。</div>
@@ -85,6 +87,8 @@ class Widget extends Component<IProps> {
 }
 
 const Wrapper = styled.div`
+  max-width: 650px;
+  margin: 0 auto;
   padding: 0 16px;
   text-align: center;
 
@@ -114,7 +118,6 @@ const Wrapper = styled.div`
 
   .pos-container {
     border-radius: 3px 3px 0 0;
-    padding-bottom: 10px;
   }
 
   .pos {
@@ -129,43 +132,50 @@ const Wrapper = styled.div`
     margin: 0;
   }
 
-  .pos.from {
+  .pos .from {
     posision: relateve;
     width: calc((100% * 1 / 3));
   }
 
-  .pos.to {
+  .pos .to {
     posision: relateve;
     width: calc((100% * 1 / 3));
-  } 
+  }
 
   .left-time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 50px;
     border-radius: 0 0 3px 3px;
-    padding: 10px;
   }
 
   .left-time {
+    display: flex;
+    align-items: baseline;
     margin: 5px;
-    display: inline-block;
     color: #707070;
     font-size: 36px;
+    font-weight: bold;
   }
 
   .left-time .str {
     font-size: 20px;
   }
 
-  .left-time.min {
+  .left-time .min {
     position: relative;
     display: inline;
     padding-left: 25px;
-    width: 50%;
   }
 
-  .left-time.sec {
+  .left-time .sec {
     position: relative;
     display: inline;
-    width: 50%;
+  }
+
+  .widget-message {
+    text-align: center;
   }
 `;
 

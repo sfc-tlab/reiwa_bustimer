@@ -1,89 +1,144 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
+import TweetButton from "./TweetButton";
+import LineButton from "./LineButton";
 
-
-class BusCard extends Component {    
-
-  render () {
+class BusCard extends Component {
+  render() {
     const { bus } = this.props;
 
-    let icon = '../static/img/bus/normal.png';
-    let info = '';
-    let subInfo = '';
-    if (bus.twin) { 
-      icon = '../static/img/bus/twin.png'; 
-      info = 'ツインライナー';
+    let info = "湘23";
+    let subInfo = "";
+    if (bus.twin) {
+      info = "TwinLiner";
     }
-    if (bus.via === 'sasakubo') {
-      icon = '../static/img/bus/sasakubo.png';
-      info = '笹久保経由';
+    if (bus.via === "sasakubo") {
+      info = "笹久保経由";
     }
-    if (bus.type==='night') {
-      icon = '../static/img/bus/night.png';
-      info = '深夜料金';
+    if (bus.type === "night") {
+      info = "深夜料金";
     }
-    subInfo = bus.rotary?'ロータリー発':'';
-    const time = {hour: bus.h, minute: bus.m};
+    subInfo = bus.rotary ? "ロータリー発" : "";
+    const time = { hour: bus.h, minute: bus.m };
 
     return (
-      <Wrapper>
+      <Wrapper bus={bus} hasSubinfo={subInfo != ""}>
         <div className="bus-card">
-          <img src={icon} alt="bus-icon" />
-          <span className="time-container">
-            <span className="time hour">
-              {('00'+time.hour).slice(-2)}
-            </span>
-            <span className="time colon">
-            :
-            </span>
-            <span className="time minute">
-              {('00'+time.minute).slice(-2)}
-            </span>
-          </span>
+          <span className="color"></span>
           <span className="info">
-            {info}
+            <span className="info-text">{info}</span>
+            <span className="sub-info-text">{subInfo}</span>
           </span>
-          <span className="sub-info">
-            {subInfo}
+          <span className="time-container">
+            <span className="time hour">{("00" + time.hour).slice(-2)}</span>
+            <span className="time colon">:</span>
+            <span className="time minute">
+              {("00" + time.minute).slice(-2)}
+            </span>
           </span>
+          <TweetButton
+            text={
+              String(time.hour) +
+              "時" +
+              String(time.minute) +
+              "分" +
+              "発のバスに乗るよ！"
+            }
+            hashtags={"bustimer,sfc"}
+          />
+          <LineButton
+            text={
+              String(time.hour) +
+              "時" +
+              String(time.minute) +
+              "分" +
+              "発のバスに乗るよ！"
+            }
+          />
         </div>
       </Wrapper>
-    )
+    );
   }
 }
 
+const getIconColor = props => {
+  if (props.twin) {
+    return "#FF3B48";
+  } else if (props.via === "sasakubo") {
+    return "#197F00";
+  } else if (props.type === "night") {
+    return "#8000AD";
+  } else {
+    return "#FF7F2C";
+  }
+};
+
 const Wrapper = styled.div`
-  font-family: "ＭＳ ゴシック",sans-serif;
-  background: #FFFFFF;
+  font-family: "ＭＳ ゴシック", sans-serif;
+  background: #ffffff;
 
   .bus-card {
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin: 0px 15px;
+    padding: 10px 0;
+    justify-content: space-between;
   }
 
-  .bus-icon {
-    padding: 10px;
+  .color {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: ${props => getIconColor(props.bus)};
   }
 
   .time-container {
-    padding: 10px;
+    padding: 0 10px;
   }
 
   .time {
     color: #707070;
+    font-weight: bold;
     font-size: 30px;
     padding: 2px;
   }
 
   .info {
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     color: #707070;
-    padding: 10px;
+  }
+
+  .info-text {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    background-color: #f2f2f2;
+    display: block;
+    padding: 0 5px;
+    border-radius: 5px;
+  }
+
+  .sub-info-text {
+    ${props =>
+      props.hasSubinfo
+        ? `
+    display: inline-block;
+    `
+        : `
+    display: none;
+    `}
+    font-size: 8px;
+    padding: 5px;
   }
 
   .sub-info {
     color: #707070;
     padding: 10px;
   }
-
 `;
 
 export default BusCard;
