@@ -27,35 +27,60 @@ class Setting extends Component {
         <Title>Settings</Title>
         <Content>
           <div className="setting">
-            <p>Comming Soon</p>
+            <p>Coming Soon</p>
           </div>
         </Content>
-        <Title>Follow Us</Title>
+        <Title>Contact Us</Title>
         <Content>
           <p>
-            <a href="https://lab.keioac.jp/">慶應義塾大学SFC 武田研究室</a>
+            開発への参加、バグの報告、機能追加要望等は以下からお願いいたします。
           </p>
-          <p>
+          <Follow>
+            <a href="https://lab.keioac.jp/" className="follow dev-team">
+              <img
+                className="icon-dev"
+                src={"/static/img/icon-dev.svg"}
+                alt="icon-dev"
+              />
+              <span>慶應義塾大学SFC 武田研究室</span>
+            </a>
+          </Follow>
+          <Follow>
             <a
               href="https://twitter.com/bustimer?ref_src=twsrc%5Etfw"
-              class="twitter-follow-button"
-              data-size="large"
-              data-show-count="false"
+              className="follow twitter"
             >
-              Follow @bustimer
+              <img
+                className="icon-twitter"
+                src={"/static/img/icon-twitter.svg"}
+                alt="icon-twitter"
+              />
+              <span>Follow @bustimer</span>
             </a>
-          </p>
-          <p>
-            <a
-              class="github-button"
-              href="https://github.com/sfc-tlab"
-              data-color-scheme="no-preference: dark; light: dark; dark: dark;"
-              data-size="large"
-              aria-label="Follow @sfc-tlab on GitHub"
-            >
-              Follow @sfc-tlab
+          </Follow>
+          <h2>GitHub</h2>
+          <Follow>
+            <a href="https://github.com/sfc-tlab" className="follow github">
+              <img
+                className="icon-github"
+                src={"/static/img/icon-github.svg"}
+                alt="icon-github"
+              />
+              <span>Follow @sfc-tlab</span>
             </a>
-          </p>
+          </Follow>
+          <a
+            className="github-buttons"
+            href="https://github.com/sfc-tlab/reiwa_bustimer/fork"
+          >
+            Fork Repository
+          </a>
+          <a
+            className="github-buttons"
+            href="https://github.com/sfc-tlab/reiwa_bustimer/issues/new/choose"
+          >
+            Make Issue
+          </a>
         </Content>
         <Title>プライバシーポリシー</Title>
         <Content>
@@ -95,6 +120,55 @@ const Content = styled.div`
   p {
     margin: 0;
     margin-bottom: 1rem;
+  }
+
+  .github-buttons {
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+    margin-right: 5px;
+    padding: 2px 5px;
+    background-color: #eff3f6;
+    border: 0.5px solid rgba(27, 31, 35, 0.2);
+    border-radius: 2.5px;
+  }
+`;
+
+const Follow = styled.p`
+  a {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 25px;
+    border-radius: 5px;
+    padding: 0 10px;
+    text-decoration: none;
+  }
+
+  .dev-team {
+    background-color: #008202;
+  }
+
+  .github {
+    background-color: black;
+  }
+
+  .twitter {
+    background-color: #1b95e0;
+  }
+
+  a img {
+    width: 14px;
+    display: block;
+    margin-right: 5px;
+  }
+
+  a span {
+    display: block;
+    color: white;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: bold;
   }
 `;
 
