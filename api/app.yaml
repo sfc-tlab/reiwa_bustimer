@@ -1,1 +1,2 @@
+main: ./src
 runtime: go113
