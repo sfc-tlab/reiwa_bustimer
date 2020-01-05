@@ -58,14 +58,24 @@ class Widget extends Component<IProps> {
                   src={"/static/img/directions.svg"}
                   alt="direction-icon"
                 />
-                <img
-                  className="pos swap-button"
-                  src={`/static/img/icon-toggle.svg`}
-                  onTouchEnd={() => {
-                    store.setFromTo(store.to, store.from);
-                  }}
-                  alt="departure-swap-button"
-                />
+                { window.ontouchstart === null
+                  ? <img
+                    className="pos swap-button"
+                    src={`/static/img/icon-toggle.svg`}
+                    onTouchEnd={() => {
+                      store.setFromTo(store.to, store.from);
+                    }}
+                    alt="departure-swap-button"
+                  />
+                  : <img
+                    className="pos swap-button"
+                    src={`/static/img/icon-toggle.svg`}
+                    onClick={() => {
+                      store.setFromTo(store.to, store.from);
+                    }}
+                    alt="departure-swap-button"
+                  />
+                }
               </div>
               <span className="pos to">
                 <img src={store.toImage}></img>
