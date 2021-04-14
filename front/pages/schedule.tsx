@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { inject, observer } from "mobx-react";
-import styled, { css } from 'styled-components';
+import styled  from 'styled-components';
+import { StoreType } from "../stores";
 
 import BusCard from '../components/BusCard';
+
+interface IProps {
+  store?: StoreType;
+}
 
 
 @inject("store")
 @observer
-class Schedule extends Component {
+class Schedule extends Component<IProps> {
 
   componentWillMount() {
     const { store } = this.props;

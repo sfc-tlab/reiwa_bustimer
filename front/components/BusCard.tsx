@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { Bus } from "../types";
 import TweetButton from "./TweetButton";
 import LineButton from "./LineButton";
 
-class BusCard extends Component {
+type prop = {
+  bus: Bus
+}
+
+class BusCard extends Component<prop> {
   render() {
     const { bus } = this.props;
 
@@ -36,6 +41,7 @@ class BusCard extends Component {
               {("00" + time.minute).slice(-2)}
             </span>
           </span>
+
           <TweetButton
             text={
               String(time.hour) +
@@ -73,7 +79,12 @@ const getIconColor = props => {
   }
 };
 
-const Wrapper = styled.div`
+type Wrap = {
+  bus: Bus,
+  hasSubinfo: boolean,
+}
+
+const Wrapper = styled.div<Wrap>`
   font-family: "ＭＳ ゴシック", sans-serif;
   background: #ffffff;
 

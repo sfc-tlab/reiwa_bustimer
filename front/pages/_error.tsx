@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 
 class ErrorPage extends Error {
-  static getInitialProps({ res, err }) {
+  getInitialProps({ res, err }) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null
     return { statusCode }
   }

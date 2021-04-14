@@ -1,16 +1,24 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-class LineButton extends Component {
-  private componentWillMount() {
-    this.setState({ ...this.props });
+interface IProps {
+  text: string
+}
+
+interface IState {
+  text: string
+}
+
+class LineButton extends Component<IProps, IState>  {
+  componentWillMount() {
+    this.setState({ text: this.props.text });
   }
 
-  private componentWillReceiveProps(nextProps) {
-    this.setState({ ...nextProps });
+  componentWillReceiveProps(nextProps) {
+    this.setState({ text: nextProps.text });
   }
 
-  public render() {
+  render() {
     let url = "line://msg/text/";
     let text = this.state.text;
 

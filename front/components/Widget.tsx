@@ -7,7 +7,7 @@ import DepartureButton from "./DepartureButton";
 import ProgressBar from "./ProgressBar";
 
 interface IProps {
-  store: StoreType;
+  store?: StoreType;
 }
 
 @inject("store")

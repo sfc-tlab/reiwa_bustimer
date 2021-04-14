@@ -1,12 +1,18 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 
+import { StoreType } from "../stores";
 import BusCard from "./BusCard";
+import { Bus } from "../types";
+
+type prop = {
+  store?: StoreType
+}
 
 @inject("store")
 @observer
-class BusList extends Component {
+class BusList extends Component<prop> {
   render() {
     const { store } = this.props;
 
@@ -15,7 +21,7 @@ class BusList extends Component {
         <div className="bus-list">
           {store.leftBuses.length ? (
             <div className="bus-card-container">
-              {store.leftBuses.map((bus, index) => (
+              {store.leftBuses.map((bus: Bus, index: number) => (
                 <BusCard bus={bus} key={"" + bus.h + bus.m + index} />
               ))}
             </div>

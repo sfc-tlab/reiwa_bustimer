@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { StoreType } from "../stores";
+
+type IProps = {
+  store?: StoreType
+}
 
 @inject("store")
 @observer
-class ProgressBar extends Component {
+class ProgressBar extends Component<IProps> {
   render() {
-    const { store, pos } = this.props;
+    const { store } = this.props;
 
     let progressSec = 0;
     let maxSec = 10 * 60;
@@ -44,7 +49,12 @@ class ProgressBar extends Component {
   }
 }
 
-const Wrapper = styled.span`
+type IWrap = {
+  max: number
+  maxSec?: number
+}
+
+const Wrapper = styled.span<IWrap>`
   display: flex;
   align-items: flex-end;
 
@@ -59,13 +69,18 @@ const Wrapper = styled.span`
   }
 `;
 
-const getProgressPct = (progress: Number, max: Number) => {
+const getProgressPct = (progress: number, max: number) => {
   let progressPct = (progress / max) * 100;
 
   return progressPct;
 };
 
-const Bar = styled.div`
+type IBar = {
+  progress: number,
+  max: number,
+}
+
+const Bar = styled.div<IBar>`
   position: relative;
   margin: 0 10px;
   width: calc(100vw - 90px);

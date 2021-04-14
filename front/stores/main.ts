@@ -51,7 +51,9 @@ export default class MainStore {
   date: DateObjType;
 
   @observable
-  leftTime: boolean | {m: number, s: number} = false;
+  leftTime: {m: number, s: number};
+  @observable
+  leftTimeExist: boolean;
 
   @observable
   from: string = 'sho';

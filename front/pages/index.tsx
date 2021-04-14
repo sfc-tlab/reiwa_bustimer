@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { StoreType } from "../stores";
 import Splash from "../components/Splash";
 import Widget from "../components/Widget";
-import ShareButtons from "../components/ShareButtons";
 import BusList from "../components/BusList";
 
 interface IProps {

@@ -1,4 +1,5 @@
 class Location {
+  pos: string;
 
   getPosName = async () => {
     try {
@@ -12,18 +13,18 @@ class Location {
   }
 
   getPos = () => {
-    try {
-      return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      try {
         if ("geolocation" in navigator) {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         } else {
           alert("GPSが無効になっています。");
           reject(false);
         }
-      });
-    } catch (e) {
-      reject(e);
-    }
+      } catch (e) {
+        reject(e);
+      }
+    });
   }
 
 
@@ -36,7 +37,7 @@ class Location {
         && (139.4 <= long && long < 139.44)) {
       this.pos = 'sfc';
     } else if ((35.327 <= lat && lat < 35.347) 
-               && (139.43 <= lng && lng < 139.46)) {
+               && (139.43 <= long && long < 139.46)) {
       this.pos = 'tuji';
     } else {
       this.pos = 'sho';

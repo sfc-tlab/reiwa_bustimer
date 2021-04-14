@@ -2,24 +2,21 @@ import React, { Component } from "react";
 import Router from "next/router";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
+import { ThemeColor } from "../types";
+import { StoreType } from "../stores";
 
-interface ThemeColor {
-  color: string;
-}
-
-interface HeaderState {
-  pathName: string;
+type prop = {
+  store?: StoreType
 }
 
 @inject("store")
 @observer
-export default class Header extends Component<{}, HeaderState> {
-  constructor(props: {}) {
+export default class Header extends Component<prop> {
+  constructor(props: prop) {
     super(props);
   }
 
   jumpTo = (e, path) => {
-    const { store } = this.props;
     e ? e.preventDefault() : null;
     Router.push(path);
   };

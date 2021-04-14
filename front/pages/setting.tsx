@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
 import { inject, observer } from "mobx-react";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { StoreType } from "../stores";
 
+interface IProps {
+  store?: StoreType;
+}
 
 @inject("store")
 @observer
-class Setting extends Component {
+class Setting extends Component<IProps> {
 
   componentWillMount() {
     const { store } = this.props;
@@ -17,7 +21,7 @@ class Setting extends Component {
   jumpTo = (e, path) => {
     const { store } = this.props;
     e?e.preventDefault():null;
-    store.setPath(path)
+    store.setPath('/setting', path)
     Router.push(path)
   }
 

@@ -1,6 +1,6 @@
-import * as axios from 'axios';
+import axios from "axios";
 
-const get = async (url, headers={'Content-Type': 'application/json'}, params={}) => {
+export const get = async (url, headers={'Content-Type': 'application/json'}, params={}) => {
   try {
     return await axios.get(url, {
       headers,
@@ -12,5 +12,3 @@ const get = async (url, headers={'Content-Type': 'application/json'}, params={})
     return e;
   }
 }
-
-module.exports = { get }

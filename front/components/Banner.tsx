@@ -8,17 +8,17 @@ class Banner extends Component {
     return (
       <Wrapper isClose={this.state.isClose}>
         <CloseBtnContainer 
-          onTouchEnd={(e)=>{this.setState({isClose: true})}}
-          onClick={(e)=>{this.setState({isClose: true})}}
+          onTouchEnd={()=>{this.setState({isClose: true})}}
+          onClick={()=>{this.setState({isClose: true})}}
         >
           <CloseBtn>×</CloseBtn>
         </CloseBtnContainer>
         <Text>
-          <div>年末年始はダイヤ変更により正常に表示されない事があります。</div>
+          <div>新型コロナの影響で運行ダイヤが乱れてる可能性があります</div>
           <div>正確な時刻は<a href="http://www.kanachu.co.jp/dia/transfer/search?s=%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6&stt=0&g=&glt=0&x=0&y=0&sdid1=00129985&sdid2=">神奈川中央交通HP</a>をご覧ください。</div>
         </Text>
         <Text>
-          <div>There are some possibilities to display incorrect information because of the New Year Holidays.</div>
+          <div>There are some possibilities to display incorrect information because of the COVID.</div>
           <div>Please check the <a href="http://www.kanachu.co.jp/dia/transfer/search?s=%E6%85%B6%E5%BF%9C%E5%A4%A7%E5%AD%A6&stt=0&g=&glt=0&x=0&y=0&sdid1=00129985&sdid2=">Kanagawa Chuo Kotsu HP</a> to get the correct information.</div>
         </Text>
       </Wrapper>
@@ -46,7 +46,10 @@ const Text = styled.p`
   text-align: center;
 `;
 
-const Wrapper = styled.div`
+type Wrap = {
+  isClose: boolean;
+}
+const Wrapper = styled.div<Wrap>`
   display: ${props => props.isClose? 'none' : ''};
   position: fixed;
   background-color: rgba(255, 241, 240, 0.8);

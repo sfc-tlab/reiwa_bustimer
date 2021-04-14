@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { inject, observer } from "mobx-react";
 import styled, { css } from 'styled-components';
+import { ThemeColor } from "../types";
+import { StoreType } from "../stores";
 
+type prop = {
+  store?: StoreType,
+  pos: string,
+}
 
 @inject("store")  
 @observer
-export default class DepartureButton extends Component {
+export default class DepartureButton extends Component<prop> {
 
   setPos (e, pos) {
     const { store } = this.props;

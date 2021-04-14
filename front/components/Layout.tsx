@@ -1,15 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import { inject, observer } from "mobx-react";
 import Head from 'next/head';
-
 import Header from './Header';
 import { initGA, logPageView } from '../helpers/analytics'
+import { StoreType } from "../stores";
 
-
+type prop = {
+  store?: StoreType
+  children?: any
+}
 
 @inject("store")
 @observer
-class Layout extends Component {
+class Layout extends Component<prop> {
 
   componentDidMount () {
     if (!window.GA_INITIALIZED) {
