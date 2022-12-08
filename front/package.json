@@ -20,7 +20,7 @@
     "@types/styled-components": "^4.4.3",
     "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.21.1",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "fs": "0.0.1-security",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
